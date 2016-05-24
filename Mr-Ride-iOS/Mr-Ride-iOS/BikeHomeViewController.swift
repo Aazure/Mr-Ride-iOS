@@ -26,6 +26,7 @@ class BikeHomeViewController: UIViewController {
         let imageView = UIImageView(image:tintImage)
         imageView.tintColor = UIColor.whiteColor()
         self.navigationItem.titleView = imageView
+       
         
 
         totalDistLabel.font = UIFont.mrTextStyle8Font()
@@ -38,6 +39,7 @@ class BikeHomeViewController: UIViewController {
         letsRideButton.layer.shadowColor = UIColor.mrBlack25Color().CGColor
         letsRideButton.layer.shadowRadius = 2
         letsRideButton.layer.shadowOffset = CGSize(width: 0, height: 2)
+        letsRideButton.layer.masksToBounds = true
         
         
         if self.revealViewController() != nil{

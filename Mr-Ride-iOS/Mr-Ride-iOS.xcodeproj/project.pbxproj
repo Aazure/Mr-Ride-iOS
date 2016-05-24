@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4645C2601CF3F1BF009093CA /* BikeSidebarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4645C25F1CF3F1BF009093CA /* BikeSidebarTableViewController.swift */; };
 		464CFE5E1CF2A28600B1FBBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CFE5D1CF2A28600B1FBBE /* AppDelegate.swift */; };
 		464CFE601CF2A28600B1FBBE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CFE5F1CF2A28600B1FBBE /* ViewController.swift */; };
 		464CFE631CF2A28600B1FBBE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464CFE611CF2A28600B1FBBE /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4645C25F1CF3F1BF009093CA /* BikeSidebarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeSidebarTableViewController.swift; sourceTree = "<group>"; };
 		464CFE5A1CF2A28600B1FBBE /* Mr-Ride-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mr-Ride-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		464CFE5D1CF2A28600B1FBBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		464CFE5F1CF2A28600B1FBBE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				464CFE801CF2E3ED00B1FBBE /* BikeHomeViewController.swift */,
 				464CFE821CF2EF1300B1FBBE /* BikeHistoryTableViewController.swift */,
 				464CFE841CF2FC1A00B1FBBE /* BikeNavigationController.swift */,
+				4645C25F1CF3F1BF009093CA /* BikeSidebarTableViewController.swift */,
 			);
 			path = "Mr-Ride-iOS";
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 				464CFE601CF2A28600B1FBBE /* ViewController.swift in Sources */,
 				464CFE7E1CF2D94200B1FBBE /* MrBikeFont.swift in Sources */,
 				464CFE831CF2EF1300B1FBBE /* BikeHistoryTableViewController.swift in Sources */,
+				4645C2601CF3F1BF009093CA /* BikeSidebarTableViewController.swift in Sources */,
 				464CFE5E1CF2A28600B1FBBE /* AppDelegate.swift in Sources */,
 				464CFE661CF2A28600B1FBBE /* Mr_Ride_iOS.xcdatamodeld in Sources */,
 				464CFE7B1CF2D88000B1FBBE /* SWRevealViewController.m in Sources */,
@@ -333,6 +337,7 @@
 				464CFE711CF2A28600B1FBBE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
