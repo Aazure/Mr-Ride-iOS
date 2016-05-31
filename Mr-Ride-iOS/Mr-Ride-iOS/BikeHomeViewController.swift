@@ -19,16 +19,15 @@ class BikeHomeViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
+
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
         navigationController?.navigationBar.shadowImage = UIImage()
         let logo = UIImage(named: "icon-bike")
         let tintImage = logo?.imageWithRenderingMode(.AlwaysTemplate)
-        let imageView = UIImageView(image:tintImage)
+        let imageView = UIImageView(image: tintImage)
         imageView.tintColor = UIColor.whiteColor()
         self.navigationItem.titleView = imageView
        
-        
-
         totalDistLabel.font = UIFont.mrTextStyle8Font()
         totalCountLabel.font = UIFont.mrTextStyle9Font()
         avgSpeedLabel.font = UIFont.mrTextStyle9Font()
@@ -41,14 +40,11 @@ class BikeHomeViewController: UIViewController {
         letsRideButton.layer.shadowOffset = CGSize(width: 0, height: 2)
         letsRideButton.layer.masksToBounds = true
         
-        
         if self.revealViewController() != nil{
             menuButton.target = self.revealViewController()
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
-        
-        
         
     }
 

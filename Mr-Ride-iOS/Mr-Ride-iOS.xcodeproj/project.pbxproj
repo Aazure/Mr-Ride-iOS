@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		460E11991CFD29A000FD23E5 /* BikeRecordDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460E11981CFD299F00FD23E5 /* BikeRecordDataModel.swift */; };
 		4645C2601CF3F1BF009093CA /* BikeSidebarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4645C25F1CF3F1BF009093CA /* BikeSidebarTableViewController.swift */; };
+		464C2FDC1CF591C000F16F9C /* BikeHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464C2FDB1CF591C000F16F9C /* BikeHistoryTableViewCell.swift */; };
 		464CFE5E1CF2A28600B1FBBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CFE5D1CF2A28600B1FBBE /* AppDelegate.swift */; };
 		464CFE601CF2A28600B1FBBE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CFE5F1CF2A28600B1FBBE /* ViewController.swift */; };
 		464CFE631CF2A28600B1FBBE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464CFE611CF2A28600B1FBBE /* Main.storyboard */; };
@@ -20,10 +22,13 @@
 		464CFE811CF2E3ED00B1FBBE /* BikeHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CFE801CF2E3ED00B1FBBE /* BikeHomeViewController.swift */; };
 		464CFE831CF2EF1300B1FBBE /* BikeHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CFE821CF2EF1300B1FBBE /* BikeHistoryTableViewController.swift */; };
 		464CFE851CF2FC1A00B1FBBE /* BikeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CFE841CF2FC1A00B1FBBE /* BikeNavigationController.swift */; };
+		46F9910B1CFBE78F004765F8 /* BikeHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F9910A1CFBE78F004765F8 /* BikeHistoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		460E11981CFD299F00FD23E5 /* BikeRecordDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeRecordDataModel.swift; sourceTree = "<group>"; };
 		4645C25F1CF3F1BF009093CA /* BikeSidebarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeSidebarTableViewController.swift; sourceTree = "<group>"; };
+		464C2FDB1CF591C000F16F9C /* BikeHistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		464CFE5A1CF2A28600B1FBBE /* Mr-Ride-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mr-Ride-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		464CFE5D1CF2A28600B1FBBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		464CFE5F1CF2A28600B1FBBE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -40,6 +45,7 @@
 		464CFE801CF2E3ED00B1FBBE /* BikeHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeHomeViewController.swift; sourceTree = "<group>"; };
 		464CFE821CF2EF1300B1FBBE /* BikeHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeHistoryTableViewController.swift; sourceTree = "<group>"; };
 		464CFE841CF2FC1A00B1FBBE /* BikeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeNavigationController.swift; sourceTree = "<group>"; };
+		46F9910A1CFBE78F004765F8 /* BikeHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeHistoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +92,9 @@
 				464CFE821CF2EF1300B1FBBE /* BikeHistoryTableViewController.swift */,
 				464CFE841CF2FC1A00B1FBBE /* BikeNavigationController.swift */,
 				4645C25F1CF3F1BF009093CA /* BikeSidebarTableViewController.swift */,
+				464C2FDB1CF591C000F16F9C /* BikeHistoryTableViewCell.swift */,
+				46F9910A1CFBE78F004765F8 /* BikeHistoryViewController.swift */,
+				460E11981CFD299F00FD23E5 /* BikeRecordDataModel.swift */,
 			);
 			path = "Mr-Ride-iOS";
 			sourceTree = "<group>";
@@ -178,9 +187,12 @@
 				464CFE831CF2EF1300B1FBBE /* BikeHistoryTableViewController.swift in Sources */,
 				4645C2601CF3F1BF009093CA /* BikeSidebarTableViewController.swift in Sources */,
 				464CFE5E1CF2A28600B1FBBE /* AppDelegate.swift in Sources */,
+				460E11991CFD29A000FD23E5 /* BikeRecordDataModel.swift in Sources */,
+				464C2FDC1CF591C000F16F9C /* BikeHistoryTableViewCell.swift in Sources */,
 				464CFE661CF2A28600B1FBBE /* Mr_Ride_iOS.xcdatamodeld in Sources */,
 				464CFE7B1CF2D88000B1FBBE /* SWRevealViewController.m in Sources */,
 				464CFE7F1CF2D94200B1FBBE /* MrBikeColor.swift in Sources */,
+				46F9910B1CFBE78F004765F8 /* BikeHistoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,7 +18,8 @@ class BikeSidebarTableViewController: UITableViewController {
         super.viewDidLoad()
         homeLabel.font = UIFont.mrTextStyle11Font()
         homeLabel.font = UIFont.mrTextStyle11Font()
-        dotHomeLabel.hidden = true
+        homeLabel.textColor = UIColor.whiteColor()
+        dotHomeLabel.hidden = false
         dotHIstoryLabel.hidden = true
     }
     
