@@ -142,7 +142,7 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         return vw
     }
     
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 //        let keys = alphabetizedFruits.keys.sort({(a,b) -> Bool in
 //            a.lowercaseString < b.lowercaseString
 //        })
@@ -152,8 +152,11 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
 //        if let fruits = alphabetizedFruits[key]{
 //            print(fruits[indexPath.row])
 //        }
-//    }
-    
+        
+        let vc = self.storyboard!.instantiateViewControllerWithIdentifier("AnalysisPage") as! BikeAnalysisViewController
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

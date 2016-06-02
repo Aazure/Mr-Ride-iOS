@@ -21,6 +21,7 @@ class BikeSidebarTableViewController: UITableViewController {
         homeLabel.textColor = UIColor.whiteColor()
         dotHomeLabel.hidden = false
         dotHIstoryLabel.hidden = true
+        
     }
     
     override func didReceiveMemoryWarning() {

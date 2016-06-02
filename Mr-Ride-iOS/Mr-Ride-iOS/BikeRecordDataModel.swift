@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct Record{
     let date: NSDate
     let distance: Double
-    let duration: String
-    let path: [Double]
+    let duration: Int32
+    let route: [CLLocation]
 }
+

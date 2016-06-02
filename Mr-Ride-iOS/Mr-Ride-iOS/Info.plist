@@ -22,6 +22,27 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Mr. Ride wants to tack your run</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Mr. Ride wants to track your run</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>RobotoMono-Bold.ttf</string>
+		<string>RobotoMono-BoldItalic.ttf</string>
+		<string>RobotoMono-Italic.ttf</string>
+		<string>RobotoMono-Light.ttf</string>
+		<string>RobotoMono-LightItalic.ttf</string>
+		<string>RobotoMono-Medium.ttf</string>
+		<string>RobotoMono-MediumItalic.ttf</string>
+		<string>RobotoMono-Regular.ttf</string>
+		<string>RobotoMono-Thin.ttf</string>
+		<string>RobotoMono-ThinItalic.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
