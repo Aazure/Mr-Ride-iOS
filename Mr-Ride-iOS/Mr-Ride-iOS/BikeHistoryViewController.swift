@@ -7,17 +7,22 @@
 //
 
 import UIKit
+import CoreData
+import CoreLocation
 
-class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     @IBOutlet weak var backImage: UIImageView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var historyTableView: UITableView!
-    var fruits: [String] = []
+    
+    @IBOutlet weak var sectionLabel: UILabel!
     let cellIdentifier = "recordCell"
-//    var alphabetizedFruits = [String: [String]]()
+    var fetchedResultsController: NSFetchedResultsController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initalizeFetchedResultsController()
+        
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
@@ -39,95 +44,101 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
-        
-//        fruits = ["Apple", "Pineapple", "Orange", "Blackberry", "Banana", "Pear", "Kiwi", "Strawberry", "Mango", "Walnut", "Apricot", "Tomato", "Almond", "Date", "Melon", "Water Melon", "Lemon", "Coconut", "Fig", "Passionfruit", "Star Fruit", "Clementin", "Citron", "Cherry", "Cranberry"]
-//        
-//        alphabetizedFruits = alphabetizedArray(fruits)
-//        
-//        let calender = NSCalendar.currentCalendar()
-//        let date = NSDate();
-//        let dateFormatter = NSDateFormatter()
-//        dateFormatter.timeStyle = NSDateFormatterStyle.MediumStyle //Set time style
-//        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle //Set date style
-//        dateFormatter.timeZone = NSTimeZone()
-//        let localDate = dateFormatter.stringFromDate(date)
-//        let month = calender.component(NSCalendarUnit.Month, fromDate: date)
-//        print(localDate)
-//        print(month)
-//        
-//        
     }
-//
-//    private func alphabetizedArray(array: [String]) -> [String: [String]]{
-//        var result = [String: [String]]()
-//        
-//        for item in array{
-//            
-//            let index = item.startIndex.advancedBy(1)
-//            let firstLetter = item.substringToIndex(index).uppercaseString
-//            
-//            if result[firstLetter] != nil{
-//                result[firstLetter]!.append(item)
-//            }else{
-//                result[firstLetter] = [item]
-//            }
-//            
-//        }
-//        
-//        for(key, value) in result{
-//            result[key] = value.sort({(a,b) -> Bool in
-//                a.lowercaseString < b.lowercaseString
-//            })
-//            
-//        }
-//        return result
-//    }
+    
+    func initalizeFetchedResultsController(){
+        let fetchRequest = NSFetchRequest(entityName: "Record")
+        let fetchSort = NSSortDescriptor(key: "date", ascending: false)
+        fetchRequest.sortDescriptors = [fetchSort]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: "dateForSection", cacheName: nil)
+        fetchedResultsController.delegate = self
+        
+        do {
+            try fetchedResultsController.performFetch()
+        }catch{
+            fatalError("Failed to initialize FetchedResultsControllr:\(error)")
+        }
+    }
+    
+    func configureCell(cell: UITableViewCell, indexPath: NSIndexPath){
+        let record = fetchedResultsController.objectAtIndexPath(indexPath)
+        
+        let date = record.valueForKey("date") as? NSDate
+        let calender = NSCalendar.currentCalendar()
+        let dateComponents = calender.components([.Day, .Month, .Year], fromDate: date!)
+        
+        let distance = record.valueForKey("distance") as? Double
+        let distanceKm = distance! * 0.01
+        let distanceStr = NSString(format: "%.2f", distanceKm)
+        
+        var  duration = record.valueForKey("duration") as! Double
+        let hours = UInt8(duration / 3600.0)
+        duration -= (NSTimeInterval(hours) * 3600)
+        let minutes = UInt8(duration / 60.0)
+        duration -= (NSTimeInterval(minutes) * 60)
+        let seconds = UInt8(duration)
+        duration -= NSTimeInterval(seconds)
+        let fraction = UInt8(duration * 100)
+        
+        let strHours = String(format: "%02d", hours)
+        let strMinutes = String(format: "%02d", minutes)
+        let strSeconds = String(format: "%02d", seconds)
+        let strFraction = String(format: "%02d", fraction)
+        let durationStr = "\(strHours):\(strMinutes):\(strSeconds).\(strFraction)"
+        
+        cell.textLabel?.text = "\(dateComponents.day)th | \(distanceStr) km \(durationStr)"
+    }
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        historyTableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        historyTableView.endUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+        switch type {
+        case .Insert:
+            historyTableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Automatic)
+        default: break
+        }
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        switch type {
+        case .Insert:
+            historyTableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Automatic)
+        default: break
+        }
+    }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int{
-//        return alphabetizedFruits.keys.count
-        return 2
+        return fetchedResultsController?.sections?.count ?? 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let keys = alphabetizedFruits.keys
-//        
-//        let sortedKeys = keys.sort({ (a,b) -> Bool in
-//            a.lowercaseString < b.lowercaseString
-//        })
-//        
-//        let key = sortedKeys[section]
-//        
-//        if let fruits = alphabetizedFruits[key]{
-//            return fruits.count
-//        }
-//        return 0
-        return 5
+        if let sections = fetchedResultsController?.sections where sections.count > 0{
+            return sections[section].numberOfObjects
+        }else {
+            return 0
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
-//
-//        let keys = alphabetizedFruits.keys.sort({(a,b) -> Bool in
-//            a.lowercaseString < b.lowercaseString
-//        })
-//        
-//        let key = keys[indexPath.section]
-//        
-//        if let fruits = alphabetizedFruits[key]{
-//        
-//        let fruit = fruits[indexPath.row]
         
-        cell.textLabel?.text = "date | Distance Duration"
-//        }
+        configureCell(cell, indexPath: indexPath)
         return cell
     }
-
+    
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        let keys = alphabetizedFruits.keys.sort({(a,b) -> Bool in
-//            a.lowercaseString < b.lowercaseString
-//        })
-        
-        return "Month, Year"
+        if let sections = fetchedResultsController?.sections where sections.count > 0 {
+            return sections[section].name
+        }else {
+            return nil
+        }
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -135,42 +146,34 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let vw = UIView()
-        vw.backgroundColor = UIColor.whiteColor()
-        vw.tintColor = UIColor.mrDarkSlateBlueColor()
+        let headerCell = tableView.dequeueReusableCellWithIdentifier("header") as! CustomHeader
+        if let sections = fetchedResultsController?.sections where sections.count > 0 {
+            headerCell.headerLabel.text = sections[section].name
+        }else {
+            return nil
+        }
         
-        return vw
+        return headerCell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        let keys = alphabetizedFruits.keys.sort({(a,b) -> Bool in
-//            a.lowercaseString < b.lowercaseString
-//        })
-//
-//        let key = keys[indexPath.section]
-//        
-//        if let fruits = alphabetizedFruits[key]{
-//            print(fruits[indexPath.row])
-//        }
+        let record = fetchedResultsController.objectAtIndexPath(indexPath)
+        let date = record.valueForKey("date") as? NSDate
+        let distance = record.valueForKey("distance") as? Double
+        let duration = record.valueForKey("duration") as? Double
+        let routes = record.valueForKey("routes")?.allObjects as? [Route]
         
-        let vc = self.storyboard!.instantiateViewControllerWithIdentifier("AnalysisPage") as! BikeAnalysisViewController
-        self.navigationController!.pushViewController(vc, animated: true)
+        let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("AnalysisPage") as! BikeAnalysisViewController
+        viewController.date = date
+        viewController.distance = distance
+        viewController.duration = duration
+        viewController.routes = routes!
+        viewController.isFromTable = true
+        self.navigationController!.pushViewController(viewController, animated: true)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

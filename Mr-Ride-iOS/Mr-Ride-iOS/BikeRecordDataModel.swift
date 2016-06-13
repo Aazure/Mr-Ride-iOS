@@ -9,10 +9,10 @@
 import Foundation
 import CoreLocation
 
-struct Record{
+struct bikeRecord{
     let date: NSDate
     let distance: Double
-    let duration: Int32
+    let duration: Double
     let route: [CLLocation]
 }
 

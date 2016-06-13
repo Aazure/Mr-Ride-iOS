@@ -3,18 +3,17 @@
     <entity name="Record" representedClassName=".Record" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="distance" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="duration" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="route" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Route" inverseName="record" inverseEntity="Route" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <relationship name="routes" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Route" inverseName="record" inverseEntity="Route" syncable="YES"/>
     </entity>
     <entity name="Route" representedClassName=".Route" syncable="YES">
         <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="record" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Record" inverseName="route" inverseEntity="Record" syncable="YES"/>
+        <relationship name="record" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Record" inverseName="routes" inverseEntity="Record" syncable="YES"/>
     </entity>
     <elements>
         <element name="Record" positionX="-270" positionY="-76" width="128" height="105"/>
-        <element name="Route" positionX="-119" positionY="-0" width="128" height="120"/>
+        <element name="Route" positionX="-65" positionY="-66" width="128" height="103"/>
     </elements>
 </model>

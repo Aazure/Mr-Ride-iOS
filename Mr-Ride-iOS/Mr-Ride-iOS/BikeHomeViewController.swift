@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class BikeHomeViewController: UIViewController {
     @IBOutlet weak var totalDistLabel: UILabel!
@@ -15,11 +16,13 @@ class BikeHomeViewController: UIViewController {
     @IBOutlet weak var letsRideButton: UIButton!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
+    let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
-
+        
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
         navigationController?.navigationBar.shadowImage = UIImage()
         let logo = UIImage(named: "icon-bike")
@@ -27,7 +30,8 @@ class BikeHomeViewController: UIViewController {
         let imageView = UIImageView(image: tintImage)
         imageView.tintColor = UIColor.whiteColor()
         self.navigationItem.titleView = imageView
-       
+        
+        setLabel()
         totalDistLabel.font = UIFont.mrTextStyle8Font()
         totalCountLabel.font = UIFont.mrTextStyle9Font()
         avgSpeedLabel.font = UIFont.mrTextStyle9Font()
@@ -47,21 +51,43 @@ class BikeHomeViewController: UIViewController {
         }
         
     }
-
+    
+    func setLabel(){
+        moc.performBlock{
+            let results = self.moc.countForFetchRequest(NSFetchRequest(entityName: "Record"), error: nil)
+            self.totalCountLabel.text = String(results) + " times"
+            
+            
+            let request = NSFetchRequest(entityName: "Record")
+            let records = try? self.moc.executeFetchRequest(request)
+            var distance = 0.0
+            var duration = 0.0
+            for record in records! {
+                distance += record.valueForKey("distance") as! Double
+                duration += record.valueForKey("duration") as! Double
+            }
+            let distanceStr = NSString(format: "%.2f", distance*0.01)
+            self.totalDistLabel.text = String(distanceStr) + " km"
+            let speedStr = NSString(format: "%.2f", distance / duration * 3.6)
+            self.avgSpeedLabel.text = String(speedStr) + " km / h"
+        }
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
