@@ -21,7 +21,7 @@ class BikeHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.clearColor()
         
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -51,6 +51,18 @@ class BikeHomeViewController: UIViewController {
         }
         
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        //        view.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.4)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
+//    override func viewDidAppear(animated: Bool) {
+//        view.backgroundColor = UIColor.clearColor()
+//    }
     
     func setLabel(){
         moc.performBlock{

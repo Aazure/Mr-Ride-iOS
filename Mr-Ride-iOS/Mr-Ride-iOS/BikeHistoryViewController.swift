@@ -23,6 +23,8 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         super.viewDidLoad()
         initalizeFetchedResultsController()
         
+        self.navigationItem.title = "History"
+        self.navigationItem.titleView?.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
@@ -44,6 +46,14 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        //        view.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.4)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
+        navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     func initalizeFetchedResultsController(){
@@ -162,14 +172,26 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         let distance = record.valueForKey("distance") as? Double
         let duration = record.valueForKey("duration") as? Double
         let routes = record.valueForKey("routes")?.allObjects as? [Route]
+        var locationArray: [CLLocationCoordinate2D] = []
+        for route in routes!{
+                     locationArray.append(CLLocationCoordinate2D(latitude: Double(route.latitude!), longitude: Double(route.longitude!)))
+        }
         
-        let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("AnalysisPage") as! BikeAnalysisViewController
-        viewController.date = date
-        viewController.distance = distance
-        viewController.duration = duration
-        viewController.routes = routes!
-        viewController.isFromTable = true
-        self.navigationController!.pushViewController(viewController, animated: true)
+        print("history: \(routes)")
+        let analysisVC = self.storyboard!.instantiateViewControllerWithIdentifier("AnalysisPage") as! BikeAnalysisViewController
+        analysisVC.date = date
+        analysisVC.distance = distance
+        analysisVC.duration = duration
+        analysisVC.routes = locationArray
+        analysisVC.isFromTable = true
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.locale = NSLocale.currentLocale()
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        let convertedDate = dateFormatter.stringFromDate(date!)
+        analysisVC.navigationItem.title = convertedDate
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController!.pushViewController(analysisVC, animated: true)
     }
     
     override func didReceiveMemoryWarning() {

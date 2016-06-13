@@ -29,6 +29,14 @@ class BikeSidebarTableViewController: UITableViewController {
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        //        view.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.4)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

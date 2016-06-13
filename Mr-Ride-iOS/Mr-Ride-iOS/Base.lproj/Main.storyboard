@@ -309,7 +309,7 @@
             </objects>
             <point key="canvasLocation" x="2218" y="-89"/>
         </scene>
-        <!--2016 /06/ 03-->
+        <!--Bike Record View Controller-->
         <scene sceneID="iSb-Ex-Vlo">
             <objects>
                 <viewController id="POZ-zG-4hw" customClass="BikeRecordViewController" customModule="Mr_Ride_iOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -317,7 +317,7 @@
                         <viewControllerLayoutGuide type="top" id="9GK-bm-sIv"/>
                         <viewControllerLayoutGuide type="bottom" id="Lin-al-nQe"/>
                     </layoutGuides>
-                    <view key="view" opaque="NO" contentMode="scaleToFill" id="glp-FI-SSp">
+                    <view key="view" contentMode="scaleToFill" id="glp-FI-SSp">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -371,7 +371,9 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vl-N3-RP2">
                                         <rect key="frame" x="17" y="25" width="46" height="30"/>
-                                        <state key="normal" title="Button"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" red="0.38823530080000002" green="0.84313726430000002" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="startPressed:" destination="POZ-zG-4hw" eventType="touchUpInside" id="CIH-HQ-fZk"/>
                                         </connections>
@@ -385,28 +387,28 @@
                                     <constraint firstAttribute="width" constant="80" id="kjv-DT-trT"/>
                                 </constraints>
                             </view>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="WR9-6S-FqX">
-                                <rect key="frame" x="128" y="447" width="345" height="101"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="p5G-7y-4D9">
+                                <rect key="frame" x="128" y="447" width="345" height="200"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="345" id="OEQ-Wb-k6U"/>
+                                    <constraint firstAttribute="width" constant="345" id="5Lp-56-GRp"/>
+                                    <constraint firstAttribute="height" constant="200" id="ne8-kI-ChY"/>
                                 </constraints>
                             </mapView>
                         </subviews>
-                        <color key="backgroundColor" red="0.043137256059999997" green="0.59215688710000003" blue="0.74117648599999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.38823530080000002" green="0.84313726430000002" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="thw-GQ-Ueu" firstAttribute="top" secondItem="9GK-bm-sIv" secondAttribute="bottom" constant="21" id="0fb-aL-jT0"/>
                             <constraint firstItem="BXr-OH-S2p" firstAttribute="top" secondItem="9GK-bm-sIv" secondAttribute="bottom" constant="151" id="0wP-p5-LIZ"/>
                             <constraint firstItem="thw-GQ-Ueu" firstAttribute="leading" secondItem="glp-FI-SSp" secondAttribute="leading" constant="38" id="31C-26-UXk"/>
+                            <constraint firstItem="p5G-7y-4D9" firstAttribute="top" secondItem="CbL-FL-VA8" secondAttribute="bottom" constant="41" id="AXO-Xt-2DP"/>
                             <constraint firstItem="BXr-OH-S2p" firstAttribute="leading" secondItem="glp-FI-SSp" secondAttribute="leading" constant="38" id="AeN-4C-GkR"/>
                             <constraint firstItem="ACO-mD-Mzp" firstAttribute="leading" secondItem="glp-FI-SSp" secondAttribute="leading" constant="38" id="EmJ-Ev-oAq"/>
-                            <constraint firstItem="Lin-al-nQe" firstAttribute="top" secondItem="WR9-6S-FqX" secondAttribute="bottom" constant="52" id="F56-HI-qDE"/>
                             <constraint firstItem="CbL-FL-VA8" firstAttribute="centerX" secondItem="glp-FI-SSp" secondAttribute="centerX" id="RqK-N8-dK6"/>
                             <constraint firstItem="Rg5-p3-XKP" firstAttribute="leading" secondItem="glp-FI-SSp" secondAttribute="leading" constant="38" id="WrY-Gj-mMo"/>
-                            <constraint firstItem="WR9-6S-FqX" firstAttribute="top" secondItem="CbL-FL-VA8" secondAttribute="bottom" constant="41" id="X0i-ae-fEX"/>
                             <constraint firstItem="uiY-q0-U74" firstAttribute="top" secondItem="9GK-bm-sIv" secondAttribute="bottom" constant="86" id="dH7-0Z-7r2"/>
                             <constraint firstItem="Fat-A9-fxc" firstAttribute="leading" secondItem="thw-GQ-Ueu" secondAttribute="leading" id="dLF-fM-sp8"/>
                             <constraint firstItem="ACO-mD-Mzp" firstAttribute="top" secondItem="9GK-bm-sIv" secondAttribute="bottom" constant="101" id="jkT-kZ-txm"/>
-                            <constraint firstItem="WR9-6S-FqX" firstAttribute="centerX" secondItem="glp-FI-SSp" secondAttribute="centerX" id="kUC-Xp-bz4"/>
                             <constraint firstItem="CbL-FL-VA8" firstAttribute="top" secondItem="9GK-bm-sIv" secondAttribute="bottom" constant="262" id="ks5-8Y-r2Q"/>
                             <constraint firstItem="Rg5-p3-XKP" firstAttribute="top" secondItem="9GK-bm-sIv" secondAttribute="bottom" constant="167" id="l8Y-7i-ruo"/>
                             <constraint firstItem="9tI-q3-ONg" firstAttribute="top" secondItem="9GK-bm-sIv" secondAttribute="bottom" constant="216" id="lDW-X9-Msl"/>
@@ -414,9 +416,10 @@
                             <constraint firstItem="Fat-A9-fxc" firstAttribute="top" secondItem="9GK-bm-sIv" secondAttribute="bottom" constant="35" id="pWC-Cs-wrC"/>
                             <constraint firstItem="9tI-q3-ONg" firstAttribute="centerX" secondItem="glp-FI-SSp" secondAttribute="centerX" id="qEa-Kc-Jev"/>
                             <constraint firstItem="uiY-q0-U74" firstAttribute="leading" secondItem="glp-FI-SSp" secondAttribute="leading" constant="38" id="wGf-Wm-wa9"/>
+                            <constraint firstItem="p5G-7y-4D9" firstAttribute="centerX" secondItem="glp-FI-SSp" secondAttribute="centerX" id="zdr-0i-0D2"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="2016 /06/ 03" id="7Zk-Wa-CMn">
+                    <navigationItem key="navigationItem" id="7Zk-Wa-CMn">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="l3B-zi-VI2">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -434,7 +437,7 @@
                         <outlet property="caloriesLabel" destination="Rg5-p3-XKP" id="lTS-Ef-FyD"/>
                         <outlet property="counterLabel" destination="9tI-q3-ONg" id="vJ0-eq-dnq"/>
                         <outlet property="distanceLabel" destination="Fat-A9-fxc" id="JwA-v6-i1e"/>
-                        <outlet property="mapView" destination="WR9-6S-FqX" id="foB-KS-pua"/>
+                        <outlet property="mapView" destination="p5G-7y-4D9" id="X4Z-7Z-ezn"/>
                         <outlet property="paceLabel" destination="ACO-mD-Mzp" id="i2w-Xr-KIE"/>
                     </connections>
                 </viewController>
@@ -442,10 +445,10 @@
             </objects>
             <point key="canvasLocation" x="3222" y="-122"/>
         </scene>
-        <!--2016 / 06/ 03-->
+        <!--Analysis-->
         <scene sceneID="4Mu-3r-c8N">
             <objects>
-                <viewController storyboardIdentifier="AnalysisPage" id="2TG-n4-OST" customClass="BikeAnalysisViewController" customModule="Mr_Ride_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AnalysisPage" id="2TG-n4-OST" userLabel="Analysis" customClass="BikeAnalysisViewController" customModule="Mr_Ride_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2f6-Dk-Hbe"/>
                         <viewControllerLayoutGuide type="bottom" id="3aG-qJ-796"/>
@@ -530,7 +533,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.043137256059999997" green="0.59215688710000003" blue="0.74117648599999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.38823530080000002" green="0.84313726430000002" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ump-yC-8c3" firstAttribute="top" secondItem="2f6-Dk-Hbe" secondAttribute="bottom" constant="130" id="31j-CS-Vzf"/>
                             <constraint firstItem="ooh-wL-vTu" firstAttribute="top" secondItem="2f6-Dk-Hbe" secondAttribute="bottom" constant="209" id="4Bt-zV-xkc"/>
@@ -562,7 +565,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="2016 / 06/ 03" id="wJb-5z-5O8">
+                    <navigationItem key="navigationItem" id="wJb-5z-5O8">
                         <barButtonItem key="leftBarButtonItem" title="Close" id="1rO-hb-Jr7">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -773,10 +776,10 @@
             </objects>
             <point key="canvasLocation" x="1426" y="1074"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Bike Navigation Controller-->
         <scene sceneID="aFD-Bb-NrO">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uxY-D5-IY3" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uxY-D5-IY3" customClass="BikeNavigationController" customModule="Mr_Ride_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ivn-5f-giD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -791,10 +794,10 @@
             </objects>
             <point key="canvasLocation" x="3222" y="-1069"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Bike Navigation Controller-->
         <scene sceneID="aNo-8Y-dEE">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RS0-i6-WlM" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RS0-i6-WlM" customClass="BikeNavigationController" customModule="Mr_Ride_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="ZvR-uF-WUg"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5QM-GF-Y8N">

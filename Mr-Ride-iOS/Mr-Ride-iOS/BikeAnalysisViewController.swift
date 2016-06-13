@@ -8,7 +8,7 @@
 
 import UIKit
 import MapKit
-//import CoreLocation
+import CoreLocation
 
 class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
     @IBOutlet weak var distanceLabel: UILabel!
@@ -20,35 +20,16 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
     var date: NSDate?
     var distance: Double?
     var duration: Double?
-    var routes: [Route] = []
+    var routes: [CLLocationCoordinate2D] = []
     var isFromTable = false
-//    lazy var locationManager: CLLocationManager = {
-//        var _locationManager = CLLocationManager()
-//        _locationManager.delegate = self
-//        _locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        _locationManager.activityType = .Fitness
-//        
-//        _locationManager.distanceFilter = 1.0
-//        return _locationManager
-//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Route.getAllLocation(moc)
+//        Route.getAllLocation(moc)
+        mapView.delegate = self
         setNavigation()
         setLabel()
-//        locationManager.delegate = self
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.requestAlwaysAuthorization()
-//        locationManager.requestWhenInUseAuthorization()
-//        locationManager.startUpdatingLocation()
-//        mapView.showsUserLocation = true
-        for route in routes{
-            print(route.latitude)
-            print(route.longitude)
-            print(route.created)
-        }
-        createPolyLine()
+        addPolyLineToMap()
     }
     
     func setNavigation(){
@@ -56,7 +37,7 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
         navigationController?.navigationBar.shadowImage = UIImage()
-    
+        
     }
     
     func setLabel(){
@@ -74,49 +55,58 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
         let fraction = UInt8(duration! * 100)
         
         durationLabel.text = String(format: "%02d:%02d:%02d.%02d", hours, minutes, seconds, fraction)
-
+        
         let calStr = Int(48 * distance! * 0.01 * 1.036)
         caloriesLabel.text = String(calStr) + " kcal"
-    
-    }
-    
-    func createPolyLine(){
-        var locations = [
-            CLLocation(latitude: 32.7767, longitude: -96.7970),         /* San Francisco, CA */
-            CLLocation(latitude: 37.7833, longitude: -122.4167),        /* Dallas, TX */
-            CLLocation(latitude: 42.2814, longitude: -83.7483),         /* Ann Arbor, MI */
-            CLLocation(latitude: 32.7767, longitude: -96.7970)          /* San Francisco, CA */
-        ]
-        
-        addPolyLineToMap(locations)
-        print(1)
         
     }
     
-    func addPolyLineToMap(locations: [CLLocation!]){
-        var coordinates = locations.map({ (location: CLLocation!)
-        -> CLLocationCoordinate2D in
-            return location.coordinate
-        })
+    func mapRegion() -> MKCoordinateRegion {
+        let initialLoc = routes.first!
         
-        let polyline = MKPolyline(coordinates: &coordinates, count: locations.count)
-        self.mapView.addOverlay(polyline)
-        self.mapView.setVisibleMapRect(polyline.boundingMapRect, animated: true)
-        print(coordinates)
-    
-    }
-    
-    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer{
-        if overlay is MKPolyline{
-            let pr = MKPolylineRenderer(overlay:overlay)
-            pr.strokeColor = UIColor.redColor().colorWithAlphaComponent(0.5)
-            pr.lineWidth = 3
-            return pr
+        var minLat = initialLoc.latitude
+        var minLng = initialLoc.longitude
+        var maxLat = minLat
+        var maxLng = minLng
+        
+        for route in routes {
+            minLat = min(minLat, route.latitude)
+            minLng = min(minLng, route.longitude)
+            maxLat = max(maxLat, route.latitude)
+            maxLng = max(maxLng, route.longitude)
         }
-        return MKOverlayRenderer()
-//        let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
-//        renderer.strokeColor = UIColor.blueColor()
-//        return renderer
+        
+        return MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: (minLat + maxLat)/2,
+                longitude: (minLng + maxLng)/2),
+            span: MKCoordinateSpan(latitudeDelta: (maxLat - minLat)*1.1,
+                longitudeDelta: (maxLng - minLng)*1.1))
+    }
+    
+    func addPolyLineToMap(){
+        var coords = [CLLocationCoordinate2D]()
+        for route in routes{
+            coords.append(CLLocationCoordinate2D(latitude: route.latitude, longitude: route.longitude))
+            
+        }
+        
+        let polyline = MKPolyline(coordinates: &coords, count: coords.count)
+//        self.mapView.setVisibleMapRect(polyline.boundingMapRect, animated: true)
+        self.mapView.addOverlay(polyline)
+                self.mapView.region = mapRegion()
+        
+    }
+    
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        guard let polyline = overlay as? MKPolyline else {
+            return MKOverlayRenderer()
+        }
+        
+        let renderer = MKPolylineRenderer(polyline: polyline)
+        renderer.lineWidth = 10.0
+        renderer.strokeColor = UIColor.mrBubblegumColor()
+        
+        return renderer
     }
     
     override func didReceiveMemoryWarning() {
@@ -125,7 +115,7 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
     
     @IBAction func closeAnalysis(sender: AnyObject) {
         if isFromTable{
-        self.navigationController!.popToRootViewControllerAnimated(true)
+            self.navigationController!.popToRootViewControllerAnimated(true)
         }else{
             self.dismissViewControllerAnimated(true, completion: nil)
         }
