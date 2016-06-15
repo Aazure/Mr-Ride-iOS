@@ -14,27 +14,24 @@ class BikeSidebarTableViewController: UITableViewController {
     @IBOutlet weak var homeLabel: UILabel!
     @IBOutlet weak var historyLabel: UILabel!
     @IBOutlet weak var dotHIstoryLabel: UILabel!
+    @IBOutlet weak var mapLabel: UILabel!
+    @IBOutlet weak var dotMapLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         homeLabel.font = UIFont.mrTextStyle11Font()
         homeLabel.font = UIFont.mrTextStyle11Font()
         homeLabel.textColor = UIColor.whiteColor()
         dotHomeLabel.hidden = false
         dotHIstoryLabel.hidden = true
+        dotMapLabel.hidden = true
         
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        //        view.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.4)
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
-        navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     // MARK: - Table view data source
@@ -46,21 +43,33 @@ class BikeSidebarTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 2
+        return 3
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         switch indexPath.row {
         case 0:
             dotHomeLabel.hidden = false
             dotHIstoryLabel.hidden = true
+            dotMapLabel.hidden = true
             homeLabel.textColor = UIColor.whiteColor()
             historyLabel.textColor = UIColor.mrWhite50Color()
+            mapLabel.textColor = UIColor.mrWhite50Color()
         case 1:
             dotHomeLabel.hidden = true
             dotHIstoryLabel.hidden = false
+            dotMapLabel.hidden = true
             homeLabel.textColor = UIColor.mrWhite50Color()
             historyLabel.textColor = UIColor.whiteColor()
+            mapLabel.textColor = UIColor.mrWhite50Color()
+        case 2:
+            dotHomeLabel.hidden = true
+            dotHIstoryLabel.hidden = true
+            dotMapLabel.hidden = false
+            homeLabel.textColor = UIColor.mrWhite50Color()
+            historyLabel.textColor = UIColor.mrWhite50Color()
+            mapLabel.textColor = UIColor.whiteColor()
         default:
             break
         }

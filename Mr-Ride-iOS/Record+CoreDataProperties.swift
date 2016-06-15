@@ -20,10 +20,10 @@ extension Record {
     @NSManaged var routes: NSOrderedSet?
     
     var dateForSection: String {
-        let calender = NSCalendar.currentCalendar()
-        let dateComponents = calender.components([.Day, .Month, .Year], fromDate: date!)
-        dateComponents.timeZone = NSTimeZone(name: "CST")
-        let sectionName = String(dateComponents.month) + ", " + String(dateComponents.year)
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MMMM, YYYY"
+        dateFormatter.timeZone = NSTimeZone(name: "CST")
+        let sectionName = dateFormatter.stringFromDate(date!)
         return sectionName
     }
 

@@ -27,6 +27,7 @@
 		464CFE7F1CF2D94200B1FBBE /* MrBikeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CFE7D1CF2D94200B1FBBE /* MrBikeColor.swift */; };
 		464CFE811CF2E3ED00B1FBBE /* BikeHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CFE801CF2E3ED00B1FBBE /* BikeHomeViewController.swift */; };
 		464CFE851CF2FC1A00B1FBBE /* BikeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CFE841CF2FC1A00B1FBBE /* BikeNavigationController.swift */; };
+		465F67C71D10FF1100875C43 /* BikeMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465F67C61D10FF1100875C43 /* BikeMapViewController.swift */; };
 		46F4927F1CFD7B99000D4EA7 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 46F492741CFD7B99000D4EA7 /* LICENSE.txt */; };
 		46F492801CFD7B99000D4EA7 /* RobotoMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F492751CFD7B99000D4EA7 /* RobotoMono-Bold.ttf */; };
 		46F492811CFD7B99000D4EA7 /* RobotoMono-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F492761CFD7B99000D4EA7 /* RobotoMono-BoldItalic.ttf */; };
@@ -68,6 +69,7 @@
 		464CFE7D1CF2D94200B1FBBE /* MrBikeColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MrBikeColor.swift; sourceTree = "<group>"; };
 		464CFE801CF2E3ED00B1FBBE /* BikeHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeHomeViewController.swift; sourceTree = "<group>"; };
 		464CFE841CF2FC1A00B1FBBE /* BikeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeNavigationController.swift; sourceTree = "<group>"; };
+		465F67C61D10FF1100875C43 /* BikeMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeMapViewController.swift; sourceTree = "<group>"; };
 		46F492741CFD7B99000D4EA7 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		46F492751CFD7B99000D4EA7 /* RobotoMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-Bold.ttf"; sourceTree = "<group>"; };
 		46F492761CFD7B99000D4EA7 /* RobotoMono-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				460E11981CFD299F00FD23E5 /* BikeRecordDataModel.swift */,
 				46F8ED561CFD5AC9003F167B /* BikeRecordViewController.swift */,
 				46F8ED581CFD6680003F167B /* BikeAnalysisViewController.swift */,
+				465F67C61D10FF1100875C43 /* BikeMapViewController.swift */,
 				464B24B61D014FC20087ED8B /* Core Data */,
 				4605DAE91CFE756100F9C55B /* Supporting Files */,
 				463E5D121D0E4EB2004C1546 /* CustomHeader.xib */,
@@ -293,6 +296,7 @@
 				464CFE7B1CF2D88000B1FBBE /* SWRevealViewController.m in Sources */,
 				464CFE7F1CF2D94200B1FBBE /* MrBikeColor.swift in Sources */,
 				46F8ED571CFD5AC9003F167B /* BikeRecordViewController.swift in Sources */,
+				465F67C71D10FF1100875C43 /* BikeMapViewController.swift in Sources */,
 				46F9910B1CFBE78F004765F8 /* BikeHistoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
