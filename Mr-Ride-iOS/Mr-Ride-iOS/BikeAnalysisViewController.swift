@@ -23,11 +23,13 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
     var routes: [CLLocationCoordinate2D] = []
     var isFromTable = false
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        Route.getAllLocation(moc)
         mapView.delegate = self
+        mapView.layer.cornerRadius = 4
         setNavigation()
+        setupBackground()
         setLabel()
         addPolyLineToMap()
     }
@@ -35,8 +37,7 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
     func setNavigation(){
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
-        navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.translucent = false
         
     }
     
@@ -58,6 +59,18 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
         
         let calStr = Int(48 * distance! * 0.01 * 1.036)
         caloriesLabel.text = String(calStr) + " kcal"
+        
+    }
+    
+    func setupBackground() {
+        
+        self.view.backgroundColor = UIColor.mrLightblueColor()
+        let topGradient = UIColor(red: 0, green: 0, blue: 0, alpha: 0.60).CGColor
+        let bottomGradient = UIColor(red: 0, green: 0, blue: 0, alpha: 0.40).CGColor
+        let gradient = CAGradientLayer()
+        gradient.frame = self.view.frame
+        gradient.colors = [topGradient, bottomGradient]
+        self.view.layer.insertSublayer(gradient, atIndex: 0)
         
     }
     
@@ -87,17 +100,16 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
         var coords = [CLLocationCoordinate2D]()
         for route in routes{
             coords.append(CLLocationCoordinate2D(latitude: route.latitude, longitude: route.longitude))
-            
         }
         
         let polyline = MKPolyline(coordinates: &coords, count: coords.count)
-//        self.mapView.setVisibleMapRect(polyline.boundingMapRect, animated: true)
+        //        self.mapView.setVisibleMapRect(polyline.boundingMapRect, animated: true)
         self.mapView.addOverlay(polyline)
-                self.mapView.region = mapRegion()
+        self.mapView.region = mapRegion()
         
     }
     
-    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer{
         guard let polyline = overlay as? MKPolyline else {
             return MKOverlayRenderer()
         }

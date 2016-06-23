@@ -4,4 +4,5 @@ use_frameworks!
 target 'Mr-Ride-iOS' do
   pod 'SwiftyJSON', '~> 2.3'
   pod 'Alamofire', '~> 3.3'
+  pod 'Amplitude-iOS', '~> 3.7.0'	
 end

@@ -11,6 +11,9 @@ import MapKit
 import CoreLocation
 import CoreData
 
+//protocol ShowHomePageInfoDelegate: class{
+//    func showHomePage()
+//}
 let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
 class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate{
     
@@ -19,6 +22,10 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
     @IBOutlet weak var counterLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var paceLabel: UILabel!
+    @IBOutlet weak var recordButton: UIButton!
+    @IBOutlet weak var circleView: UIView!
+    
+    var test = "fail"
     
     var distance = 0.0
     var currentSpeed = 0.0
@@ -28,6 +35,7 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
     var totalTime = NSTimeInterval()
     var date = NSDate()
     var flag = false
+//    weak var delegation:ShowHomePageInfoDelegate?
     
     lazy var locations = [CLLocation]()
     lazy var locationManager: CLLocationManager = {
@@ -42,12 +50,19 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         mapView.delegate = self
+        mapView.layer.cornerRadius = 4
         distance = 0.0
         locations.removeAll(keepCapacity: false)
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
+        self.navigationController?.navigationBar.translucent = false
+        setupRecordButton()
+        setupBackground()
+        circleView.layer.cornerRadius = circleView.frame.width / 2
+        circleView.layer.borderWidth = 4
+        circleView.layer.borderColor = UIColor.whiteColor().CGColor
         counterLabel.font = UIFont(name: "RobotoMono-Light", size:30.0)
         mapView.showsUserLocation = true
         
@@ -94,14 +109,21 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
         locationManager.stopUpdatingLocation()
     }
     
+    func setupRecordButton(){
+        
+        recordButton.backgroundColor = UIColor.redColor()
+        recordButton.layer.cornerRadius = recordButton.frame.width / 2
+        recordButton.clipsToBounds = true
+    }
+    
     func locationManager(manager: CLLocationManager, didUpdateLocations bikeLocations: [CLLocation]) {
- 
+        
         if flag{
             for location in bikeLocations {
                 let howRecent = location.timestamp.timeIntervalSinceNow
                 
                 if abs(howRecent) < 10 && location.horizontalAccuracy < 20 {
-
+                    
                     //update distance
                     if self.locations.count > 0 {
                         distance += location.distanceFromLocation(self.locations.last!)
@@ -111,10 +133,10 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
                         mapView.setRegion(region, animated: true)
                         
                         if self.locations.count > 1{
-                        let c1 = locations[locations.count-1].coordinate
-                        let c2 = locations[locations.count-2].coordinate
-                        var coords = [c1, c2]
-                        mapView.addOverlay(MKPolyline(coordinates: &coords, count: coords.count))
+                            let c1 = locations[locations.count-1].coordinate
+                            let c2 = locations[locations.count-2].coordinate
+                            var coords = [c1, c2]
+                            mapView.addOverlay(MKPolyline(coordinates: &coords, count: coords.count))
                         }
                     }
                     
@@ -130,6 +152,7 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
     }
     
     @IBAction func dismissRecord(sender: AnyObject) {
+//        delegation?.showHomePage()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -149,18 +172,35 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
             startTime = NSDate.timeIntervalSinceReferenceDate()
             flag = true
             startLocationUpdates()
+            UIView.animateWithDuration(0.6){
+                self.recordButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
+                UIView.animateWithDuration(0.6){
+                    self.recordButton.layer.cornerRadius = 8
+                }
+            }
             buttonStatus = .Pause
         case .Pause:
             timer.invalidate()
             pausedTime = NSDate.timeIntervalSinceReferenceDate()
             flag = false
             stopLocationUpdates()
+            UIView.animateWithDuration(0.6){
+                self.recordButton.layer.cornerRadius = self.recordButton.bounds.width / 2
+                UIView.animateWithDuration(0.6){
+                self.recordButton.transform = CGAffineTransformMakeScale(0.8, 0.8)
+                }
+            }
             buttonStatus = .Continue
         case .Continue:
             startTime = NSDate.timeIntervalSinceReferenceDate() - pausedTime + startTime
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(BikeRecordViewController.startRecord(_:)), userInfo: nil, repeats: true)
             flag = true
             startLocationUpdates()
+            UIView.animateWithDuration(0.6){
+                self.recordButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
+                self.recordButton.layer.cornerRadius = 8
+                self.recordButton.clipsToBounds = true
+            }
             buttonStatus = .Pause
         }
     }
@@ -171,13 +211,27 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
         for location in locations{
             locationArray.append(CLLocationCoordinate2D(latitude: Double(location.coordinate.latitude), longitude: Double(location.coordinate.longitude)))
         }
-        let vc = self.storyboard!.instantiateViewControllerWithIdentifier("AnalysisPage") as! BikeAnalysisViewController
-        vc.date = date
-        vc.distance = distance
-        vc.duration = totalTime
-        vc.routes = locationArray
-        self.navigationController!.pushViewController(vc, animated: true)
+        let destinationVC = self.storyboard!.instantiateViewControllerWithIdentifier("AnalysisPage") as! BikeAnalysisViewController
+        destinationVC.date = date
+        destinationVC.distance = distance
+        destinationVC.duration = totalTime
+        destinationVC.routes = locationArray
+        self.navigationController!.pushViewController(destinationVC, animated: true)
     }
+    
+    
+    func setupBackground() {
+        
+        self.view.backgroundColor = UIColor.mrLightblueColor()
+        let topGradient = UIColor(red: 0, green: 0, blue: 0, alpha: 0.60).CGColor
+        let bottomGradient = UIColor(red: 0, green: 0, blue: 0, alpha: 0.40).CGColor
+        let gradient = CAGradientLayer()
+        gradient.frame = self.view.frame
+        gradient.colors = [topGradient, bottomGradient]
+        self.view.layer.insertSublayer(gradient, atIndex: 0)
+        
+    }
+
     
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         guard let polyline = overlay as? MKPolyline else {
@@ -190,5 +244,6 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
         
         return renderer
     }
+
     
 }

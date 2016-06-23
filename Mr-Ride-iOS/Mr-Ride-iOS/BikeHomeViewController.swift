@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class BikeHomeViewController: UIViewController {
+class BikeHomeViewController: UIViewController{
     @IBOutlet weak var totalDistLabel: UILabel!
     @IBOutlet weak var totalCountLabel: UILabel!
     @IBOutlet weak var avgSpeedLabel: UILabel!
@@ -32,9 +32,7 @@ class BikeHomeViewController: UIViewController {
         self.navigationItem.titleView = imageView
         
         setLabel()
-        totalDistLabel.font = UIFont.mrTextStyle8Font()
-        totalCountLabel.font = UIFont.mrTextStyle9Font()
-        avgSpeedLabel.font = UIFont.mrTextStyle9Font()
+
         letsRideButton.titleLabel?.font = UIFont.mrTextStyle9Font()
         letsRideButton.layer.cornerRadius = 30
         letsRideButton.layer.borderWidth = 1
@@ -70,6 +68,10 @@ class BikeHomeViewController: UIViewController {
             self.totalDistLabel.text = String(distanceStr) + " km"
             let speedStr = NSString(format: "%.2f", distance / duration * 3.6)
             self.avgSpeedLabel.text = String(speedStr) + " km / h"
+            
+            self.totalDistLabel.font = UIFont.mrTextStyle8Font()
+            self.totalCountLabel.font = UIFont.mrTextStyle9Font()
+            self.avgSpeedLabel.font = UIFont.mrTextStyle9Font()
         }
         
     }
@@ -89,5 +91,35 @@ class BikeHomeViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
+//    func showHomePage(){
+//        for subview in view.subviews where subview is UILabel{
+//            subview.hidden = false
+//        }
+//        letsRideButton.hidden = false
+//    }
     
+//    private var record: BikeRecordViewController!
+//    
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if let recordVC = segue.destinationViewController as? BikeRecordViewController where segue.identifier == "recordSegue"{
+//            self.record = recordVC
+//            record.delegation = self
+//
+//        }
+//    }
+    
+    
+//    @IBAction func buttonTapped(sender: UIButton) {
+//
+////        let recordVC = self.storyboard!.instantiateViewControllerWithIdentifier("RecordPage") as! BikeRecordViewController
+////        recordVC.delegation = self
+////        recordVC.test = "YA~~~!!"
+//        
+////        self.navigationController!.presentViewController(recordVC, animated: true, completion: nil)
+//        
+//        for subview in view.subviews where subview is UILabel{
+//            subview.hidden = true
+//        }
+//        letsRideButton.hidden = true
+//    }
 }

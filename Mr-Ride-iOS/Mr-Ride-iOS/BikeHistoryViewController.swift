@@ -152,7 +152,11 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 24.0
+        return 34.0
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 10.0
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -166,6 +170,12 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         return headerCell
     }
     
+//    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        let footerCell = tableView.dequeueReusableCellWithIdentifier("footer") as! CustomFooter
+//        
+//        return footerCell
+//    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let record = fetchedResultsController.objectAtIndexPath(indexPath)
         let date = record.valueForKey("date") as? NSDate
@@ -174,7 +184,7 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         let routes = record.valueForKey("routes")?.allObjects as? [Route]
         var locationArray: [CLLocationCoordinate2D] = []
         for route in routes!{
-                     locationArray.append(CLLocationCoordinate2D(latitude: Double(route.latitude!), longitude: Double(route.longitude!)))
+            locationArray.append(CLLocationCoordinate2D(latitude: Double(route.latitude!), longitude: Double(route.longitude!)))
         }
         
         print("history: \(routes)")
