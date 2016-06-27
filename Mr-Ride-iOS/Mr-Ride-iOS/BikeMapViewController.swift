@@ -12,7 +12,7 @@ import MapKit
 class BikeMapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
-    
+    @IBOutlet weak var infoView: UIView!
     enum MakerType: String{
         case Toilets
         case YouBikes
@@ -36,6 +36,7 @@ class BikeMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     
     var toilets: [BikeToiletModel] = []
     var toiletAnnotations: [MKAnnotation] = []
+//    let toiletAnnotation = ToiletAnnotation
     
     override func viewWillAppear(animated: Bool) {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0) ){
@@ -69,9 +70,8 @@ class BikeMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         mapView.showsUserLocation = true
         mapView.layer.cornerRadius = 10.0
         
-        
-        
-        
+        infoView.layer.cornerRadius = 10.0
+        infoView.hidden = true
         
         //        self.locationManager.startUpdatingLocation()
         
@@ -155,15 +155,18 @@ class BikeMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         let selectedAnnotation = view.annotation
+//            as? ToiletAnnotation
+
         print(selectedAnnotation?.title)
-        addressLabel.text = (selectedAnnotation?.subtitle!)! as String
-        titleLabel.text = (selectedAnnotation?.title!)! as String
+        infoView.hidden = false
+        addressLabel.text = selectedAnnotation!.subtitle!! as String
+        titleLabel.text = selectedAnnotation!.title!! as String
         view.backgroundColor =  UIColor.mrLightblueColor()
         
         let request = MKDirectionsRequest()
         let sourceItem = MKMapItem(placemark: MKPlacemark(coordinate: mapView.userLocation.coordinate, addressDictionary: nil))
         request.source = sourceItem
-        let destinationItem = MKMapItem(placemark: MKPlacemark(coordinate: (selectedAnnotation?.coordinate)!, addressDictionary: nil))
+        let destinationItem = MKMapItem(placemark: MKPlacemark(coordinate: (selectedAnnotation!.coordinate), addressDictionary: nil))
         request.destination = destinationItem
         let direction = MKDirections(request: request)
         direction.calculateETAWithCompletionHandler{(response, error) -> Void in
@@ -177,8 +180,11 @@ class BikeMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     }
     
     func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
+        infoView.hidden = true
         view.backgroundColor = UIColor.whiteColor()
     }
+    
+    
     
     
     //    func getToiletsData() {
