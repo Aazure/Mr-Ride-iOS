@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Amplitude_iOS
 
 class BikeHomeViewController: UIViewController{
     @IBOutlet weak var totalDistLabel: UILabel!
@@ -41,6 +42,8 @@ class BikeHomeViewController: UIViewController{
         letsRideButton.layer.shadowRadius = 2
         letsRideButton.layer.shadowOffset = CGSize(width: 0, height: 2)
         letsRideButton.layer.masksToBounds = true
+        
+        Amplitude.instance().logEvent("view_in_home")
         
         if self.revealViewController() != nil{
             menuButton.target = self.revealViewController()
