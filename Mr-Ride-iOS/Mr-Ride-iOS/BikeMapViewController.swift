@@ -41,7 +41,7 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     let pickerData = ["UBike Station", "Toilet"]
     
     override func viewWillAppear(animated: Bool) {
-        
+        locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
     }
@@ -69,6 +69,7 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         pickViewToolBar.hidden = true
         BikeMapManager.sharedManager.getYouBikes(){ data in
             self.addYouBikeAnnotations(data)
+            self.locationManager.startUpdatingLocation()
             //                self.setupUserLocation()
             
         }

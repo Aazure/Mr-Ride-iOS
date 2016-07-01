@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
+import FBSDKShareKit
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var loginButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,6 +23,8 @@ class LoginViewController: UIViewController {
         gradient.frame = CGRect(x: 0, y: 374, width: view.bounds.width, height: 400)
         gradient.colors = [colorTop.CGColor, colorBottom.CGColor]
         self.view.layer.insertSublayer(gradient, atIndex: 1)
+        
+        loginButton.layer.cornerRadius = 30
 
         // Do any additional setup after loading the view.
     }
@@ -27,7 +33,44 @@ class LoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     
+    @IBAction func fbButtonTapped(sender: UIButton) {
+        let login = FBSDKLoginManager()
+        login.logInWithReadPermissions(["public_profile", "email"], fromViewController: self, handler: { (result,error) -> Void in
+            if error != nil{
+                print(error.localizedDescription)
+                return
+            }else if result.isCancelled{
+                return
+            }else{
+                self.login()
+            }
+        })
+    }
+
+    func login(){
+        let homeViewController = self.storyboard?.instantiateViewControllerWithIdentifier("RevealViewController")
+        self.view.window?.rootViewController = homeViewController
+        
+        if FBSDKAccessToken.currentAccessToken() != nil{
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "name, picture.type(large), link, email"]).startWithCompletionHandler({ (connection, result, error) -> Void in
+                if error == nil{
+                    let defaults = NSUserDefaults.standardUserDefaults()
+                    defaults.setObject(result["name"], forKey: "name")
+                    defaults.setObject(result["picture"], forKey: "picture")
+                    defaults.setObject(result["link"], forKey: "link")
+                    defaults.setObject(result["email"], forKey: "email")
+                    defaults.synchronize()
+                    print(defaults.objectForKey("link"))
+                    
+                    print("FBdata saved!")
+                }
+                
+            })
+        }
+        
+    }
 
     /*
     // MARK: - Navigation

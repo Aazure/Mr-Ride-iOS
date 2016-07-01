@@ -9,7 +9,7 @@
         <!--Reveal View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SWRevealViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RevealViewController" id="BYZ-38-t0r" customClass="SWRevealViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -177,6 +177,30 @@
                                     <constraint firstAttribute="width" constant="335" id="omY-qX-UxU"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gVm-JO-a5w">
+                                <rect key="frame" x="188" y="428" width="224" height="60"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="224" id="E3C-Nm-HZv"/>
+                                    <constraint firstAttribute="height" constant="60" id="ccu-vc-LuD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <size key="titleShadowOffset" width="0.0" height="1"/>
+                                <state key="normal" title="   Log In">
+                                    <color key="titleColor" red="0.38823530080000002" green="0.84313726430000002" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.25" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="fbButtonTapped:" destination="Wsf-je-QfN" eventType="touchUpInside" id="DgW-id-rPN"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-facebook" translatesAutoresizingMaskIntoConstraints="NO" id="PoQ-pu-2oH">
+                                <rect key="frame" x="237" y="448" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="5Wf-SV-Fde"/>
+                                    <constraint firstAttribute="height" constant="20" id="oId-jt-6Dk"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.38823530080000002" green="0.84313726430000002" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
@@ -184,28 +208,41 @@
                             <constraint firstItem="Fj1-Jc-kxI" firstAttribute="top" secondItem="b5D-hI-f1Y" secondAttribute="bottom" constant="60" id="4xy-Gr-4L9"/>
                             <constraint firstItem="Fj1-Jc-kxI" firstAttribute="centerX" secondItem="WQK-5I-lsZ" secondAttribute="centerX" id="5Zz-0u-egB"/>
                             <constraint firstItem="JhA-O6-6ih" firstAttribute="top" secondItem="b5D-hI-f1Y" secondAttribute="bottom" constant="375" id="6oN-dn-bDt"/>
+                            <constraint firstItem="gVm-JO-a5w" firstAttribute="leading" secondItem="PoQ-pu-2oH" secondAttribute="trailing" constant="49" id="7CS-7u-lBd"/>
+                            <constraint firstItem="PoQ-pu-2oH" firstAttribute="top" secondItem="gVm-JO-a5w" secondAttribute="top" constant="20" id="8tc-OL-AjU"/>
                             <constraint firstItem="kqp-nx-i1T" firstAttribute="centerX" secondItem="WQK-5I-lsZ" secondAttribute="centerX" id="APh-6E-6OC"/>
                             <constraint firstItem="JhA-O6-6ih" firstAttribute="leading" secondItem="WQK-5I-lsZ" secondAttribute="leading" id="CPb-MD-tQJ"/>
                             <constraint firstItem="JhA-O6-6ih" firstAttribute="leading" secondItem="WQK-5I-lsZ" secondAttribute="leadingMargin" id="Mxn-dG-aeQ"/>
+                            <constraint firstItem="PoQ-pu-2oH" firstAttribute="leading" secondItem="gVm-JO-a5w" secondAttribute="leading" constant="49" id="OOd-bt-BHv"/>
                             <constraint firstItem="IIx-Kz-GK9" firstAttribute="centerX" secondItem="WQK-5I-lsZ" secondAttribute="centerX" id="PxW-pb-uxH"/>
                             <constraint firstItem="kqp-nx-i1T" firstAttribute="top" secondItem="IIx-Kz-GK9" secondAttribute="bottom" constant="10" id="Q9c-KJ-Ni5"/>
+                            <constraint firstItem="JhA-O6-6ih" firstAttribute="top" secondItem="gVm-JO-a5w" secondAttribute="bottom" constant="-83" id="UL5-Ap-qzS"/>
+                            <constraint firstItem="gVm-JO-a5w" firstAttribute="centerX" secondItem="WQK-5I-lsZ" secondAttribute="centerX" id="Vqv-32-MYe"/>
                             <constraint firstItem="JhA-O6-6ih" firstAttribute="width" secondItem="WQK-5I-lsZ" secondAttribute="width" id="awH-ur-LmS"/>
                             <constraint firstItem="IIx-Kz-GK9" firstAttribute="top" secondItem="b5D-hI-f1Y" secondAttribute="bottom" constant="188" id="cak-2E-hWM"/>
                             <constraint firstItem="JhA-O6-6ih" firstAttribute="top" secondItem="b5D-hI-f1Y" secondAttribute="bottom" constant="375" id="cvG-LG-NlN"/>
                             <constraint firstItem="JhA-O6-6ih" firstAttribute="width" secondItem="WQK-5I-lsZ" secondAttribute="width" id="jCc-md-GK6"/>
                             <constraint firstItem="JIK-XH-AcZ" firstAttribute="top" secondItem="JhA-O6-6ih" secondAttribute="bottom" id="kc6-sL-NVh"/>
                             <constraint firstItem="JhA-O6-6ih" firstAttribute="leading" secondItem="WQK-5I-lsZ" secondAttribute="leading" id="oDc-Ql-mrb"/>
+                            <constraint firstItem="JIK-XH-AcZ" firstAttribute="top" secondItem="gVm-JO-a5w" secondAttribute="bottom" constant="112" id="rgU-Wu-cfN"/>
+                            <constraint firstItem="gVm-JO-a5w" firstAttribute="top" secondItem="PoQ-pu-2oH" secondAttribute="bottom" constant="20" id="vPe-cU-f7p"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="1o1-1R-ORm"/>
                                 <exclude reference="6oN-dn-bDt"/>
                                 <exclude reference="Mxn-dG-aeQ"/>
+                                <exclude reference="UL5-Ap-qzS"/>
                                 <exclude reference="awH-ur-LmS"/>
                                 <exclude reference="oDc-Ql-mrb"/>
+                                <exclude reference="7CS-7u-lBd"/>
+                                <exclude reference="vPe-cU-f7p"/>
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="loginButton" destination="gVm-JO-a5w" id="w2d-Qk-GOk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dfb-yb-yqk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -380,7 +417,7 @@
         <!--Bike Home View Controller-->
         <scene sceneID="xys-pY-Zbq">
             <objects>
-                <viewController id="9QA-S1-lhu" customClass="BikeHomeViewController" customModule="Mr_Ride_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BikeHomeViewController" id="9QA-S1-lhu" customClass="BikeHomeViewController" customModule="Mr_Ride_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="93x-Z6-mBi"/>
                         <viewControllerLayoutGuide type="bottom" id="vPN-BH-5mj"/>
@@ -1327,8 +1364,9 @@
         <image name="icon-menu" width="30" height="30"/>
         <image name="image-history-background" width="1536" height="1021"/>
         <image name="image-medal" width="55" height="85"/>
+        <image name="logo-facebook" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Pp4-Yv-nkz"/>
+        <segue reference="qLu-EH-Xte"/>
     </inferredMetricsTieBreakers>
 </document>
