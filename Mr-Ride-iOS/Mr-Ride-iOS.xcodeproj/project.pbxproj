@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		460E11991CFD29A000FD23E5 /* BikeRecordDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460E11981CFD299F00FD23E5 /* BikeRecordDataModel.swift */; };
+		463C9C7E1D25E066002BE256 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463C9C7D1D25E066002BE256 /* MapAnnotation.swift */; };
+		463C9C821D26179F002BE256 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463C9C811D26179F002BE256 /* LoginViewController.swift */; };
 		463E5D131D0E4EB2004C1546 /* CustomHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 463E5D121D0E4EB2004C1546 /* CustomHeader.xib */; };
 		463E5D151D0E58BF004C1546 /* CustomHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463E5D141D0E58BF004C1546 /* CustomHeader.swift */; };
 		4645C2601CF3F1BF009093CA /* BikeSidebarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4645C25F1CF3F1BF009093CA /* BikeSidebarTableViewController.swift */; };
@@ -27,7 +29,6 @@
 		464CFE7F1CF2D94200B1FBBE /* MrBikeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CFE7D1CF2D94200B1FBBE /* MrBikeColor.swift */; };
 		464CFE811CF2E3ED00B1FBBE /* BikeHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CFE801CF2E3ED00B1FBBE /* BikeHomeViewController.swift */; };
 		464CFE851CF2FC1A00B1FBBE /* BikeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CFE841CF2FC1A00B1FBBE /* BikeNavigationController.swift */; };
-		465956751D210C64002C0416 /* ToiletAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465956741D210C64002C0416 /* ToiletAnnotation.swift */; };
 		465956781D2124E3002C0416 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465956761D2124E3002C0416 /* Fabric.framework */; };
 		465956791D2124E3002C0416 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465956771D2124E3002C0416 /* Crashlytics.framework */; };
 		465F67C71D10FF1100875C43 /* BikeMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465F67C61D10FF1100875C43 /* BikeMapViewController.swift */; };
@@ -58,6 +59,8 @@
 		0E24B26DC4B3589F0F024B3E /* Pods_Mr_Ride_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mr_Ride_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		115DF64DF741BEBC0D2CA1FB /* Pods-Mr-Ride-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mr-Ride-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Mr-Ride-iOS/Pods-Mr-Ride-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		460E11981CFD299F00FD23E5 /* BikeRecordDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeRecordDataModel.swift; sourceTree = "<group>"; };
+		463C9C7D1D25E066002BE256 /* MapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
+		463C9C811D26179F002BE256 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		463E5D121D0E4EB2004C1546 /* CustomHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomHeader.xib; sourceTree = "<group>"; };
 		463E5D141D0E58BF004C1546 /* CustomHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHeader.swift; sourceTree = "<group>"; };
 		4645C25F1CF3F1BF009093CA /* BikeSidebarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeSidebarTableViewController.swift; sourceTree = "<group>"; };
@@ -81,7 +84,6 @@
 		464CFE7D1CF2D94200B1FBBE /* MrBikeColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MrBikeColor.swift; sourceTree = "<group>"; };
 		464CFE801CF2E3ED00B1FBBE /* BikeHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeHomeViewController.swift; sourceTree = "<group>"; };
 		464CFE841CF2FC1A00B1FBBE /* BikeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeNavigationController.swift; sourceTree = "<group>"; };
-		465956741D210C64002C0416 /* ToiletAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToiletAnnotation.swift; sourceTree = "<group>"; };
 		465956761D2124E3002C0416 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		465956771D2124E3002C0416 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		465F67C61D10FF1100875C43 /* BikeMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeMapViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +146,34 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		463C9C7F1D25E091002BE256 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				463C9C811D26179F002BE256 /* LoginViewController.swift */,
+				464CFE801CF2E3ED00B1FBBE /* BikeHomeViewController.swift */,
+				464CFE841CF2FC1A00B1FBBE /* BikeNavigationController.swift */,
+				4645C25F1CF3F1BF009093CA /* BikeSidebarTableViewController.swift */,
+				46F9910A1CFBE78F004765F8 /* BikeHistoryViewController.swift */,
+				46F8ED561CFD5AC9003F167B /* BikeRecordViewController.swift */,
+				46F8ED581CFD6680003F167B /* BikeAnalysisViewController.swift */,
+				465F67C61D10FF1100875C43 /* BikeMapViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		463C9C801D25E0CE002BE256 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				46F2E7B91D1279EE00816318 /* BikeToiletModel.swift */,
+				46F6958A1D1D089C00D70249 /* BikeYouBikeModel.swift */,
+				46F2E7BB1D127AE100816318 /* BikeToiletModelHelper.swift */,
+				46F6958C1D1D08CE00D70249 /* BikeYouBikeModelHelper.swift */,
+				46F2E7BD1D12804400816318 /* BikeMapManager.swift */,
+				463C9C7D1D25E066002BE256 /* MapAnnotation.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		464B24B61D014FC20087ED8B /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,26 +213,15 @@
 				464CFE5F1CF2A28600B1FBBE /* ViewController.swift */,
 				464CFE611CF2A28600B1FBBE /* Main.storyboard */,
 				464CFE641CF2A28600B1FBBE /* Mr_Ride_iOS.xcdatamodeld */,
-				464CFE801CF2E3ED00B1FBBE /* BikeHomeViewController.swift */,
-				464CFE841CF2FC1A00B1FBBE /* BikeNavigationController.swift */,
-				4645C25F1CF3F1BF009093CA /* BikeSidebarTableViewController.swift */,
 				464C2FDB1CF591C000F16F9C /* BikeHistoryTableViewCell.swift */,
-				46F9910A1CFBE78F004765F8 /* BikeHistoryViewController.swift */,
 				460E11981CFD299F00FD23E5 /* BikeRecordDataModel.swift */,
-				46F8ED561CFD5AC9003F167B /* BikeRecordViewController.swift */,
-				46F8ED581CFD6680003F167B /* BikeAnalysisViewController.swift */,
-				465F67C61D10FF1100875C43 /* BikeMapViewController.swift */,
+				463C9C7F1D25E091002BE256 /* Controller */,
+				463C9C801D25E0CE002BE256 /* Model */,
 				464B24B61D014FC20087ED8B /* Core Data */,
 				4605DAE91CFE756100F9C55B /* Supporting Files */,
 				463E5D121D0E4EB2004C1546 /* CustomHeader.xib */,
 				463E5D141D0E58BF004C1546 /* CustomHeader.swift */,
-				46F2E7B91D1279EE00816318 /* BikeToiletModel.swift */,
-				46F6958A1D1D089C00D70249 /* BikeYouBikeModel.swift */,
-				46F2E7BB1D127AE100816318 /* BikeToiletModelHelper.swift */,
-				46F6958C1D1D08CE00D70249 /* BikeYouBikeModelHelper.swift */,
-				46F2E7BD1D12804400816318 /* BikeMapManager.swift */,
 				46F2E7C31D12D25700816318 /* CustomFooter.swift */,
-				465956741D210C64002C0416 /* ToiletAnnotation.swift */,
 			);
 			path = "Mr-Ride-iOS";
 			sourceTree = "<group>";
@@ -397,8 +416,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				463C9C821D26179F002BE256 /* LoginViewController.swift in Sources */,
 				464CFE811CF2E3ED00B1FBBE /* BikeHomeViewController.swift in Sources */,
 				464CFE851CF2FC1A00B1FBBE /* BikeNavigationController.swift in Sources */,
+				463C9C7E1D25E066002BE256 /* MapAnnotation.swift in Sources */,
 				464CFE601CF2A28600B1FBBE /* ViewController.swift in Sources */,
 				46F6958D1D1D08CE00D70249 /* BikeYouBikeModelHelper.swift in Sources */,
 				464CFE7E1CF2D94200B1FBBE /* MrBikeFont.swift in Sources */,
@@ -408,7 +429,6 @@
 				46F2E7C41D12D25700816318 /* CustomFooter.swift in Sources */,
 				464B24B31D014FA70087ED8B /* Record.swift in Sources */,
 				460E11991CFD29A000FD23E5 /* BikeRecordDataModel.swift in Sources */,
-				465956751D210C64002C0416 /* ToiletAnnotation.swift in Sources */,
 				464B24B41D014FA70087ED8B /* Route+CoreDataProperties.swift in Sources */,
 				464B24B51D014FA70087ED8B /* Route.swift in Sources */,
 				46F8ED591CFD6680003F167B /* BikeAnalysisViewController.swift in Sources */,

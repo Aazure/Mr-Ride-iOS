@@ -112,7 +112,8 @@ class BikeHomeViewController: UIViewController{
 //    }
     
     
-//    @IBAction func buttonTapped(sender: UIButton) {
+    @IBAction func buttonTapped(sender: UIButton) {
+         Amplitude.instance().logEvent("select_ride_in_home")
 //
 ////        let recordVC = self.storyboard!.instantiateViewControllerWithIdentifier("RecordPage") as! BikeRecordViewController
 ////        recordVC.delegation = self
@@ -124,5 +125,5 @@ class BikeHomeViewController: UIViewController{
 //            subview.hidden = true
 //        }
 //        letsRideButton.hidden = true
-//    }
+    }
 }

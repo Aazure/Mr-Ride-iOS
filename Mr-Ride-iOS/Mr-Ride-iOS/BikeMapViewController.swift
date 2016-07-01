@@ -9,18 +9,22 @@
 import UIKit
 import MapKit
 
-class BikeMapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
-    @IBOutlet weak var menuButton: UIBarButtonItem!
-    @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var infoView: UIView!
+class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
     enum MakerType: String{
         case Toilets
         case YouBikes
     }
+    @IBOutlet weak var menuButton: UIBarButtonItem!
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var catelogLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var etaLabel: UILabel!
+    @IBOutlet weak var pickView: UIPickerView!
+    
+    @IBOutlet weak var pickViewToolBar: UIView!
+    @IBOutlet weak var mapTypeButton: UIButton!
     
     var currentUserLocation: CLLocation? = nil
     lazy var locations = [CLLocation]()
@@ -33,30 +37,12 @@ class BikeMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         _locationManager.distanceFilter = 1.0
         return _locationManager
     }()
-    
-    var toilets: [BikeToiletModel] = []
-    var toiletAnnotations: [MKAnnotation] = []
-//    let toiletAnnotation = ToiletAnnotation
+
+    let pickerData = ["UBike Station", "Toilet"]
     
     override func viewWillAppear(animated: Bool) {
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0) ){
-            BikeMapManager.sharedManager.getToilets()
-            //            self.locationManager.startUpdatingLocation()
-            let toilets = BikeMapManager.sharedManager.toilets
-            for toilet in toilets{
-                let toiletAnnotation = MKPointAnnotation()
-                toiletAnnotation.coordinate = toilet.coordinate
-                toiletAnnotation.title = toilet.name
-                toiletAnnotation.subtitle = toilet.address
-                self.toiletAnnotations.append(toiletAnnotation)
-            }
-            dispatch_async(dispatch_get_main_queue()){
-                //                self.locationManager.startUpdatingLocation()
-                self.mapView.addAnnotations(self.toiletAnnotations)
-                
-            }
-        }
-        //        locationManager.startUpdatingLocation()
+        
+        locationManager.startUpdatingLocation()
         
     }
     
@@ -73,14 +59,26 @@ class BikeMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         infoView.layer.cornerRadius = 10.0
         infoView.hidden = true
         
-        //        self.locationManager.startUpdatingLocation()
+        infoView.hidden = true
+        
+        pickView.hidden = true
+        pickView.backgroundColor = UIColor.whiteColor()
+        self.pickView.dataSource = self
+        self.pickView.delegate = self
+        
+        pickViewToolBar.hidden = true
+        BikeMapManager.sharedManager.getYouBikes(){ data in
+            self.addYouBikeAnnotations(data)
+            //                self.setupUserLocation()
+            
+        }
+
         
         if self.revealViewController() != nil{
             menuButton.target = self.revealViewController()
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
-        self.mapView.reloadInputViews()
         
         // Do any additional setup after loading the view.
     }
@@ -100,7 +98,7 @@ class BikeMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        //        self.navigationBar.barStyle = .Black
+//                self.navigationBar.barStyle = .Black
         
     }
     
@@ -110,11 +108,7 @@ class BikeMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        //        print(4)
         currentUserLocation = locations.last
-        //        let region = MKCoordinateRegionMakeWithDistance(currentUserLocation!.coordinate, 500, 500)
-        //        mapView.setRegion(region, animated: true)
-        //        print(5)
         
     }
     
@@ -125,57 +119,76 @@ class BikeMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        let annotationReusedId = "Toilet"
         
         if annotation.isKindOfClass(MKUserLocation){
             return nil
         }
-        
-        var anView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationReusedId)
-        if anView == nil{
-            anView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationReusedId)
-            anView?.canShowCallout = true
-        }else{
-            anView?.annotation = annotation
+        var imageName = "icon-station"
+        if let mapAnnotation = annotation as? MapAnnotation{
+            switch mapAnnotation.type!{
+            case "toilet":
+                imageName = "icon-toilet"
+            case "youbike":
+                imageName = "icon-station"
+            default:
+                break
+            }
+            
         }
-        let iconImage = UIImage(named: "icon-toilet")
+        
+        let anView = MKAnnotationView()
+
+        let iconImage = UIImage(named: imageName)
         let tintedImage = iconImage?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         let iconImageView = UIImageView(image: tintedImage)
         iconImageView.tintColor = .mrDarkSlateBlueColor()
         
-        anView?.backgroundColor = .whiteColor()
-        anView?.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        anView?.layer.cornerRadius = (anView?.frame.width)! / 2
-        //        anView?.clipsToBounds = true
+        anView.backgroundColor = .whiteColor()
+        anView.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        anView.layer.cornerRadius = anView.frame.width / 2
+        anView.canShowCallout = true
         
-        anView?.addSubview(iconImageView)
-        iconImageView.center = (anView?.center)!
+        anView.addSubview(iconImageView)
+        iconImageView.center = anView.center
         return anView
     }
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
-        let selectedAnnotation = view.annotation
-//            as? ToiletAnnotation
-
-        print(selectedAnnotation?.title)
         infoView.hidden = false
-        addressLabel.text = selectedAnnotation!.subtitle!! as String
-        titleLabel.text = selectedAnnotation!.title!! as String
         view.backgroundColor =  UIColor.mrLightblueColor()
-        
-        let request = MKDirectionsRequest()
-        let sourceItem = MKMapItem(placemark: MKPlacemark(coordinate: mapView.userLocation.coordinate, addressDictionary: nil))
-        request.source = sourceItem
-        let destinationItem = MKMapItem(placemark: MKPlacemark(coordinate: (selectedAnnotation!.coordinate), addressDictionary: nil))
-        request.destination = destinationItem
-        let direction = MKDirections(request: request)
-        direction.calculateETAWithCompletionHandler{(response, error) -> Void in
-            if let error = error{
-                print("Error while requesting ETA:\(error.localizedDescription)")
-            }else{
-                self.etaLabel.text = "\(Int((response?.expectedTravelTime)! / 60)) mins"
+        if let selectedAnnotation = view.annotation as? MapAnnotation{
+//            switch selectedAnnotation.type!{
+//            case "toilet":
+//                //do add track
+//
+//            case "youbike":
+//                //do add track
+//            default:
+//                break
+//            }
+            titleLabel.text = selectedAnnotation.title
+            addressLabel.text = selectedAnnotation.address
+            catelogLabel.text = selectedAnnotation.catelog
+            catelogLabel.layer.cornerRadius = 2
+            catelogLabel.layer.borderWidth = 0.5
+            catelogLabel.layer.borderColor = UIColor.whiteColor().CGColor
+            let request = MKDirectionsRequest()
+            let sourceItem = MKMapItem(placemark: MKPlacemark(coordinate: mapView.userLocation.coordinate, addressDictionary: nil))
+            request.source = sourceItem
+            let destinationItem = MKMapItem(placemark: MKPlacemark(coordinate: (selectedAnnotation.coordinate), addressDictionary: nil))
+            request.destination = destinationItem
+            let direction = MKDirections(request: request)
+            direction.calculateETAWithCompletionHandler{(response, error) -> Void in
+                if let error = error{
+                    print("Error while requesting ETA:\(error.localizedDescription)")
+                }else{
+                    self.etaLabel.text = "\(Int((response?.expectedTravelTime)! / 60)) mins"
+                }
             }
+            
         }
+        
+        
         
     }
     
@@ -184,50 +197,83 @@ class BikeMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         view.backgroundColor = UIColor.whiteColor()
     }
     
+    @IBAction func mapTypeChanged(sender: UIButton) {
+        pickView.hidden = false
+        pickViewToolBar.hidden = false
+    }
     
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
     
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
     
-    //    func getToiletsData() {
-    //
-    //        let mapDataManager = BikeMapManager()
-    //
-    //        mapDataManager.getToilets(
-    //            success: { [weak self] toilets in
-    //
-    //                guard let weakSelf = self else { return }
-    //
-    //                weakSelf.toilets = toilets
-    //
-    //                //weakSelf.setupToiletMarkers()
-    //            },
-    //            failure: { error in
-    //
-    //                print("ERROR: \(error)")
-    //            }
-    //        )
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
     
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        switch row{
+        case 0:
+            mapTypeButton.titleLabel?.text = pickerData[row]
+            BikeMapManager.sharedManager.getYouBikes(){ data in
+                self.addYouBikeAnnotations(data)
+                //                self.setupUserLocation()
+                
+            }
+        case 1:
+            mapTypeButton.titleLabel?.text = pickerData[row]
+            BikeMapManager.sharedManager.getToilets(){data in
+                
+                self.addToiletAnnotations(data)
+                //                self.setupUserLocation()
+            }
+        default:
+            break
+        }
+        infoView.hidden = true
+    }
     
-    //    func setupToiletMakers(){
-    //
-    //        for toilet in toilets{
-    //            let location = toilet.coordinate
-    //
-    //
-    //        }
-    //
-    //    }
+    func addYouBikeAnnotations(youbikes: [BikeYouBikeModel]){
+        mapView.removeAnnotations(mapView.annotations)
+        var annotations = [MapAnnotation]()
+        
+        for youbike in youbikes{
+            let availableYB = String(format: "%d bikes left", youbike.availableYB)
+            let annotation = MapAnnotation(type: "youbike", catelog: youbike.area, address: youbike.address)
+            annotation.title = youbike.name
+            annotation.subtitle = availableYB
+            annotation.coordinate = youbike.coordinate
+            annotations.append(annotation)
+        }
+        mapView.addAnnotations(annotations)
+        
+    }
     
+    func addToiletAnnotations(toilets: [BikeToiletModel]){
+        mapView.removeAnnotations(mapView.annotations)
+        var annotations = [MapAnnotation]()
+        
+        for toilet in toilets{
+            let annotation = MapAnnotation(type: "toilet", catelog: toilet.catelog, address: toilet.address)
+            annotation.title = toilet.name
+            annotation.coordinate = toilet.coordinate
+            annotations.append(annotation)
+            
+        }
+        mapView.addAnnotations(annotations)
+    }
+
+    @IBAction func doneButtonTapped(sender: UIButton) {
+        pickView.hidden = true
+        pickViewToolBar.hidden = true
+    }
     
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    @IBAction func cancelButtonTapped(sender: UIButton) {
+        pickView.hidden = true
+        pickViewToolBar.hidden = true
+    }
     
 }
