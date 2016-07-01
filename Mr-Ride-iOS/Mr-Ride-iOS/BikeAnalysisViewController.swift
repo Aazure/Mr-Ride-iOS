@@ -56,7 +56,7 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
         let fraction = UInt8(duration! * 100)
         
         durationLabel.text = String(format: "%02d:%02d:%02d.%02d", hours, minutes, seconds, fraction)
-        
+    
         let calStr = Int(48 * distance! * 0.01 * 1.036)
         caloriesLabel.text = String(calStr) + " kcal"
         

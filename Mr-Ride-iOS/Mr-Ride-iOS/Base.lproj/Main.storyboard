@@ -241,7 +241,9 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="heightTextField" destination="zCW-zC-Dmr" id="Hob-Rb-RgN"/>
                         <outlet property="loginButton" destination="gVm-JO-a5w" id="w2d-Qk-GOk"/>
+                        <outlet property="weightTextField" destination="S2N-oP-ilm" id="dlT-zv-C6N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dfb-yb-yqk" userLabel="First Responder" sceneMemberID="firstResponder"/>

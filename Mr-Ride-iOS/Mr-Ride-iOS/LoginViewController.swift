@@ -11,9 +11,12 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import FBSDKShareKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var heightTextField: UITextField!
+    @IBOutlet weak var weightTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,6 +27,8 @@ class LoginViewController: UIViewController {
         gradient.colors = [colorTop.CGColor, colorBottom.CGColor]
         self.view.layer.insertSublayer(gradient, atIndex: 1)
         
+        setupTextField()
+        
         loginButton.layer.cornerRadius = 30
 
         // Do any additional setup after loading the view.
@@ -33,6 +38,85 @@ class LoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func setupTextField(){
+        heightTextField.delegate = self
+        weightTextField.delegate = self
+        
+        heightTextField.keyboardType = .NumbersAndPunctuation
+        weightTextField.keyboardType = .NumbersAndPunctuation
+        
+        heightTextField.textColor = UIColor.grayColor()
+        weightTextField.textColor = UIColor.grayColor()
+        
+        heightTextField.text = "Please enter your height"
+        weightTextField.text = "Please enter your weight"
+    
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        heightTextField.textColor = UIColor.mrDarkSlateBlueColor()
+        weightTextField.textColor = UIColor.mrDarkSlateBlueColor()
+        
+        if textField === weightTextField{
+            weightTextField.text = ""
+        }else if textField === heightTextField{
+            heightTextField.text = ""
+        }
+    }
+    func textFieldDidEndEditing(textField: UITextField) {
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if textField === weightTextField {
+            guard let weight = Double(weightTextField.text!) else {
+                weightTextField.text = ""
+                ErrorAlert("Invalid Input", errorMessage: "please enter again")
+                return
+            }
+            defaults.setValue(weight, forKey: "weight")
+        }
+        else if textField === heightTextField {
+            guard let height = Double(heightTextField.text!) else {
+                heightTextField.text = ""
+                ErrorAlert("Invalid Input", errorMessage: "please enter again")
+                return
+            }
+            defaults.setValue(height, forKey: "height")
+        }
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
+    
+    private func weightAndHeightDidSet() -> Bool {
+        if weightTextField.text == "" || heightTextField.text == "" {
+            ErrorAlert("Unable to Login", errorMessage: "please enter your height and weight")
+            return false
+        } else { return true }
+    }
+
+    
+    func ErrorAlert(errorTitle: String, errorMessage: String) {
+        
+        let alert = UIAlertController(
+            title: NSLocalizedString(errorTitle, comment: ""),
+            message: errorMessage,
+            preferredStyle: .Alert
+        )
+        
+        let ok = UIAlertAction(
+            title: NSLocalizedString("OK", comment: ""),
+            style: .Cancel,
+            handler: nil
+        )
+        
+        alert.addAction(ok)
+        presentViewController(alert, animated: true, completion: nil)
+    }
+
 
     
     @IBAction func fbButtonTapped(sender: UIButton) {
@@ -50,8 +134,10 @@ class LoginViewController: UIViewController {
     }
 
     func login(){
+               let appDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
         let homeViewController = self.storyboard?.instantiateViewControllerWithIdentifier("RevealViewController")
-        self.view.window?.rootViewController = homeViewController
+        appDelegate.window?.rootViewController = homeViewController
+        appDelegate.window?.makeKeyAndVisible()
         
         if FBSDKAccessToken.currentAccessToken() != nil{
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "name, picture.type(large), link, email"]).startWithCompletionHandler({ (connection, result, error) -> Void in
