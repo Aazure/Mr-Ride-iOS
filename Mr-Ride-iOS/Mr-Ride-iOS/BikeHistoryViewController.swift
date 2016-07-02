@@ -178,9 +178,9 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let record = fetchedResultsController.objectAtIndexPath(indexPath)
-        let date = record.valueForKey("date") as? NSDate
-        let distance = record.valueForKey("distance") as? Double
-        let duration = record.valueForKey("duration") as? Double
+        let date = record.valueForKey("date") as! NSDate
+        let distance = record.valueForKey("distance") as! Double
+        let duration = record.valueForKey("duration") as! Double
         let routes = record.valueForKey("routes")?.allObjects as? [Route]
         var locationArray: [CLLocationCoordinate2D] = []
         for route in routes!{
@@ -188,7 +188,7 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         }
         
         print("history: \(routes)")
-        let analysisVC = self.storyboard!.instantiateViewControllerWithIdentifier("AnalysisPage") as! BikeAnalysisViewController
+        let analysisVC = self.storyboard?.instantiateViewControllerWithIdentifier("AnalysisPage") as! BikeAnalysisViewController
         analysisVC.date = date
         analysisVC.distance = distance
         analysisVC.duration = duration
@@ -198,7 +198,7 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         let dateFormatter = NSDateFormatter()
         dateFormatter.locale = NSLocale.currentLocale()
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        let convertedDate = dateFormatter.stringFromDate(date!)
+        let convertedDate = dateFormatter.stringFromDate(date)
         analysisVC.navigationItem.title = convertedDate
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController!.pushViewController(analysisVC, animated: true)

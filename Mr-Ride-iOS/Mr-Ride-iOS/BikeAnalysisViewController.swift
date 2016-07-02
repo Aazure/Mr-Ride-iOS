@@ -17,9 +17,9 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     
-    var date: NSDate?
-    var distance: Double?
-    var duration: Double?
+    var date: NSDate!
+    var distance: Double = 0.0
+    var duration: Double = 0.0
     var routes: [CLLocationCoordinate2D] = []
     var isFromTable = false
     
@@ -42,22 +42,24 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
     }
     
     func setLabel(){
-        let distanceStr = NSString(format: "%.2f", distance!)
+        let distanceStr = NSString(format: "%.2f", distance)
         distanceLabel.text = String(distanceStr) + " m"
-        let speedStr = NSString(format: "%.2f", distance! / duration! * 3.6)
+        let speedStr = NSString(format: "%.2f", distance / duration * 3.6)
         avgSpeedLabel.text = String(speedStr) + " km / h"
         
-        let hours = UInt8(duration! / 3600.0)
-        duration! -= (NSTimeInterval(hours) * 3600)
-        let minutes = UInt8(duration! / 60.0)
-        duration! -= (NSTimeInterval(minutes) * 60)
-        let seconds = UInt8(duration!)
-        duration! -= NSTimeInterval(seconds)
-        let fraction = UInt8(duration! * 100)
+        let hours = UInt8(duration / 3600.0)
+        duration -= (NSTimeInterval(hours) * 3600)
+        let minutes = UInt8(duration / 60.0)
+        duration -= (NSTimeInterval(minutes) * 60)
+        let seconds = UInt8(duration)
+        duration -= NSTimeInterval(seconds)
+        let fraction = UInt8(duration * 100)
         
         durationLabel.text = String(format: "%02d:%02d:%02d.%02d", hours, minutes, seconds, fraction)
     
-        let calStr = Int(48 * distance! * 0.01 * 1.036)
+        let weight = NSUserDefaults.standardUserDefaults().doubleForKey("weight")
+        
+        let calStr = Int(weight * distance * 0.001 * 1.036)
         caloriesLabel.text = String(calStr) + " kcal"
         
     }

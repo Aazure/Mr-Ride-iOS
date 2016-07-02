@@ -134,7 +134,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
     func login(){
-               let appDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let homeViewController = self.storyboard?.instantiateViewControllerWithIdentifier("RevealViewController")
         appDelegate.window?.rootViewController = homeViewController
         appDelegate.window?.makeKeyAndVisible()

@@ -97,7 +97,9 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
         
         counterLabel.text = String(format: "%02d:%02d:%02d.%02d", hours, minutes, seconds, fraction)
         
-        let calStr = Int(48 * distance * 0.01 * 1.036)
+        let weight = NSUserDefaults.standardUserDefaults().doubleForKey("weight")
+        
+        let calStr = Int(weight * distance * 0.001 * 1.036)
         caloriesLabel.text = String(calStr) + " kcal"
     }
     
