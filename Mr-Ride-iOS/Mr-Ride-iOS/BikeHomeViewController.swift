@@ -96,7 +96,7 @@ class BikeHomeViewController: UIViewController{
                     print(self.dateArray)
                 }
                 if let distanceTmp = record.valueForKey("distance") as? Double{
-                    self.distanceArray.append(distanceTmp)
+                    self.distanceArray.append(distanceTmp / 1000)
                     print(self.distanceArray)
                 }
         }
