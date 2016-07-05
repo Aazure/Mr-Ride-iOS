@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = UIColor.mrLightblueColor()
         // Override point for customization after application launch.
         Fabric.with([Crashlytics.self])
-    Amplitude.instance().initializeApiKey("43b6d76448b71c4b25d6019a85a21b76")
+        Amplitude.instance().initializeApiKey("43b6d76448b71c4b25d6019a85a21b76")
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }

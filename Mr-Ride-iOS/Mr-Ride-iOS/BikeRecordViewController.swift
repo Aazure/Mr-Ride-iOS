@@ -35,7 +35,7 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
     var totalTime = NSTimeInterval()
     var date = NSDate()
     var flag = false
-//    weak var delegation:ShowHomePageInfoDelegate?
+    //    weak var delegation:ShowHomePageInfoDelegate?
     
     lazy var locations = [CLLocation]()
     lazy var locationManager: CLLocationManager = {
@@ -154,7 +154,7 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
     }
     
     @IBAction func dismissRecord(sender: AnyObject) {
-//        delegation?.showHomePage()
+        //        delegation?.showHomePage()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -189,7 +189,7 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
             UIView.animateWithDuration(0.6){
                 self.recordButton.layer.cornerRadius = self.recordButton.bounds.width / 2
                 UIView.animateWithDuration(0.6){
-                self.recordButton.transform = CGAffineTransformMakeScale(0.8, 0.8)
+                    self.recordButton.transform = CGAffineTransformMakeScale(0.8, 0.8)
                 }
             }
             buttonStatus = .Continue
@@ -233,7 +233,7 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
         self.view.layer.insertSublayer(gradient, atIndex: 0)
         
     }
-
+    
     
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         guard let polyline = overlay as? MKPolyline else {
@@ -246,6 +246,6 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
         
         return renderer
     }
-
+    
     
 }

@@ -9,39 +9,39 @@
 import UIKit
 
 class BikeNavigationController: UINavigationController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
-
+        
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.navigationBar.barStyle = .Black
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
+        //        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
+        //        navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     override func viewWillAppear(animated: Bool) {
-//        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-//        self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
+        //        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        //        self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
+        //        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
+        //        navigationController?.navigationBar.shadowImage = UIImage()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

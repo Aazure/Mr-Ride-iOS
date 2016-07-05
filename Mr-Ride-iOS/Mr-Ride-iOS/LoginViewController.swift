@@ -12,7 +12,7 @@ import FBSDKLoginKit
 import FBSDKShareKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var heightTextField: UITextField!
     @IBOutlet weak var weightTextField: UITextField!
@@ -30,10 +30,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         setupTextField()
         
         loginButton.layer.cornerRadius = 30
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -51,7 +51,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         heightTextField.text = "Please enter your height"
         weightTextField.text = "Please enter your weight"
-    
+        
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
@@ -97,7 +97,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             return false
         } else { return true }
     }
-
+    
     
     func ErrorAlert(errorTitle: String, errorMessage: String) {
         
@@ -116,8 +116,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         alert.addAction(ok)
         presentViewController(alert, animated: true, completion: nil)
     }
-
-
+    
+    
     
     @IBAction func fbButtonTapped(sender: UIButton) {
         let login = FBSDKLoginManager()
@@ -132,7 +132,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
         })
     }
-
+    
     func login(){
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let homeViewController = self.storyboard?.instantiateViewControllerWithIdentifier("RevealViewController")
@@ -157,15 +157,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

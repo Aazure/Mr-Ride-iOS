@@ -56,7 +56,7 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
         let fraction = UInt8(duration * 100)
         
         durationLabel.text = String(format: "%02d:%02d:%02d.%02d", hours, minutes, seconds, fraction)
-    
+        
         let weight = NSUserDefaults.standardUserDefaults().doubleForKey("weight")
         
         let calStr = Int(weight * distance * 0.001 * 1.036)

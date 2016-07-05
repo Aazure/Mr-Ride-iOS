@@ -13,10 +13,10 @@ import Foundation
 import CoreData
 
 extension Route {
-
+    
     @NSManaged var created: NSDate?
     @NSManaged var latitude: NSNumber?
     @NSManaged var longitude: NSNumber?
     @NSManaged var record: Record?
-
+    
 }

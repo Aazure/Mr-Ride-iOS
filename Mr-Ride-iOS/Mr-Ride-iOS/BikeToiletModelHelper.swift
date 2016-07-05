@@ -28,17 +28,17 @@ extension BikeToiletModelHelper{
         guard let catelog = json[JSONKey.Catelog].string else{
             throw JSONError.MissingCatelog
         }
-
+        
         guard let name = json[JSONKey.Name].string else{
             throw JSONError.MissingName
         }
-
+        
         guard let address = json[JSONKey.Address].string else{
             throw JSONError.MissingAddress
         }
-
+        
         let numberFormatter = NSNumberFormatter()
-       guard let longitudeString = json[JSONKey.Longitude].string else{
+        guard let longitudeString = json[JSONKey.Longitude].string else{
             throw JSONError.MissingLongitude
         }
         let longitude = numberFormatter.numberFromString(longitudeString) as? Double ?? 0.0
@@ -51,10 +51,10 @@ extension BikeToiletModelHelper{
         
         let toilet = BikeToiletModel(catelog: catelog, name: name, address: address,
                                      coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
-    
+        
         return toilet
     }
-
-
-
+    
+    
+    
 }

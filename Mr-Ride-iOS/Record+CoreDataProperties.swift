@@ -13,7 +13,7 @@ import Foundation
 import CoreData
 
 extension Record {
-
+    
     @NSManaged var date: NSDate?
     @NSManaged var distance: NSNumber?
     @NSManaged var duration: NSNumber?
@@ -26,6 +26,6 @@ extension Record {
         let sectionName = dateFormatter.stringFromDate(date!)
         return sectionName
     }
-
-
+    
+    
 }

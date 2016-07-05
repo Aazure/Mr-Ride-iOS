@@ -37,7 +37,7 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         _locationManager.distanceFilter = 1.0
         return _locationManager
     }()
-
+    
     let pickerData = ["UBike Station", "Toilet"]
     
     override func viewWillAppear(animated: Bool) {
@@ -73,7 +73,7 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             //                self.setupUserLocation()
             
         }
-
+        
         
         if self.revealViewController() != nil{
             menuButton.target = self.revealViewController()
@@ -99,7 +99,7 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-//                self.navigationBar.barStyle = .Black
+        //                self.navigationBar.barStyle = .Black
         
     }
     
@@ -138,7 +138,7 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         }
         
         let anView = MKAnnotationView()
-
+        
         let iconImage = UIImage(named: imageName)
         let tintedImage = iconImage?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         let iconImageView = UIImageView(image: tintedImage)
@@ -158,15 +158,15 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         infoView.hidden = false
         view.backgroundColor =  UIColor.mrLightblueColor()
         if let selectedAnnotation = view.annotation as? MapAnnotation{
-//            switch selectedAnnotation.type!{
-//            case "toilet":
-//                //do add track
-//
-//            case "youbike":
-//                //do add track
-//            default:
-//                break
-//            }
+            //            switch selectedAnnotation.type!{
+            //            case "toilet":
+            //                //do add track
+            //
+            //            case "youbike":
+            //                //do add track
+            //            default:
+            //                break
+            //            }
             titleLabel.text = selectedAnnotation.title
             addressLabel.text = selectedAnnotation.address
             catelogLabel.text = selectedAnnotation.catelog
@@ -266,7 +266,7 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         }
         mapView.addAnnotations(annotations)
     }
-
+    
     @IBAction func doneButtonTapped(sender: UIButton) {
         pickView.hidden = true
         pickViewToolBar.hidden = true

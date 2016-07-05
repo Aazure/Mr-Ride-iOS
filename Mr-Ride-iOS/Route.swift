@@ -18,6 +18,12 @@ class Route: NSManagedObject {
         route.latitude = latitude
         route.longitude = longitude
         
+        do{
+            try moc.save()
+        }catch{
+            fatalError("Failure to save context \(error)")
+        }
+        
     }
     
     class func getAllLocation(moc: NSManagedObjectContext) -> [Route]{
@@ -29,5 +35,5 @@ class Route: NSManagedObject {
         }
         
     }
-
+    
 }

@@ -22,55 +22,55 @@ class BikeMapManager{
             return
         }
         Alamofire.request(.GET, toiletUrl, encoding: .JSON).validate().responseData {result in
-                switch result.result{
-                case .Success(let data):
-                    let json = JSON(data: data)
-                    for(_, subJSON) in json["result"]["results"]{
-                        do{
-                            let toilet = try BikeToiletModelHelper().parse(json: subJSON)
-                            self.toilets.append(toilet)
-                        }catch(let error){
-                            print(error)
-                        }
+            switch result.result{
+            case .Success(let data):
+                let json = JSON(data: data)
+                for(_, subJSON) in json["result"]["results"]{
+                    do{
+                        let toilet = try BikeToiletModelHelper().parse(json: subJSON)
+                        self.toilets.append(toilet)
+                    }catch(let error){
+                        print(error)
                     }
-                    dispatch_async(dispatch_get_main_queue()){
-                        completion(self.toilets)
-                    }
-                case .Failure(let err):
-                    print(err)
                 }
-                
+                dispatch_async(dispatch_get_main_queue()){
+                    completion(self.toilets)
+                }
+            case .Failure(let err):
+                print(err)
             }
+            
         }
+    }
     
     func getYouBikes(completion: [BikeYouBikeModel] -> Void){
         let youbikeUrl = "http://data.taipei/youbike"
-            Alamofire.request(.GET, youbikeUrl, encoding: .JSON).validate().responseData{result in
-                switch result.result{
-                case .Success(let data):
-                    let json = JSON(data: data)
-                    for(_, subJSON) in json["retVal"]{
+        Alamofire.request(.GET, youbikeUrl, encoding: .JSON).validate().responseData{result in
+            switch result.result{
+            case .Success(let data):
+                let json = JSON(data: data)
+                for(_, subJSON) in json["retVal"]{
+                    
+                    do{
+                        let youbike = try BikeYouBikeModelHelper().parse(json: subJSON)
+                        self.youbikes.append(youbike)
+                    }catch(let error){
+                        print(error)
                         
-                        do{
-                            let youbike = try BikeYouBikeModelHelper().parse(json: subJSON)
-                            self.youbikes.append(youbike)
-                        }catch(let error){
-                            print(error)
-                            
-                        }
                     }
-                    dispatch_async(dispatch_get_main_queue()){
-                        completion(self.youbikes)
-                    }
-                case .Failure(let err):
-                    print(err)
                 }
-                
+                dispatch_async(dispatch_get_main_queue()){
+                    completion(self.youbikes)
+                }
+            case .Failure(let err):
+                print(err)
             }
             
         }
         
-
+    }
+    
+    
 }
 
 

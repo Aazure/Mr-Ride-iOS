@@ -71,7 +71,7 @@ class BikeSidebarTableViewController: UITableViewController {
             homeLabel.textColor = UIColor.mrWhite50Color()
             historyLabel.textColor = UIColor.mrWhite50Color()
             mapLabel.textColor = UIColor.whiteColor()
-
+            
         default:
             break
         }

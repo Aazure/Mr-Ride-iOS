@@ -170,11 +170,11 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         return headerCell
     }
     
-//    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let footerCell = tableView.dequeueReusableCellWithIdentifier("footer") as! CustomFooter
-//        
-//        return footerCell
-//    }
+    //    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    //        let footerCell = tableView.dequeueReusableCellWithIdentifier("footer") as! CustomFooter
+    //
+    //        return footerCell
+    //    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let record = fetchedResultsController.objectAtIndexPath(indexPath)
