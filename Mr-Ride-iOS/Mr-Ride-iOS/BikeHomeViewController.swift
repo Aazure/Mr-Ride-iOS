@@ -114,10 +114,9 @@ class BikeHomeViewController: UIViewController{
         lineChartView.data = lineChartData
         
         
-        
         //fill gradient for the curve
-        let gradientColors = [ UIColor.mrRobinsEggBlueColor().CGColor, UIColor.mrLightblueColor().CGColor] // Colors of the gradient
-        let colorLocations:[CGFloat] = [0.0, 0.35] // Positioning of the gradient
+        let gradientColors = [ UIColor.mrRobinsEggBlue0Color().CGColor, UIColor.mrWaterBlueColor().CGColor] // Colors of the gradient
+        let colorLocations:[CGFloat] = [0.0, 0.2] // Positioning of the gradient
         let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), gradientColors, colorLocations) // Gradient Object
         lineChartDataSet.fill = ChartFill.fillWithLinearGradient(gradient!, angle: 90.0)
         lineChartDataSet.drawFilledEnabled = true
@@ -126,32 +125,28 @@ class BikeHomeViewController: UIViewController{
         
         lineChartDataSet.drawCirclesEnabled = false //remove the point circle
         lineChartDataSet.mode = .CubicBezier //make the line to be curve
-//        lineChartDataSet.setDrawValues(false)        //remove value label on each point
+       lineChartDataSet.drawValuesEnabled = false       //remove value label on each point
 
         //make chartview not scalable and remove the interaction line
         lineChartView.setScaleEnabled(false)
         lineChartView.userInteractionEnabled = false
         
-        //set display attribute
-        lineChartView.xAxis.drawAxisLineEnabled = false
-        lineChartView.xAxis.drawGridLinesEnabled = false
-        
-        //display no labels
-        lineChartView.xAxis.drawLabelsEnabled = false
-        
+        lineChartView.backgroundColor = UIColor.clearColor()
+        lineChartView.drawGridBackgroundEnabled = false
+        lineChartView.rightAxis.labelTextColor = .clearColor()
+        lineChartView.rightAxis.gridColor = .clearColor()
+        lineChartView.leftAxis.enabled = false
+        lineChartView.xAxis.gridColor = .clearColor()
+        lineChartView.xAxis.labelTextColor = .clearColor()
+        lineChartView.xAxis.labelPosition = .Bottom
+        lineChartView.xAxis.axisLineColor = .clearColor()
+        lineChartView.legend.enabled = false
+        lineChartView.descriptionText = ""
         
         lineChartView.leftAxis.drawAxisLineEnabled = false
         lineChartView.rightAxis.drawAxisLineEnabled = false
         lineChartView.leftAxis.drawLabelsEnabled = false
         lineChartView.rightAxis.drawLabelsEnabled = false
-        
-        //display no gridlines
-        lineChartView.rightAxis.drawGridLinesEnabled = false
-        lineChartView.leftAxis.drawGridLinesEnabled = false
-        
-        
-        lineChartView.legend.enabled = false  // remove legend icon (Lower left corner)
-        lineChartView.descriptionText = ""   // clear description
     
         
     }

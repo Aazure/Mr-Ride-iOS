@@ -88,25 +88,20 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         let lineChartData = LineChartData(xVals: dataPoints, dataSet: lineChartDataSet)
         lineChartView.data = lineChartData
         
-        
-        
         //fill gradient for the curve
-        let gradientColors = [ UIColor.mrBrightBlueColor().CGColor, UIColor.mrTurquoiseBlueColor().CGColor] // Colors of the gradient
-        let colorLocations:[CGFloat] = [0.0, 0.05] // Positioning of the gradient
-        let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), gradientColors, colorLocations) // Gradient Object
+        let gradientColors = [ UIColor.mrBrightBlueColor().CGColor, UIColor.mrTurquoiseBlueColor().CGColor]
+        let colorLocations:[CGFloat] = [0.0, 0.05]
+        let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), gradientColors, colorLocations)
+        
         lineChartDataSet.fill = ChartFill.fillWithLinearGradient(gradient!, angle: 90.0)
         lineChartDataSet.drawFilledEnabled = true
         lineChartDataSet.lineWidth = 0.0
+        lineChartDataSet.drawCirclesEnabled = false
+        lineChartDataSet.mode = .CubicBezier
+        lineChartDataSet.drawValuesEnabled = false
         
-        
-        lineChartDataSet.drawCirclesEnabled = false //remove the point circle
-        lineChartDataSet.mode = .CubicBezier //make the line to be curve
-        lineChartDataSet.drawValuesEnabled = false       //remove value label on each point
-        
-        //make chartview not scalable and remove the interaction line
         lineChartView.setScaleEnabled(false)
         lineChartView.userInteractionEnabled = false
-        
         lineChartView.backgroundColor = UIColor.clearColor()
         lineChartView.drawGridBackgroundEnabled = false
         lineChartView.rightAxis.labelTextColor = .clearColor()
@@ -118,7 +113,6 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         lineChartView.xAxis.axisLineColor = .whiteColor()
         lineChartView.legend.enabled = false
         lineChartView.descriptionText = ""
-        lineChartView.userInteractionEnabled = false
         
         lineChartView.leftAxis.drawAxisLineEnabled = false
         lineChartView.rightAxis.drawAxisLineEnabled = false
