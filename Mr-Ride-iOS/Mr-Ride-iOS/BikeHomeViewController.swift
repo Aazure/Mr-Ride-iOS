@@ -26,13 +26,9 @@ class BikeHomeViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupNavigation()
-     
         setupLabel()
         getDataForChart()
-        print(self.dateArray)
-        print(self.distanceArray)
         setChart(self.dateArray, values: self.distanceArray)
         
         setupLetsRideButton()

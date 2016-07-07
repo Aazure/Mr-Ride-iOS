@@ -9,26 +9,26 @@
 import UIKit
 import CoreData
 import CoreLocation
+import Charts
 
 class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     @IBOutlet weak var backImage: UIImageView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var historyTableView: UITableView!
-    
+    @IBOutlet weak var lineChartView: LineChartView!
     @IBOutlet weak var sectionLabel: UILabel!
     let cellIdentifier = "recordCell"
     var fetchedResultsController: NSFetchedResultsController!
+    var dateArray: [String] = []
+    var distanceArray: [Double] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initalizeFetchedResultsController()
+        setupNavigation()
+        getDataForChart()
+        setChart(self.dateArray, values: self.distanceArray)
         
-        self.navigationItem.title = "History"
-        self.navigationItem.titleView?.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
-        navigationController?.navigationBar.shadowImage = UIImage()
         
         let colorTop = UIColor(red: 99/255.0, green: 215/255.0, blue: 246/255.0, alpha: 1)
         let colorBottom = UIColor(red: 4/255.0, green: 20/255.0, blue: 25/255.0, alpha: 0.5)
@@ -48,12 +48,83 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        //        view.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.4)
+    func setupNavigation(){
+        self.navigationItem.title = "History"
+        self.navigationItem.titleView?.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
         navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
+    func getDataForChart(){
+        let mocChart = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        let request = NSFetchRequest(entityName: "Record")
+        let records = try? mocChart.executeFetchRequest(request)
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM/dd"
+        for record in records!{
+            if let dateTmp = record.valueForKey("date") as? NSDate{
+                self.dateArray.append(dateFormatter.stringFromDate(dateTmp))
+                print(self.dateArray)
+            }
+            if let distanceTmp = record.valueForKey("distance") as? Double{
+                self.distanceArray.append(distanceTmp / 1000)
+                print(self.distanceArray)
+            }
+            
+        }
+    }
+    
+    func setChart(dataPoints: [String], values: [Double]){
+        var dataEntries: [ChartDataEntry] = []
+        
+        for i in 0..<dataPoints.count{
+            let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
+            dataEntries.append(dataEntry)
+        }
+        
+        let lineChartDataSet = LineChartDataSet(yVals: dataEntries, label: "km")
+        let lineChartData = LineChartData(xVals: dataPoints, dataSet: lineChartDataSet)
+        lineChartView.data = lineChartData
+        
+        
+        
+        //fill gradient for the curve
+        let gradientColors = [ UIColor.mrBrightBlueColor().CGColor, UIColor.mrTurquoiseBlueColor().CGColor] // Colors of the gradient
+        let colorLocations:[CGFloat] = [0.0, 0.05] // Positioning of the gradient
+        let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), gradientColors, colorLocations) // Gradient Object
+        lineChartDataSet.fill = ChartFill.fillWithLinearGradient(gradient!, angle: 90.0)
+        lineChartDataSet.drawFilledEnabled = true
+        lineChartDataSet.lineWidth = 0.0
+        
+        
+        lineChartDataSet.drawCirclesEnabled = false //remove the point circle
+        lineChartDataSet.mode = .CubicBezier //make the line to be curve
+        lineChartDataSet.drawValuesEnabled = false       //remove value label on each point
+        
+        //make chartview not scalable and remove the interaction line
+        lineChartView.setScaleEnabled(false)
+        lineChartView.userInteractionEnabled = false
+        
+        lineChartView.backgroundColor = UIColor.clearColor()
+        lineChartView.drawGridBackgroundEnabled = false
+        lineChartView.rightAxis.labelTextColor = .clearColor()
+        lineChartView.rightAxis.gridColor = .whiteColor()
+        lineChartView.leftAxis.enabled = false
+        lineChartView.xAxis.gridColor = .clearColor()
+        lineChartView.xAxis.labelTextColor = .whiteColor()
+        lineChartView.xAxis.labelPosition = .Bottom
+        lineChartView.xAxis.axisLineColor = .whiteColor()
+        lineChartView.legend.enabled = false
+        lineChartView.descriptionText = ""
+        lineChartView.userInteractionEnabled = false
+        
+        lineChartView.leftAxis.drawAxisLineEnabled = false
+        lineChartView.rightAxis.drawAxisLineEnabled = false
+        lineChartView.leftAxis.drawLabelsEnabled = false
+        lineChartView.rightAxis.drawLabelsEnabled = false
+        
     }
     
     func initalizeFetchedResultsController(){

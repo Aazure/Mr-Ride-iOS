@@ -129,13 +129,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 return
             }else{
                 self.login()
+                print(FBSDKAccessToken.currentAccessToken())
             }
         })
     }
     
     func login(){
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let homeViewController = self.storyboard?.instantiateViewControllerWithIdentifier("RevealViewController")
+        let homeViewController = self.storyboard?.instantiateViewControllerWithIdentifier("RevealViewController") as! SWRevealViewController
         appDelegate.window?.rootViewController = homeViewController
         appDelegate.window?.makeKeyAndVisible()
         

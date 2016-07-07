@@ -23,12 +23,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         self.window?.tintColor = UIColor.whiteColor()
-        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().barTintColor = UIColor.mrLightblueColor()
+        
+        if(FBSDKAccessToken.currentAccessToken() != nil){
+            
+            self.window?.rootViewController = storyboard.instantiateViewControllerWithIdentifier("RevealViewController") 
+        }else{
+            self.window?.rootViewController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController")
+        }
         // Override point for customization after application launch.
         Fabric.with([Crashlytics.self])
-        Amplitude.instance().initializeApiKey("43b6d76448b71c4b25d6019a85a21b76")
+    Amplitude.instance().initializeApiKey("43b6d76448b71c4b25d6019a85a21b76")
+        
+        //        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
