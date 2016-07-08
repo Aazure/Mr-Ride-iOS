@@ -50,33 +50,50 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        mapView.delegate = self
-        mapView.layer.cornerRadius = 4
         distance = 0.0
         locations.removeAll(keepCapacity: false)
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
-        self.navigationController?.navigationBar.translucent = false
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        
+        setupNavigation()
         setupRecordButton()
         setupBackground()
-        circleView.layer.cornerRadius = circleView.frame.width / 2
-        circleView.layer.borderWidth = 4
-        circleView.layer.borderColor = UIColor.whiteColor().CGColor
+        setupMapView()
+        setupCircleView()
         counterLabel.font = UIFont(name: "RobotoMono-Light", size:30.0)
-        mapView.showsUserLocation = true
-        
     }
     
     override func viewWillAppear(animated: Bool) {
         locationManager.requestAlwaysAuthorization()
+        //        locationManager.startUpdatingLocation()
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        locationManager.startUpdatingLocation()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        locationManager.stopUpdatingLocation()
         timer.invalidate()
+    }
+    
+    func setupNavigation(){
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
+        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+    }
+    
+    func setupMapView(){
+        mapView.delegate = self
+        mapView.layer.cornerRadius = 4
+        mapView.showsUserLocation = true
+    }
+    
+    func setupCircleView(){
+        circleView.layer.cornerRadius = circleView.frame.width / 2
+        circleView.layer.borderWidth = 4
+        circleView.layer.borderColor = UIColor.whiteColor().CGColor
     }
     
     func startRecord(timer: NSTimer) {
@@ -114,7 +131,6 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
     }
     
     func setupRecordButton(){
-        
         recordButton.backgroundColor = UIColor.redColor()
         recordButton.layer.cornerRadius = recordButton.frame.width / 2
         recordButton.clipsToBounds = true
@@ -218,7 +234,7 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
             },completion: { (isFinished)in
                 self.addIconCornerRadiusAnimation((self.recordButton.bounds.width) / 2, to: 8, duration: 0.3)
         })
-    
+        
     }
     
     func buttonCircleAnimation(){
@@ -226,7 +242,7 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
             self.recordButton.transform = CGAffineTransformMakeScale(0.8, 0.8)
             self.recordButton.layer.cornerRadius = self.recordButton.bounds.width / 2
         }
-    
+        
     }
     
     func addIconCornerRadiusAnimation(from: CGFloat, to: CGFloat, duration: CFTimeInterval)
@@ -242,7 +258,6 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
     
     
     func setupBackground() {
-        
         self.view.backgroundColor = UIColor.mrLightblueColor()
         let topGradient = UIColor(red: 0, green: 0, blue: 0, alpha: 0.60).CGColor
         let bottomGradient = UIColor(red: 0, green: 0, blue: 0, alpha: 0.40).CGColor

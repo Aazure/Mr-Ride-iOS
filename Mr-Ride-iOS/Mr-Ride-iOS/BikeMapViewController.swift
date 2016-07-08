@@ -46,42 +46,20 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Map"
         setNavigation()
-        
-        mapView.delegate = self
-        mapView.showsUserLocation = true
-        mapView.layer.cornerRadius = 10.0
-        
-        infoView.layer.cornerRadius = 10.0
-        infoView.hidden = true
-        
-        infoView.hidden = true
-        
-        pickView.hidden = true
-        pickView.backgroundColor = UIColor.whiteColor()
-        self.pickView.dataSource = self
-        self.pickView.delegate = self
-        
-        pickViewToolBar.hidden = true
+        setupMapView()
+        setupInfoView()
+        setupPickView()
+        setupSidebar()
         BikeMapManager.sharedManager.getYouBikes(){ data in
             self.addYouBikeAnnotations(data)
             self.locationManager.startUpdatingLocation()
             //                self.setupUserLocation()
             
         }
-        
-        
-        if self.revealViewController() != nil{
-            menuButton.target = self.revealViewController()
-            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
-        
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -104,6 +82,35 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         self.navigationController?.navigationBar.shadowImage = UIImage()
         //                self.navigationBar.barStyle = .Black
         
+    }
+    
+    func setupSidebar(){
+        if self.revealViewController() != nil{
+            menuButton.target = self.revealViewController()
+            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+    }
+    
+    func setupMapView(){
+        mapView.delegate = self
+        mapView.showsUserLocation = true
+        mapView.layer.cornerRadius = 10.0
+    }
+    
+    func setupInfoView(){
+        
+        infoView.layer.cornerRadius = 10.0
+        infoView.hidden = true
+        infoView.hidden = true
+    }
+    
+    func setupPickView(){
+        pickView.hidden = true
+        pickView.backgroundColor = UIColor.whiteColor()
+        self.pickView.dataSource = self
+        self.pickView.delegate = self
+        pickViewToolBar.hidden = true
     }
     
     override func didReceiveMemoryWarning() {

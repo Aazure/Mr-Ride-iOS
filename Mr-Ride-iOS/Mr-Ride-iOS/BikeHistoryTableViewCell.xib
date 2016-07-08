@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="RobotoMono-Light.ttf">
+            <string>RobotoMono-Light</string>
+            <string>RobotoMono-Light</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BikeHistoryTableViewCell" customModule="Mr_Ride_iOS" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BikeHistoryTableViewCell" rowHeight="147" id="ySR-a5-BKb" userLabel="BikeHistoryTableViewCell" customClass="BikeHistoryTableViewCell" customModule="Mr_Ride_iOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="640" height="147"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ySR-a5-BKb" id="Gqc-dS-i3u">
+                <rect key="frame" x="0.0" y="0.0" width="640" height="146"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ex8-He-Mmt" userLabel="Cell Container View">
+                        <rect key="frame" x="0.0" y="0.0" width="640" height="145"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="15th" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1k6-Ga-RuC">
+                                <rect key="frame" x="0.0" y="57" width="85" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="85" id="moW-jB-QUg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="RobotoMono-Light" family="Roboto Mono" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hcr-O6-FL5">
+                                <rect key="frame" x="89" y="53" width="1" height="39"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="1" id="AUn-p8-f55"/>
+                                    <constraint firstAttribute="height" constant="39" id="Bwb-pc-t8w"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3.15 km 01:23:07.28" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wgt-fh-R8d">
+                                <rect key="frame" x="110" y="57" width="510" height="32"/>
+                                <fontDescription key="fontDescription" name="RobotoMono-Light" family="Roboto Mono" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.054901961239999998" green="0.20784313979999999" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Hcr-O6-FL5" firstAttribute="leading" secondItem="Ex8-He-Mmt" secondAttribute="leading" constant="89" id="JQS-xB-3VY"/>
+                            <constraint firstItem="wgt-fh-R8d" firstAttribute="leading" secondItem="Hcr-O6-FL5" secondAttribute="trailing" constant="20" id="Mvs-5P-iHW"/>
+                            <constraint firstItem="Hcr-O6-FL5" firstAttribute="centerY" secondItem="Ex8-He-Mmt" secondAttribute="centerY" id="ODb-FR-tF5"/>
+                            <constraint firstItem="1k6-Ga-RuC" firstAttribute="leading" secondItem="Ex8-He-Mmt" secondAttribute="leading" id="bE9-ef-xDR"/>
+                            <constraint firstItem="1k6-Ga-RuC" firstAttribute="centerY" secondItem="Ex8-He-Mmt" secondAttribute="centerY" id="kr4-Hn-bga"/>
+                            <constraint firstItem="wgt-fh-R8d" firstAttribute="centerY" secondItem="Ex8-He-Mmt" secondAttribute="centerY" id="pop-yL-Izh"/>
+                            <constraint firstAttribute="trailing" secondItem="wgt-fh-R8d" secondAttribute="trailing" constant="20" id="r1u-Hr-Moj"/>
+                        </constraints>
+                    </view>
+                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xoE-Kr-S5P" userLabel="Separator Line">
+                        <rect key="frame" x="0.0" y="145" width="640" height="1"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="fYZ-VE-Lrn"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="xoE-Kr-S5P" firstAttribute="top" secondItem="Ex8-He-Mmt" secondAttribute="bottom" id="1qo-wn-unR"/>
+                    <constraint firstAttribute="bottom" secondItem="xoE-Kr-S5P" secondAttribute="bottom" id="AYE-Xg-BVi"/>
+                    <constraint firstItem="xoE-Kr-S5P" firstAttribute="leading" secondItem="Gqc-dS-i3u" secondAttribute="leading" id="NE0-yH-Pl1"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Ex8-He-Mmt" secondAttribute="trailing" constant="-8" id="edW-hT-RQC"/>
+                    <constraint firstItem="Ex8-He-Mmt" firstAttribute="leading" secondItem="Gqc-dS-i3u" secondAttribute="leadingMargin" constant="-8" id="l7o-kc-08z"/>
+                    <constraint firstAttribute="trailing" secondItem="xoE-Kr-S5P" secondAttribute="trailing" id="pFe-33-AQa"/>
+                    <constraint firstItem="Ex8-He-Mmt" firstAttribute="top" secondItem="Gqc-dS-i3u" secondAttribute="topMargin" constant="-8" id="z3I-jz-eg7"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="cellView" destination="Ex8-He-Mmt" id="ZxR-Po-o7C"/>
+                <outlet property="dateLabel" destination="1k6-Ga-RuC" id="9r3-7e-1Ve"/>
+                <outlet property="recordLabel" destination="wgt-fh-R8d" id="2KJ-8Q-Cib"/>
+            </connections>
+            <point key="canvasLocation" x="354" y="383.5"/>
+        </tableViewCell>
+    </objects>
+</document>

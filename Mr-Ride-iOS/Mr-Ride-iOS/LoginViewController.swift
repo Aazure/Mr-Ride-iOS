@@ -19,23 +19,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let colorTop = UIColor(red: 99/255.0, green: 215/255.0, blue: 246/255.0, alpha: 1)
-        let colorBottom = UIColor(red: 4/255.0, green: 20/255.0, blue: 25/255.0, alpha: 0.5)
-        let gradient = CAGradientLayer()
-        gradient.frame = CGRect(x: 0, y: 374, width: view.bounds.width, height: 400)
-        gradient.colors = [colorTop.CGColor, colorBottom.CGColor]
-        self.view.layer.insertSublayer(gradient, atIndex: 1)
-        
+        setupBackground()
         setupTextField()
-        
         loginButton.layer.cornerRadius = 30
-        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-
+        
+    }
+    
+    func setupBackground(){
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [UIColor.mrLightblueColor().CGColor, UIColor.mrPineGreen50Color().CGColor]
+        gradientLayer.locations = [0.5, 1]
+        gradientLayer.frame = view.frame
+        self.view.layer.insertSublayer(gradientLayer, atIndex: 1 )
     }
     
     func setupTextField(){

@@ -24,23 +24,16 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initalizeFetchedResultsController()
         setupNavigation()
+        setupBackground()
+        setupTableViewStyle()
+        setupSidebar()
+        initalizeFetchedResultsController()
         getDataForChart()
         setChart(self.dateArray, values: self.distanceArray)
-        
-        
-        let colorTop = UIColor(red: 99/255.0, green: 215/255.0, blue: 246/255.0, alpha: 1)
-        let colorBottom = UIColor(red: 4/255.0, green: 20/255.0, blue: 25/255.0, alpha: 0.5)
-        let gradient = CAGradientLayer()
-        gradient.frame = CGRect(x: 0, y: 374, width: 400, height: 400)
-        gradient.colors = [colorTop.CGColor, colorBottom.CGColor]
-        self.view.layer.insertSublayer(gradient, atIndex: 1)
-        
-        historyTableView.backgroundColor = UIColor.clearColor()
-        historyTableView.separatorColor = UIColor.clearColor()
-        historyTableView.separatorStyle = .SingleLine
-        
+    }
+    
+    func setupSidebar(){
         if self.revealViewController() != nil{
             menuButton.target = self.revealViewController()
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
@@ -55,6 +48,20 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
         navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
+    func setupBackground(){
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [UIColor.mrLightblueColor().CGColor, UIColor.mrPineGreen50Color().CGColor]
+        gradientLayer.locations = [0.5, 1]
+        gradientLayer.frame = view.frame
+        self.view.layer.insertSublayer(gradientLayer, atIndex: 1 )
+    }
+    
+    func setupTableViewStyle(){
+        historyTableView.backgroundColor = UIColor.clearColor()
+        historyTableView.separatorColor = UIColor.clearColor()
+        historyTableView.separatorStyle = .SingleLine
     }
     
     func getDataForChart(){
@@ -136,7 +143,7 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
-    func configureCell(cell: UITableViewCell, indexPath: NSIndexPath){
+    func configureCell(cell: BikeHistoryTableViewCell, indexPath: NSIndexPath){
         let record = fetchedResultsController.objectAtIndexPath(indexPath)
         
         let date = record.valueForKey("date") as? NSDate
@@ -162,7 +169,9 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         let strFraction = String(format: "%02d", fraction)
         let durationStr = "\(strHours):\(strMinutes):\(strSeconds).\(strFraction)"
         
-        cell.textLabel?.text = "\(dateComponents.day)th | \(distanceStr) km \(durationStr)"
+        cell.dateLabel?.text = "\(dateComponents.day)th"
+        cell.recordLabel?.text = "\(distanceStr) km \(durationStr)"
+        
     }
     
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
@@ -202,8 +211,8 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
-        
+        let cell = UINib(nibName: "BikeHistoryTableViewCell", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! BikeHistoryTableViewCell
+        cell.selectionStyle = .None
         configureCell(cell, indexPath: indexPath)
         return cell
     }

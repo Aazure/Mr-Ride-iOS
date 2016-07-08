@@ -16,7 +16,6 @@
 		464B24B31D014FA70087ED8B /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B24AF1D014FA70087ED8B /* Record.swift */; };
 		464B24B41D014FA70087ED8B /* Route+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B24B01D014FA70087ED8B /* Route+CoreDataProperties.swift */; };
 		464B24B51D014FA70087ED8B /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B24B11D014FA70087ED8B /* Route.swift */; };
-		464C2FDC1CF591C000F16F9C /* BikeHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464C2FDB1CF591C000F16F9C /* BikeHistoryTableViewCell.swift */; };
 		464CFE5E1CF2A28600B1FBBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CFE5D1CF2A28600B1FBBE /* AppDelegate.swift */; };
 		464CFE631CF2A28600B1FBBE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464CFE611CF2A28600B1FBBE /* Main.storyboard */; };
 		464CFE661CF2A28600B1FBBE /* Mr_Ride_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 464CFE641CF2A28600B1FBBE /* Mr_Ride_iOS.xcdatamodeld */; };
@@ -30,7 +29,8 @@
 		465956781D2124E3002C0416 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465956761D2124E3002C0416 /* Fabric.framework */; };
 		465956791D2124E3002C0416 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465956771D2124E3002C0416 /* Crashlytics.framework */; };
 		465F67C71D10FF1100875C43 /* BikeMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465F67C61D10FF1100875C43 /* BikeMapViewController.swift */; };
-		46EB3AF81D2E528B00554A68 /* cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46EB3AF71D2E528B00554A68 /* cell.xib */; };
+		46F10B641D3012A80066EAF1 /* BikeHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F10B621D3012A80066EAF1 /* BikeHistoryTableViewCell.swift */; };
+		46F10B651D3012A80066EAF1 /* BikeHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46F10B631D3012A80066EAF1 /* BikeHistoryTableViewCell.xib */; };
 		46F2E7BA1D1279EE00816318 /* BikeToiletModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F2E7B91D1279EE00816318 /* BikeToiletModel.swift */; };
 		46F2E7BC1D127AE100816318 /* BikeToiletModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F2E7BB1D127AE100816318 /* BikeToiletModelHelper.swift */; };
 		46F2E7BE1D12804400816318 /* BikeMapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F2E7BD1D12804400816318 /* BikeMapManager.swift */; };
@@ -66,7 +66,6 @@
 		464B24AF1D014FA70087ED8B /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Record.swift; path = ../Record.swift; sourceTree = "<group>"; };
 		464B24B01D014FA70087ED8B /* Route+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Route+CoreDataProperties.swift"; path = "../Route+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		464B24B11D014FA70087ED8B /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Route.swift; path = ../Route.swift; sourceTree = "<group>"; };
-		464C2FDB1CF591C000F16F9C /* BikeHistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		464CFE5A1CF2A28600B1FBBE /* Mr-Ride-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mr-Ride-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		464CFE5D1CF2A28600B1FBBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		464CFE621CF2A28600B1FBBE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -84,7 +83,8 @@
 		465956761D2124E3002C0416 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		465956771D2124E3002C0416 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		465F67C61D10FF1100875C43 /* BikeMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeMapViewController.swift; sourceTree = "<group>"; };
-		46EB3AF71D2E528B00554A68 /* cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = cell.xib; sourceTree = "<group>"; };
+		46F10B621D3012A80066EAF1 /* BikeHistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		46F10B631D3012A80066EAF1 /* BikeHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BikeHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		46F2E7B91D1279EE00816318 /* BikeToiletModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeToiletModel.swift; sourceTree = "<group>"; };
 		46F2E7BB1D127AE100816318 /* BikeToiletModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeToiletModelHelper.swift; sourceTree = "<group>"; };
 		46F2E7BD1D12804400816318 /* BikeMapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeMapManager.swift; sourceTree = "<group>"; };
@@ -176,10 +176,11 @@
 			isa = PBXGroup;
 			children = (
 				464CFE611CF2A28600B1FBBE /* Main.storyboard */,
-				464C2FDB1CF591C000F16F9C /* BikeHistoryTableViewCell.swift */,
 				463E5D121D0E4EB2004C1546 /* CustomHeader.xib */,
 				463E5D141D0E58BF004C1546 /* CustomHeader.swift */,
 				46F2E7C31D12D25700816318 /* CustomFooter.swift */,
+				46F10B621D3012A80066EAF1 /* BikeHistoryTableViewCell.swift */,
+				46F10B631D3012A80066EAF1 /* BikeHistoryTableViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -226,7 +227,6 @@
 				463C9C801D25E0CE002BE256 /* Model */,
 				464B24B61D014FC20087ED8B /* Core Data */,
 				4605DAE91CFE756100F9C55B /* Supporting Files */,
-				46EB3AF71D2E528B00554A68 /* cell.xib */,
 			);
 			path = "Mr-Ride-iOS";
 			sourceTree = "<group>";
@@ -336,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46F492821CFD7B99000D4EA7 /* RobotoMono-Italic.ttf in Resources */,
+				46F10B651D3012A80066EAF1 /* BikeHistoryTableViewCell.xib in Resources */,
 				46F492861CFD7B99000D4EA7 /* RobotoMono-MediumItalic.ttf in Resources */,
 				463E5D131D0E4EB2004C1546 /* CustomHeader.xib in Resources */,
 				46F4927F1CFD7B99000D4EA7 /* LICENSE.txt in Resources */,
@@ -344,7 +345,6 @@
 				46F492801CFD7B99000D4EA7 /* RobotoMono-Bold.ttf in Resources */,
 				46F492841CFD7B99000D4EA7 /* RobotoMono-LightItalic.ttf in Resources */,
 				464CFE6B1CF2A28600B1FBBE /* LaunchScreen.storyboard in Resources */,
-				46EB3AF81D2E528B00554A68 /* cell.xib in Resources */,
 				464CFE681CF2A28600B1FBBE /* Assets.xcassets in Resources */,
 				464CFE631CF2A28600B1FBBE /* Main.storyboard in Resources */,
 				46F492851CFD7B99000D4EA7 /* RobotoMono-Medium.ttf in Resources */,
@@ -425,6 +425,7 @@
 				463C9C821D26179F002BE256 /* LoginViewController.swift in Sources */,
 				464CFE811CF2E3ED00B1FBBE /* BikeHomeViewController.swift in Sources */,
 				464CFE851CF2FC1A00B1FBBE /* BikeNavigationController.swift in Sources */,
+				46F10B641D3012A80066EAF1 /* BikeHistoryTableViewCell.swift in Sources */,
 				463C9C7E1D25E066002BE256 /* MapAnnotation.swift in Sources */,
 				46F6958D1D1D08CE00D70249 /* BikeYouBikeModelHelper.swift in Sources */,
 				464CFE7E1CF2D94200B1FBBE /* MrBikeFont.swift in Sources */,
@@ -436,7 +437,6 @@
 				464B24B41D014FA70087ED8B /* Route+CoreDataProperties.swift in Sources */,
 				464B24B51D014FA70087ED8B /* Route.swift in Sources */,
 				46F8ED591CFD6680003F167B /* BikeAnalysisViewController.swift in Sources */,
-				464C2FDC1CF591C000F16F9C /* BikeHistoryTableViewCell.swift in Sources */,
 				464CFE661CF2A28600B1FBBE /* Mr_Ride_iOS.xcdatamodeld in Sources */,
 				464B24B21D014FA70087ED8B /* Record+CoreDataProperties.swift in Sources */,
 				463E5D151D0E58BF004C1546 /* CustomHeader.swift in Sources */,

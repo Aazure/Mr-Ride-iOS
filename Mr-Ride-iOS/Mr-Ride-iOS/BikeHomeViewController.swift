@@ -28,19 +28,11 @@ class BikeHomeViewController: UIViewController{
         super.viewDidLoad()
         setupNavigation()
         setupLabel()
+        setupLetsRideButton()
+        setupSidebar()
         getDataForChart()
         setChart(self.dateArray, values: self.distanceArray)
-        
-        setupLetsRideButton()
-        
         Amplitude.instance().logEvent("view_in_home")
-        
-        if self.revealViewController() != nil{
-            menuButton.target = self.revealViewController()
-            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
-        
     }
     
     func setupNavigation(){
@@ -54,10 +46,13 @@ class BikeHomeViewController: UIViewController{
         imageView.tintColor = UIColor.whiteColor()
         self.navigationItem.titleView = imageView
     }
-    
-    func viewWillAppear(animated: Bool) {
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationBar.barStyle = .Black
+
+    func setupSidebar(){
+        if self.revealViewController() != nil{
+            menuButton.target = self.revealViewController()
+            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
     }
     
     func setupLabel(){
@@ -101,8 +96,6 @@ class BikeHomeViewController: UIViewController{
                     print(self.distanceArray)
                 }
         }
-//        dateArray = dateArray.reverse()
-//        distanceArray = distanceArray.reverse()
 
     }
     
@@ -152,8 +145,6 @@ class BikeHomeViewController: UIViewController{
         lineChartView.rightAxis.drawAxisLineEnabled = false
         lineChartView.leftAxis.drawLabelsEnabled = false
         lineChartView.rightAxis.drawLabelsEnabled = false
-    
-        
     }
     
     func setupLetsRideButton(){
@@ -174,16 +165,6 @@ class BikeHomeViewController: UIViewController{
         // Dispose of any resources that can be recreated.
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     //    func showHomePage(){
     //        for subview in view.subviews where subview is UILabel{
     //            subview.hidden = false
