@@ -24,7 +24,7 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
     @IBOutlet weak var paceLabel: UILabel!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var circleView: UIView!
-    
+    @IBOutlet weak var finishButton: UIBarButtonItem!
     var test = "fail"
     
     var distance = 0.0
@@ -58,6 +58,8 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
         self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
         setupRecordButton()
         setupBackground()
         circleView.layer.cornerRadius = circleView.frame.width / 2
@@ -169,40 +171,29 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
     @IBAction func startPressed(sender: UIButton) {
         switch buttonStatus{
         case .Begin:
+            
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(BikeRecordViewController.startRecord(_:)), userInfo: nil, repeats: true)
             date = NSDate()
             startTime = NSDate.timeIntervalSinceReferenceDate()
             flag = true
             startLocationUpdates()
-            UIView.animateWithDuration(0.6){
-                self.recordButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
-                UIView.animateWithDuration(0.6){
-                    self.recordButton.layer.cornerRadius = 8
-                }
-            }
+            buttonSquareAnimation()
             buttonStatus = .Pause
+            
         case .Pause:
             timer.invalidate()
             pausedTime = NSDate.timeIntervalSinceReferenceDate()
             flag = false
             stopLocationUpdates()
-            UIView.animateWithDuration(0.6){
-                self.recordButton.layer.cornerRadius = self.recordButton.bounds.width / 2
-                UIView.animateWithDuration(0.6){
-                    self.recordButton.transform = CGAffineTransformMakeScale(0.8, 0.8)
-                }
-            }
+            buttonCircleAnimation()
             buttonStatus = .Continue
+            
         case .Continue:
             startTime = NSDate.timeIntervalSinceReferenceDate() - pausedTime + startTime
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(BikeRecordViewController.startRecord(_:)), userInfo: nil, repeats: true)
             flag = true
             startLocationUpdates()
-            UIView.animateWithDuration(0.6){
-                self.recordButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
-                self.recordButton.layer.cornerRadius = 8
-                self.recordButton.clipsToBounds = true
-            }
+            buttonSquareAnimation()
             buttonStatus = .Pause
         }
     }
@@ -219,6 +210,34 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
         destinationVC.duration = totalTime
         destinationVC.routes = locationArray
         self.navigationController!.pushViewController(destinationVC, animated: true)
+    }
+    
+    func buttonSquareAnimation(){
+        UIView.animateWithDuration(0.6, delay: 0.0,options: .TransitionFlipFromLeft, animations:{
+            self.recordButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
+            },completion: { (isFinished)in
+                self.addIconCornerRadiusAnimation((self.recordButton.bounds.width) / 2, to: 8, duration: 0.3)
+        })
+    
+    }
+    
+    func buttonCircleAnimation(){
+        UIView.animateWithDuration(0.6){
+            self.recordButton.transform = CGAffineTransformMakeScale(0.8, 0.8)
+            self.recordButton.layer.cornerRadius = self.recordButton.bounds.width / 2
+        }
+    
+    }
+    
+    func addIconCornerRadiusAnimation(from: CGFloat, to: CGFloat, duration: CFTimeInterval)
+    {
+        let animation = CABasicAnimation(keyPath:"cornerRadius")
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.fromValue = from
+        animation.toValue = to
+        animation.duration = duration
+        self.recordButton.layer.addAnimation(animation, forKey: "cornerRadius")
+        self.recordButton.layer.cornerRadius = to
     }
     
     
@@ -241,7 +260,7 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
         }
         
         let renderer = MKPolylineRenderer(polyline: polyline)
-        renderer.lineWidth = 10.0
+        renderer.lineWidth = 5.0
         renderer.strokeColor = UIColor.mrBubblegumColor()
         
         return renderer

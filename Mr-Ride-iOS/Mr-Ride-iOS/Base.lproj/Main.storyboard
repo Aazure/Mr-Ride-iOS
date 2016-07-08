@@ -735,6 +735,7 @@
                         <outlet property="circleView" destination="CbL-FL-VA8" id="RQc-2p-N62"/>
                         <outlet property="counterLabel" destination="9tI-q3-ONg" id="vJ0-eq-dnq"/>
                         <outlet property="distanceLabel" destination="Fat-A9-fxc" id="JwA-v6-i1e"/>
+                        <outlet property="finishButton" destination="haZ-Pi-fKV" id="4x6-DF-19t"/>
                         <outlet property="mapView" destination="p5G-7y-4D9" id="X4Z-7Z-ezn"/>
                         <outlet property="paceLabel" destination="ACO-mD-Mzp" id="i2w-Xr-KIE"/>
                         <outlet property="recordButton" destination="4vl-N3-RP2" id="gz4-qS-RWn"/>

@@ -55,6 +55,11 @@ class BikeHomeViewController: UIViewController{
         self.navigationItem.titleView = imageView
     }
     
+    func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        self.navigationBar.barStyle = .Black
+    }
+    
     func setupLabel(){
         moc.performBlock{
             let results = self.moc.countForFetchRequest(NSFetchRequest(entityName: "Record"), error: nil)

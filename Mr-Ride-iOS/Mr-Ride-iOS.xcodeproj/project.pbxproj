@@ -30,6 +30,7 @@
 		465956781D2124E3002C0416 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465956761D2124E3002C0416 /* Fabric.framework */; };
 		465956791D2124E3002C0416 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465956771D2124E3002C0416 /* Crashlytics.framework */; };
 		465F67C71D10FF1100875C43 /* BikeMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465F67C61D10FF1100875C43 /* BikeMapViewController.swift */; };
+		46EB3AF81D2E528B00554A68 /* cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46EB3AF71D2E528B00554A68 /* cell.xib */; };
 		46F2E7BA1D1279EE00816318 /* BikeToiletModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F2E7B91D1279EE00816318 /* BikeToiletModel.swift */; };
 		46F2E7BC1D127AE100816318 /* BikeToiletModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F2E7BB1D127AE100816318 /* BikeToiletModelHelper.swift */; };
 		46F2E7BE1D12804400816318 /* BikeMapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F2E7BD1D12804400816318 /* BikeMapManager.swift */; };
@@ -83,6 +84,7 @@
 		465956761D2124E3002C0416 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		465956771D2124E3002C0416 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		465F67C61D10FF1100875C43 /* BikeMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeMapViewController.swift; sourceTree = "<group>"; };
+		46EB3AF71D2E528B00554A68 /* cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = cell.xib; sourceTree = "<group>"; };
 		46F2E7B91D1279EE00816318 /* BikeToiletModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeToiletModel.swift; sourceTree = "<group>"; };
 		46F2E7BB1D127AE100816318 /* BikeToiletModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeToiletModelHelper.swift; sourceTree = "<group>"; };
 		46F2E7BD1D12804400816318 /* BikeMapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeMapManager.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				463C9C801D25E0CE002BE256 /* Model */,
 				464B24B61D014FC20087ED8B /* Core Data */,
 				4605DAE91CFE756100F9C55B /* Supporting Files */,
+				46EB3AF71D2E528B00554A68 /* cell.xib */,
 			);
 			path = "Mr-Ride-iOS";
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				46F492801CFD7B99000D4EA7 /* RobotoMono-Bold.ttf in Resources */,
 				46F492841CFD7B99000D4EA7 /* RobotoMono-LightItalic.ttf in Resources */,
 				464CFE6B1CF2A28600B1FBBE /* LaunchScreen.storyboard in Resources */,
+				46EB3AF81D2E528B00554A68 /* cell.xib in Resources */,
 				464CFE681CF2A28600B1FBBE /* Assets.xcassets in Resources */,
 				464CFE631CF2A28600B1FBBE /* Main.storyboard in Resources */,
 				46F492851CFD7B99000D4EA7 /* RobotoMono-Medium.ttf in Resources */,

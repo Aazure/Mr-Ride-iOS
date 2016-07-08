@@ -31,12 +31,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         loginButton.layer.cornerRadius = 30
         
-        // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
     }
     
     func setupTextField(){
@@ -64,6 +63,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             heightTextField.text = ""
         }
     }
+    
     func textFieldDidEndEditing(textField: UITextField) {
         
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -149,24 +149,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     defaults.setObject(result["link"], forKey: "link")
                     defaults.setObject(result["email"], forKey: "email")
                     defaults.synchronize()
-                    print(defaults.objectForKey("link"))
-                    
-                    print("FBdata saved!")
                 }
                 
             })
         }
         
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

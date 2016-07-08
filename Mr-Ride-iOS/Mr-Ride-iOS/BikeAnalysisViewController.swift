@@ -117,7 +117,7 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
         }
         
         let renderer = MKPolylineRenderer(polyline: polyline)
-        renderer.lineWidth = 10.0
+        renderer.lineWidth = 5.0
         renderer.strokeColor = UIColor.mrBubblegumColor()
         
         return renderer

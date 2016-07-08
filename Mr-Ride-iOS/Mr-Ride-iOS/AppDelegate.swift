@@ -28,8 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().barTintColor = UIColor.mrLightblueColor()
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let user = defaults.objectForKey("name")
         
-        if(FBSDKAccessToken.currentAccessToken() != nil){
+        if(user != nil){
             
             self.window?.rootViewController = storyboard.instantiateViewControllerWithIdentifier("RevealViewController") 
         }else{
