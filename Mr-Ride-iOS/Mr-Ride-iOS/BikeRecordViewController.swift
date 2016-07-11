@@ -61,6 +61,7 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
     }
     
     override func viewWillAppear(animated: Bool) {
+    TrackingManager.sharedManager.createTrackingScreenView("view_in_record_creating")
         locationManager.requestAlwaysAuthorization()
         //        locationManager.startUpdatingLocation()
         
@@ -172,6 +173,7 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
     }
     
     @IBAction func dismissRecord(sender: AnyObject) {
+        TrackingManager.sharedManager.createTrackingEvent("record_creating", action: "select_cancel_in_record_creating")
         //        delegation?.showHomePage()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -215,6 +217,7 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
     }
     
     @IBAction func finishPressed(sender: AnyObject) {
+        TrackingManager.sharedManager.createTrackingEvent("record_creating", action: "select_finish_in_record_creating")
         Record.add(moc, date: date, distance: distance, duration: totalTime, routes: locations)
         var locationArray: [CLLocationCoordinate2D] = []
         for location in locations{

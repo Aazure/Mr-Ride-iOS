@@ -30,6 +30,11 @@ class BikeSidebarTableViewController: UITableViewController {
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        TrackingManager.sharedManager.createTrackingScreenView("view_in_menu")
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -57,6 +62,7 @@ class BikeSidebarTableViewController: UITableViewController {
             homeLabel.textColor = UIColor.whiteColor()
             historyLabel.textColor = UIColor.mrWhite50Color()
             mapLabel.textColor = UIColor.mrWhite50Color()
+            TrackingManager.sharedManager.createTrackingEvent("menu", action: "select_home_in_menu")
         case 1:
             dotHomeLabel.hidden = true
             dotHIstoryLabel.hidden = false
@@ -64,6 +70,7 @@ class BikeSidebarTableViewController: UITableViewController {
             homeLabel.textColor = UIColor.mrWhite50Color()
             historyLabel.textColor = UIColor.whiteColor()
             mapLabel.textColor = UIColor.mrWhite50Color()
+            TrackingManager.sharedManager.createTrackingEvent("menu", action: "select_select_history_in_menuhome_in_menu")
         case 2:
             dotHomeLabel.hidden = true
             dotHIstoryLabel.hidden = true
@@ -71,6 +78,7 @@ class BikeSidebarTableViewController: UITableViewController {
             homeLabel.textColor = UIColor.mrWhite50Color()
             historyLabel.textColor = UIColor.mrWhite50Color()
             mapLabel.textColor = UIColor.whiteColor()
+            TrackingManager.sharedManager.createTrackingEvent("menu", action: "select_map_in_menu")
             
         default:
             break

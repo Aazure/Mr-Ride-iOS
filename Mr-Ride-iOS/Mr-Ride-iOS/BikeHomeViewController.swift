@@ -68,7 +68,7 @@ class BikeHomeViewController: UIViewController{
                 distance += record.valueForKey("distance") as! Double
                 duration += record.valueForKey("duration") as! Double
             }
-            let distanceStr = NSString(format: "%.2f", distance*0.01)
+            let distanceStr = NSString(format: "%.2f", distance*0.001)
             self.totalDistLabel.text = String(distanceStr) + " km"
             let speedStr = NSString(format: "%.2f", distance / duration * 3.6)
             self.avgSpeedLabel.text = String(speedStr) + " km / h"
@@ -184,7 +184,7 @@ class BikeHomeViewController: UIViewController{
     
     
     @IBAction func buttonTapped(sender: UIButton) {
-        Amplitude.instance().logEvent("select_ride_in_home")
+        TrackingManager.sharedManager.createTrackingEvent("Home", action: "select_ride_in_home")
         //
         ////        let recordVC = self.storyboard!.instantiateViewControllerWithIdentifier("RecordPage") as! BikeRecordViewController
         ////        recordVC.delegation = self

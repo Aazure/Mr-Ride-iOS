@@ -33,6 +33,11 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         setChart(self.dateArray, values: self.distanceArray)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+       TrackingManager.sharedManager.createTrackingScreenView("view_in_home")
+    }
+    
     func setupSidebar(){
         if self.revealViewController() != nil{
             menuButton.target = self.revealViewController()
@@ -151,7 +156,7 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         let dateComponents = calender.components([.Day, .Month, .Year], fromDate: date!)
         
         let distance = record.valueForKey("distance") as? Double
-        let distanceKm = distance! * 0.01
+        let distanceKm = distance! * 0.001
         let distanceStr = NSString(format: "%.2f", distanceKm)
         
         var  duration = record.valueForKey("duration") as! Double
@@ -251,6 +256,7 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
     //    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        TrackingManager.sharedManager.createTrackingEvent("history", action: "select_record_result_in_history")
         let record = fetchedResultsController.objectAtIndexPath(indexPath)
         let date = record.valueForKey("date") as! NSDate
         let distance = record.valueForKey("distance") as! Double

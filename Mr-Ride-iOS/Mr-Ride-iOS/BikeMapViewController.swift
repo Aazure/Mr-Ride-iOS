@@ -41,10 +41,12 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     let pickerData = ["UBike Station", "Toilet"]
     
     override func viewWillAppear(animated: Bool) {
+    TrackingManager.sharedManager.createTrackingScreenView("view_in_toilet_map")
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -168,15 +170,14 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         infoView.hidden = false
         view.backgroundColor =  UIColor.mrLightblueColor()
         if let selectedAnnotation = view.annotation as? MapAnnotation{
-            //            switch selectedAnnotation.type!{
-            //            case "toilet":
-            //                //do add track
-            //
-            //            case "youbike":
-            //                //do add track
-            //            default:
-            //                break
-            //            }
+                        switch selectedAnnotation.type!{
+                        case "toilet":
+                            TrackingManager.sharedManager.createTrackingScreenView("view_in_toilet_map")
+                        case "youbike":
+                            TrackingManager.sharedManager.createTrackingScreenView("view_in_ubike_station_map")
+                        default:
+                            break
+                        }
             titleLabel.text = selectedAnnotation.title
             addressLabel.text = selectedAnnotation.address
             catelogLabel.text = selectedAnnotation.catelog
@@ -209,6 +210,7 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     @IBAction func mapTypeChanged(sender: UIButton) {
+        TrackingManager.sharedManager.createTrackingScreenView("view_in_look_for_picker")
         pickView.hidden = false
         pickViewToolBar.hidden = false
     }
@@ -280,11 +282,13 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBAction func doneButtonTapped(sender: UIButton) {
         pickView.hidden = true
         pickViewToolBar.hidden = true
+        TrackingManager.sharedManager.createTrackingEvent("look_for_picker", action: "select_done_in_look_for_picker")
     }
     
     @IBAction func cancelButtonTapped(sender: UIButton) {
         pickView.hidden = true
         pickViewToolBar.hidden = true
+        TrackingManager.sharedManager.createTrackingEvent("look_for_picker", action: "select_cancel_in_look_for_picker")
     }
     
 }

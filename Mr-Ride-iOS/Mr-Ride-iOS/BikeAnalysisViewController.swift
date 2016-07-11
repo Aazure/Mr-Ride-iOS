@@ -34,6 +34,11 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
         addPolyLineToMap()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        TrackingManager.sharedManager.createTrackingScreenView("view_in_record_result")
+    }
+    
     func setNavigation(){
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
@@ -128,6 +133,7 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
     }
     
     @IBAction func closeAnalysis(sender: AnyObject) {
+        TrackingManager.sharedManager.createTrackingEvent("record_result", action: "select_close_in_record_result")
         if isFromTable{
             self.navigationController!.popToRootViewControllerAnimated(true)
         }else{

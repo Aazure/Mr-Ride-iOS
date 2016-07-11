@@ -12,6 +12,7 @@ import Fabric
 import Crashlytics
 import Amplitude_iOS
 import FBSDKCoreKit
+import Google
 
 
 @UIApplicationMain
@@ -39,6 +40,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         // Override point for customization after application launch.
         Fabric.with([Crashlytics.self])
+        
+        // [Google Analytics]
+        // Configure tracker from GoogleService-Info.plist.
+        var configureError:NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+//         Optional: configure GAI options.
+//        let gai = GAI.sharedInstance()
+//        gai.trackUncaughtExceptions = true  // report uncaught exceptions
+//        gai.logger.logLevel = GAILogLevel.Verbose  // remove before app release
+
     Amplitude.instance().initializeApiKey("43b6d76448b71c4b25d6019a85a21b76")
         
         //        self.window?.rootViewController = initialViewController
