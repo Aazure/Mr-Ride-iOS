@@ -8,6 +8,8 @@
 
 import UIKit
 import MapKit
+import FBSDKLoginKit
+import FBSDKCoreKit
 
 class BikeSidebarTableViewController: UITableViewController {
     @IBOutlet var BikeSidebarTableView: UITableView!
@@ -28,6 +30,26 @@ class BikeSidebarTableViewController: UITableViewController {
         dotHIstoryLabel.hidden = true
         dotMapLabel.hidden = true
         
+        let button = UIButton()
+        button.frame = CGRectMake(55, 586, 150, 32)
+        button.backgroundColor = UIColor.mrBlack25Color()
+        button.tintColor = UIColor.whiteColor()
+        button.layer.cornerRadius = 4
+        button.setTitle("Log Out", forState: .Normal)
+        button.addTarget(self, action: #selector(self.logout), forControlEvents: .TouchUpInside)
+        
+        self.view.addSubview(button)
+        
+    }
+    
+    func logout(){
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let loginViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
+        appDelegate.window?.rootViewController = loginViewController
+
+        let loginManager = FBSDKLoginManager()
+        loginManager.logOut()
+        NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "name")
     }
     
     override func viewWillAppear(animated: Bool) {
