@@ -405,7 +405,7 @@
                     </tableView>
                     <connections>
                         <outlet property="BikeSidebarTableView" destination="VqC-ZG-WT2" id="WHB-78-oet"/>
-                        <outlet property="dotHIstoryLabel" destination="AEh-vk-UyR" id="8mz-Nf-exb"/>
+                        <outlet property="dotHistoryLabel" destination="AEh-vk-UyR" id="Rdf-BS-8Mr"/>
                         <outlet property="dotHomeLabel" destination="CIX-PF-K5D" id="doh-b7-smG"/>
                         <outlet property="dotMapLabel" destination="tZq-My-dPt" id="iOr-Nr-9ZA"/>
                         <outlet property="historyLabel" destination="5Sv-yp-mnU" id="3Wm-oF-PJp"/>
@@ -1388,6 +1388,6 @@
         <image name="logo-facebook" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qLu-EH-Xte"/>
+        <segue reference="Pp4-Yv-nkz"/>
     </inferredMetricsTieBreakers>
 </document>

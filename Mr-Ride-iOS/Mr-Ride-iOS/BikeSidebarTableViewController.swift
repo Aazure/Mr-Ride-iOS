@@ -16,7 +16,7 @@ class BikeSidebarTableViewController: UITableViewController {
     @IBOutlet weak var dotHomeLabel: UILabel!
     @IBOutlet weak var homeLabel: UILabel!
     @IBOutlet weak var historyLabel: UILabel!
-    @IBOutlet weak var dotHIstoryLabel: UILabel!
+    @IBOutlet weak var dotHistoryLabel: UILabel!
     @IBOutlet weak var mapLabel: UILabel!
     @IBOutlet weak var dotMapLabel: UILabel!
     
@@ -24,22 +24,26 @@ class BikeSidebarTableViewController: UITableViewController {
         super.viewDidLoad()
         
         homeLabel.font = UIFont.mrTextStyle11Font()
-        homeLabel.font = UIFont.mrTextStyle11Font()
         homeLabel.textColor = UIColor.whiteColor()
         dotHomeLabel.hidden = false
-        dotHIstoryLabel.hidden = true
+        dotHistoryLabel.hidden = true
         dotMapLabel.hidden = true
         
+        setupLogoutButton()
+        
+    }
+    
+    func setupLogoutButton(){
         let button = UIButton()
         button.frame = CGRectMake(55, 586, 150, 32)
         button.backgroundColor = UIColor.mrBlack25Color()
         button.tintColor = UIColor.whiteColor()
         button.layer.cornerRadius = 4
         button.setTitle("Log Out", forState: .Normal)
+        button.titleLabel?.font = UIFont(name: "SFUIText-Regular", size: 12)
         button.addTarget(self, action: #selector(self.logout), forControlEvents: .TouchUpInside)
         
         self.view.addSubview(button)
-        
     }
     
     func logout(){
@@ -79,7 +83,7 @@ class BikeSidebarTableViewController: UITableViewController {
         switch indexPath.row {
         case 0:
             dotHomeLabel.hidden = false
-            dotHIstoryLabel.hidden = true
+            dotHistoryLabel.hidden = true
             dotMapLabel.hidden = true
             homeLabel.textColor = UIColor.whiteColor()
             historyLabel.textColor = UIColor.mrWhite50Color()
@@ -87,7 +91,7 @@ class BikeSidebarTableViewController: UITableViewController {
             TrackingManager.sharedManager.createTrackingEvent("menu", action: "select_home_in_menu")
         case 1:
             dotHomeLabel.hidden = true
-            dotHIstoryLabel.hidden = false
+            dotHistoryLabel.hidden = false
             dotMapLabel.hidden = true
             homeLabel.textColor = UIColor.mrWhite50Color()
             historyLabel.textColor = UIColor.whiteColor()
@@ -95,7 +99,7 @@ class BikeSidebarTableViewController: UITableViewController {
             TrackingManager.sharedManager.createTrackingEvent("menu", action: "select_select_history_in_menuhome_in_menu")
         case 2:
             dotHomeLabel.hidden = true
-            dotHIstoryLabel.hidden = true
+            dotHistoryLabel.hidden = true
             dotMapLabel.hidden = false
             homeLabel.textColor = UIColor.mrWhite50Color()
             historyLabel.textColor = UIColor.mrWhite50Color()

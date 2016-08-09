@@ -63,6 +63,7 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
     override func viewWillAppear(animated: Bool) {
     TrackingManager.sharedManager.createTrackingScreenView("view_in_record_creating")
         locationManager.requestAlwaysAuthorization()
+        locationManager.allowsBackgroundLocationUpdates = true
         //        locationManager.startUpdatingLocation()
         
     }
