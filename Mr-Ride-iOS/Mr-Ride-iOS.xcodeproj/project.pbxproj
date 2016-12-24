@@ -132,13 +132,13 @@
 		4605DAE91CFE756100F9C55B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				46F492731CFD7B99000D4EA7 /* Roboto_Mono */,
 				464CFE5D1CF2A28600B1FBBE /* AppDelegate.swift */,
 				464CFE671CF2A28600B1FBBE /* Assets.xcassets */,
 				464CFE6C1CF2A28600B1FBBE /* Info.plist */,
 				464CFE691CF2A28600B1FBBE /* LaunchScreen.storyboard */,
 				464CFE7C1CF2D94200B1FBBE /* MrBikeFont.swift */,
 				464CFE7D1CF2D94200B1FBBE /* MrBikeColor.swift */,
-				462E9D591D305D00004528C4 /* TrackingManager.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -146,6 +146,7 @@
 		463C9C7F1D25E091002BE256 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				464CFE771CF2D86B00B1FBBE /* SWRevealViewController */,
 				463C9C811D26179F002BE256 /* LoginViewController.swift */,
 				464CFE801CF2E3ED00B1FBBE /* BikeHomeViewController.swift */,
 				464CFE841CF2FC1A00B1FBBE /* BikeNavigationController.swift */,
@@ -161,11 +162,13 @@
 		463C9C801D25E0CE002BE256 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				464B24B61D014FC20087ED8B /* Core Data */,
 				46F2E7B91D1279EE00816318 /* BikeToiletModel.swift */,
 				46F6958A1D1D089C00D70249 /* BikeYouBikeModel.swift */,
 				46F2E7BB1D127AE100816318 /* BikeToiletModelHelper.swift */,
 				46F6958C1D1D08CE00D70249 /* BikeYouBikeModelHelper.swift */,
 				46F2E7BD1D12804400816318 /* BikeMapManager.swift */,
+				462E9D591D305D00004528C4 /* TrackingManager.swift */,
 				463C9C7D1D25E066002BE256 /* MapAnnotation.swift */,
 			);
 			name = Model;
@@ -210,12 +213,10 @@
 			isa = PBXGroup;
 			children = (
 				464D668E1D33474700531162 /* GoogleService-Info.plist */,
-				46F492731CFD7B99000D4EA7 /* Roboto_Mono */,
-				464CFE771CF2D86B00B1FBBE /* SWRevealViewController */,
+				464CFE781CF2D88000B1FBBE /* Mr-Ride-iOS-Bridging-Header.h */,
 				463C9C831D266047002BE256 /* View */,
 				463C9C7F1D25E091002BE256 /* Controller */,
 				463C9C801D25E0CE002BE256 /* Model */,
-				464B24B61D014FC20087ED8B /* Core Data */,
 				4605DAE91CFE756100F9C55B /* Supporting Files */,
 			);
 			path = "Mr-Ride-iOS";
@@ -226,7 +227,6 @@
 			children = (
 				464CFE791CF2D88000B1FBBE /* SWRevealViewController.h */,
 				464CFE7A1CF2D88000B1FBBE /* SWRevealViewController.m */,
-				464CFE781CF2D88000B1FBBE /* Mr-Ride-iOS-Bridging-Header.h */,
 			);
 			name = SWRevealViewController;
 			sourceTree = "<group>";
