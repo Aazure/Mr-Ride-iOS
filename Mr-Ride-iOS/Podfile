@@ -3,11 +3,13 @@ use_frameworks!
 
 target 'Mr-Ride-iOS' do
   pod 'SwiftyJSON', '~> 2.3'
-  pod 'Alamofire', '~> 3.3'
-  pod 'Amplitude-iOS', '~> 3.7.0'	
+  pod 'Alamofire', '~> 3.3'	
   pod 'FBSDKCoreKit'
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
   pod 'Charts', '~> 2.2.5'
   pod 'Google/Analytics'
+  pod 'Amplitude-iOS', '~> 3.7.0'
+  pod 'Fabric'
+  pod 'Crashlytics'
 end

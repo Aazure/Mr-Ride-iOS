@@ -10,6 +10,9 @@ PODS:
   - Charts (2.2.5):
     - Charts/Core (= 2.2.5)
   - Charts/Core (2.2.5)
+  - Crashlytics (3.8.3):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.11)
   - FBSDKCoreKit (4.11.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.11.0):
@@ -39,6 +42,8 @@ DEPENDENCIES:
   - Alamofire (~> 3.3)
   - Amplitude-iOS (~> 3.7.0)
   - Charts (~> 2.2.5)
+  - Crashlytics
+  - Fabric
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
@@ -50,6 +55,8 @@ SPEC CHECKSUMS:
   Amplitude-iOS: 8bc8b9dc9c1898dbe5da541e21e8941ec085644f
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   Charts: b48fcc8d7190de910ff9e9748f5360c8ea7856e5
+  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   FBSDKCoreKit: 686ac982723a14ec9ddb85e2f81235d7706c891b
   FBSDKLoginKit: bade9fc78277764149ccc5bfaadbf13c83175c6a
   FBSDKShareKit: 2d1746144cfc8a9dbbd24997c34ee0471be51b6a
@@ -62,6 +69,6 @@ SPEC CHECKSUMS:
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: ff9e18a6ece20619ab3fbe7bc8264ae37552f0d0
+PODFILE CHECKSUM: ef1a86146d4944e9884371c6824edc780c87689e
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.1

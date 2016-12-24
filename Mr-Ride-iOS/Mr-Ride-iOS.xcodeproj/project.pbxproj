@@ -28,8 +28,6 @@
 		464CFE811CF2E3ED00B1FBBE /* BikeHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CFE801CF2E3ED00B1FBBE /* BikeHomeViewController.swift */; };
 		464CFE851CF2FC1A00B1FBBE /* BikeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464CFE841CF2FC1A00B1FBBE /* BikeNavigationController.swift */; };
 		464D668F1D33474700531162 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 464D668E1D33474700531162 /* GoogleService-Info.plist */; };
-		465956781D2124E3002C0416 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465956761D2124E3002C0416 /* Fabric.framework */; };
-		465956791D2124E3002C0416 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465956771D2124E3002C0416 /* Crashlytics.framework */; };
 		465F67C71D10FF1100875C43 /* BikeMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465F67C61D10FF1100875C43 /* BikeMapViewController.swift */; };
 		46F10B641D3012A80066EAF1 /* BikeHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F10B621D3012A80066EAF1 /* BikeHistoryTableViewCell.swift */; };
 		46F10B651D3012A80066EAF1 /* BikeHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46F10B631D3012A80066EAF1 /* BikeHistoryTableViewCell.xib */; };
@@ -60,6 +58,7 @@
 		0E24B26DC4B3589F0F024B3E /* Pods_Mr_Ride_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mr_Ride_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		115DF64DF741BEBC0D2CA1FB /* Pods-Mr-Ride-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mr-Ride-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Mr-Ride-iOS/Pods-Mr-Ride-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		462E9D591D305D00004528C4 /* TrackingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingManager.swift; sourceTree = "<group>"; };
+		463AD0FC1E0E808400E6502E /* Mr-Ride-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mr-Ride-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		463C9C7D1D25E066002BE256 /* MapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		463C9C811D26179F002BE256 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		463E5D121D0E4EB2004C1546 /* CustomHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomHeader.xib; sourceTree = "<group>"; };
@@ -69,7 +68,6 @@
 		464B24AF1D014FA70087ED8B /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Record.swift; path = ../Record.swift; sourceTree = "<group>"; };
 		464B24B01D014FA70087ED8B /* Route+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Route+CoreDataProperties.swift"; path = "../Route+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		464B24B11D014FA70087ED8B /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Route.swift; path = ../Route.swift; sourceTree = "<group>"; };
-		464CFE5A1CF2A28600B1FBBE /* Mr-Ride-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mr-Ride-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		464CFE5D1CF2A28600B1FBBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		464CFE621CF2A28600B1FBBE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		464CFE651CF2A28600B1FBBE /* Mr_Ride_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mr_Ride_iOS.xcdatamodel; sourceTree = "<group>"; };
@@ -84,8 +82,6 @@
 		464CFE801CF2E3ED00B1FBBE /* BikeHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeHomeViewController.swift; sourceTree = "<group>"; };
 		464CFE841CF2FC1A00B1FBBE /* BikeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeNavigationController.swift; sourceTree = "<group>"; };
 		464D668E1D33474700531162 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		465956761D2124E3002C0416 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		465956771D2124E3002C0416 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		465F67C61D10FF1100875C43 /* BikeMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeMapViewController.swift; sourceTree = "<group>"; };
 		46F10B621D3012A80066EAF1 /* BikeHistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		46F10B631D3012A80066EAF1 /* BikeHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BikeHistoryTableViewCell.xib; sourceTree = "<group>"; };
@@ -118,8 +114,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				904456225F79211FDE985043 /* Pods_Mr_Ride_iOS.framework in Frameworks */,
-				465956791D2124E3002C0416 /* Crashlytics.framework in Frameworks */,
-				465956781D2124E3002C0416 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,26 +200,16 @@
 			isa = PBXGroup;
 			children = (
 				464CFE5C1CF2A28600B1FBBE /* Mr-Ride-iOS */,
-				464CFE5B1CF2A28600B1FBBE /* Products */,
 				2CB9FBA81D337951C33183C0 /* Pods */,
 				D4AB053AE7D1F702DCA3764B /* Frameworks */,
+				463AD0FC1E0E808400E6502E /* Mr-Ride-iOS.app */,
 			);
-			sourceTree = "<group>";
-		};
-		464CFE5B1CF2A28600B1FBBE /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				464CFE5A1CF2A28600B1FBBE /* Mr-Ride-iOS.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		464CFE5C1CF2A28600B1FBBE /* Mr-Ride-iOS */ = {
 			isa = PBXGroup;
 			children = (
 				464D668E1D33474700531162 /* GoogleService-Info.plist */,
-				465956761D2124E3002C0416 /* Fabric.framework */,
-				465956771D2124E3002C0416 /* Crashlytics.framework */,
 				46F492731CFD7B99000D4EA7 /* Roboto_Mono */,
 				464CFE771CF2D86B00B1FBBE /* SWRevealViewController */,
 				463C9C831D266047002BE256 /* View */,
@@ -294,7 +278,7 @@
 			);
 			name = "Mr-Ride-iOS";
 			productName = "Mr-Ride-iOS";
-			productReference = 464CFE5A1CF2A28600B1FBBE /* Mr-Ride-iOS.app */;
+			productReference = 463AD0FC1E0E808400E6502E /* Mr-Ride-iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -327,7 +311,7 @@
 				Base,
 			);
 			mainGroup = 464CFE511CF2A28600B1FBBE;
-			productRefGroup = 464CFE5B1CF2A28600B1FBBE /* Products */;
+			productRefGroup = 464CFE511CF2A28600B1FBBE;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -390,7 +374,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 34521961f222299164d26c8a214b658ed5792317 99dd5a2fd2967472ad0a0bb9bb1d5c7128cc7571371d30e3316f42b651b9ab14";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 34521961f222299164d26c8a214b658ed5792317 99dd5a2fd2967472ad0a0bb9bb1d5c7128cc7571371d30e3316f42b651b9ab14";
 		};
 		4791862419DEEF43DC13A554 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -419,7 +403,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
