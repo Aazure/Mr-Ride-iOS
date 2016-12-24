@@ -64,10 +64,10 @@
 		463E5D121D0E4EB2004C1546 /* CustomHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomHeader.xib; sourceTree = "<group>"; };
 		463E5D141D0E58BF004C1546 /* CustomHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHeader.swift; sourceTree = "<group>"; };
 		4645C25F1CF3F1BF009093CA /* BikeSidebarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeSidebarTableViewController.swift; sourceTree = "<group>"; };
-		464B24AE1D014FA70087ED8B /* Record+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Record+CoreDataProperties.swift"; path = "../Record+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		464B24AF1D014FA70087ED8B /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Record.swift; path = ../Record.swift; sourceTree = "<group>"; };
-		464B24B01D014FA70087ED8B /* Route+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Route+CoreDataProperties.swift"; path = "../Route+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		464B24B11D014FA70087ED8B /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Route.swift; path = ../Route.swift; sourceTree = "<group>"; };
+		464B24AE1D014FA70087ED8B /* Record+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Record+CoreDataProperties.swift"; path = "Record+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		464B24AF1D014FA70087ED8B /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Record.swift; path = Record.swift; sourceTree = "<group>"; };
+		464B24B01D014FA70087ED8B /* Route+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Route+CoreDataProperties.swift"; path = "Route+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		464B24B11D014FA70087ED8B /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Route.swift; path = Route.swift; sourceTree = "<group>"; };
 		464CFE5D1CF2A28600B1FBBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		464CFE621CF2A28600B1FBBE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		464CFE651CF2A28600B1FBBE /* Mr_Ride_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mr_Ride_iOS.xcdatamodel; sourceTree = "<group>"; };
@@ -137,74 +137,79 @@
 				464CFE671CF2A28600B1FBBE /* Assets.xcassets */,
 				464CFE6C1CF2A28600B1FBBE /* Info.plist */,
 				464CFE691CF2A28600B1FBBE /* LaunchScreen.storyboard */,
-				464CFE7C1CF2D94200B1FBBE /* MrBikeFont.swift */,
 				464CFE7D1CF2D94200B1FBBE /* MrBikeColor.swift */,
+				464CFE7C1CF2D94200B1FBBE /* MrBikeFont.swift */,
 			);
 			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		463C9C7F1D25E091002BE256 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				464CFE771CF2D86B00B1FBBE /* SWRevealViewController */,
-				463C9C811D26179F002BE256 /* LoginViewController.swift */,
-				464CFE801CF2E3ED00B1FBBE /* BikeHomeViewController.swift */,
-				464CFE841CF2FC1A00B1FBBE /* BikeNavigationController.swift */,
-				4645C25F1CF3F1BF009093CA /* BikeSidebarTableViewController.swift */,
-				46F9910A1CFBE78F004765F8 /* BikeHistoryViewController.swift */,
-				46F8ED561CFD5AC9003F167B /* BikeRecordViewController.swift */,
 				46F8ED581CFD6680003F167B /* BikeAnalysisViewController.swift */,
+				46F9910A1CFBE78F004765F8 /* BikeHistoryViewController.swift */,
+				464CFE801CF2E3ED00B1FBBE /* BikeHomeViewController.swift */,
 				465F67C61D10FF1100875C43 /* BikeMapViewController.swift */,
+				464CFE841CF2FC1A00B1FBBE /* BikeNavigationController.swift */,
+				46F8ED561CFD5AC9003F167B /* BikeRecordViewController.swift */,
+				4645C25F1CF3F1BF009093CA /* BikeSidebarTableViewController.swift */,
+				463C9C811D26179F002BE256 /* LoginViewController.swift */,
 			);
 			name = Controller;
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		463C9C801D25E0CE002BE256 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				464B24B61D014FC20087ED8B /* Core Data */,
-				46F2E7B91D1279EE00816318 /* BikeToiletModel.swift */,
-				46F6958A1D1D089C00D70249 /* BikeYouBikeModel.swift */,
-				46F2E7BB1D127AE100816318 /* BikeToiletModelHelper.swift */,
-				46F6958C1D1D08CE00D70249 /* BikeYouBikeModelHelper.swift */,
 				46F2E7BD1D12804400816318 /* BikeMapManager.swift */,
-				462E9D591D305D00004528C4 /* TrackingManager.swift */,
+				46F2E7B91D1279EE00816318 /* BikeToiletModel.swift */,
+				46F2E7BB1D127AE100816318 /* BikeToiletModelHelper.swift */,
+				46F6958A1D1D089C00D70249 /* BikeYouBikeModel.swift */,
+				46F6958C1D1D08CE00D70249 /* BikeYouBikeModelHelper.swift */,
 				463C9C7D1D25E066002BE256 /* MapAnnotation.swift */,
+				462E9D591D305D00004528C4 /* TrackingManager.swift */,
 			);
 			name = Model;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		463C9C831D266047002BE256 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				464CFE611CF2A28600B1FBBE /* Main.storyboard */,
-				463E5D121D0E4EB2004C1546 /* CustomHeader.xib */,
-				463E5D141D0E58BF004C1546 /* CustomHeader.swift */,
-				46F2E7C31D12D25700816318 /* CustomFooter.swift */,
 				46F10B621D3012A80066EAF1 /* BikeHistoryTableViewCell.swift */,
 				46F10B631D3012A80066EAF1 /* BikeHistoryTableViewCell.xib */,
+				46F2E7C31D12D25700816318 /* CustomFooter.swift */,
+				463E5D141D0E58BF004C1546 /* CustomHeader.swift */,
+				463E5D121D0E4EB2004C1546 /* CustomHeader.xib */,
+				464CFE611CF2A28600B1FBBE /* Main.storyboard */,
 			);
 			name = View;
+			path = View;
 			sourceTree = "<group>";
 		};
 		464B24B61D014FC20087ED8B /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				464CFE641CF2A28600B1FBBE /* Mr_Ride_iOS.xcdatamodeld */,
 				464B24AE1D014FA70087ED8B /* Record+CoreDataProperties.swift */,
 				464B24AF1D014FA70087ED8B /* Record.swift */,
 				464B24B01D014FA70087ED8B /* Route+CoreDataProperties.swift */,
 				464B24B11D014FA70087ED8B /* Route.swift */,
-				464CFE641CF2A28600B1FBBE /* Mr_Ride_iOS.xcdatamodeld */,
 			);
 			name = "Core Data";
+			path = "Core Data";
 			sourceTree = "<group>";
 		};
 		464CFE511CF2A28600B1FBBE = {
 			isa = PBXGroup;
 			children = (
+				D4AB053AE7D1F702DCA3764B /* Frameworks */,
 				464CFE5C1CF2A28600B1FBBE /* Mr-Ride-iOS */,
 				2CB9FBA81D337951C33183C0 /* Pods */,
-				D4AB053AE7D1F702DCA3764B /* Frameworks */,
 				463AD0FC1E0E808400E6502E /* Mr-Ride-iOS.app */,
 			);
 			sourceTree = "<group>";
@@ -212,12 +217,12 @@
 		464CFE5C1CF2A28600B1FBBE /* Mr-Ride-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				464D668E1D33474700531162 /* GoogleService-Info.plist */,
-				464CFE781CF2D88000B1FBBE /* Mr-Ride-iOS-Bridging-Header.h */,
-				463C9C831D266047002BE256 /* View */,
 				463C9C7F1D25E091002BE256 /* Controller */,
 				463C9C801D25E0CE002BE256 /* Model */,
 				4605DAE91CFE756100F9C55B /* Supporting Files */,
+				463C9C831D266047002BE256 /* View */,
+				464D668E1D33474700531162 /* GoogleService-Info.plist */,
+				464CFE781CF2D88000B1FBBE /* Mr-Ride-iOS-Bridging-Header.h */,
 			);
 			path = "Mr-Ride-iOS";
 			sourceTree = "<group>";
@@ -229,6 +234,7 @@
 				464CFE7A1CF2D88000B1FBBE /* SWRevealViewController.m */,
 			);
 			name = SWRevealViewController;
+			path = SWRevealViewController;
 			sourceTree = "<group>";
 		};
 		46F492731CFD7B99000D4EA7 /* Roboto_Mono */ = {
@@ -452,6 +458,7 @@
 				464CFE621CF2A28600B1FBBE /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		464CFE691CF2A28600B1FBBE /* LaunchScreen.storyboard */ = {
@@ -460,6 +467,7 @@
 				464CFE6A1CF2A28600B1FBBE /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -562,7 +570,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Mr-Ride-iOS",
 				);
-				INFOPLIST_FILE = "Mr-Ride-iOS/Info.plist";
+				INFOPLIST_FILE = "Mr-Ride-iOS/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appworks-school-jocyhsiao.Mr-Ride-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -584,7 +592,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Mr-Ride-iOS",
 				);
-				INFOPLIST_FILE = "Mr-Ride-iOS/Info.plist";
+				INFOPLIST_FILE = "Mr-Ride-iOS/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appworks-school-jocyhsiao.Mr-Ride-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
