@@ -9,7 +9,8 @@
 import UIKit
 
 class BikeNavigationController: UINavigationController {
-    
+
+    // MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
@@ -29,10 +30,6 @@ class BikeNavigationController: UINavigationController {
         self.navigationBar.barStyle = .Black
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarPosition: .Any, barMetrics: .Default)
         navigationController?.navigationBar.shadowImage = UIImage()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
 }
