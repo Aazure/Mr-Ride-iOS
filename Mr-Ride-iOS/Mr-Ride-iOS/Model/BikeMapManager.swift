@@ -14,6 +14,7 @@ class BikeMapManager{
     var toilets: [BikeToiletModel] = []
     var youbikes: [BikeYouBikeModel] = []
     
+    // MARK: - Public Toilets Data
     func getToilets(completion:[BikeToiletModel] -> Void){
         let toiletUrl = "http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=008ed7cf-2340-4bc4-89b0-e258a5573be2"
         
@@ -43,6 +44,7 @@ class BikeMapManager{
         }
     }
     
+     // MARK: - Youbike Stations Data
     func getYouBikes(completion: [BikeYouBikeModel] -> Void){
         let youbikeUrl = "http://data.taipei/youbike"
         Alamofire.request(.GET, youbikeUrl, encoding: .JSON).validate().responseData{result in
