@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
+class BikeMapViewController: UIViewController{
     enum MakerType: String{
         case Toilets
         case YouBikes
@@ -22,7 +22,6 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var etaLabel: UILabel!
     @IBOutlet weak var pickView: UIPickerView!
-    
     @IBOutlet weak var pickViewToolBar: UIView!
     @IBOutlet weak var mapTypeButton: UIButton!
     
@@ -39,42 +38,10 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }()
     
     let pickerData = ["UBike Station", "Toilet"]
-    
-    override func viewWillAppear(animated: Bool) {
-    TrackingManager.sharedManager.createTrackingScreenView("view_in_toilet_map")
-        locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation()
-        
-    }
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationItem.title = "Map"
-        setNavigation()
-        setupMapView()
-        setupInfoView()
-        setupPickView()
-        setupSidebar()
-        BikeMapManager.sharedManager.getYouBikes(){ data in
-            self.addYouBikeAnnotations(data)
-            self.locationManager.startUpdatingLocation()
-            //                self.setupUserLocation()
-            
-        }
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        locationManager.startUpdatingLocation()
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        locationManager.stopUpdatingLocation()
-    }
-    
-    
+}
+
+// MARK: - Setup
+extension BikeMapViewController{
     func setNavigation(){
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
@@ -101,7 +68,6 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     func setupInfoView(){
-        
         infoView.layer.cornerRadius = 10.0
         infoView.hidden = true
         infoView.hidden = true
@@ -114,17 +80,54 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         self.pickView.delegate = self
         pickViewToolBar.hidden = true
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+}
+
+// MARK: - View LifeCycle
+extension BikeMapViewController{
+    override func viewWillAppear(animated: Bool) {
+        TrackingManager.sharedManager.createTrackingScreenView("view_in_toilet_map")
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
+        
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationItem.title = "Map"
+        setNavigation()
+        setupMapView()
+        setupInfoView()
+        setupPickView()
+        setupSidebar()
+        BikeMapManager.sharedManager.getYouBikes(){ data in
+            self.addYouBikeAnnotations(data)
+            self.locationManager.startUpdatingLocation()
+            //                self.setupUserLocation()
+            
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        locationManager.startUpdatingLocation()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        locationManager.stopUpdatingLocation()
+    }
+}
+
+// MARK: - CLLocationManagerDelegate
+extension BikeMapViewController: CLLocationManagerDelegate{
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentUserLocation = locations.last
         
     }
-    
+}
+
+// MARK: - MapView
+extension BikeMapViewController: MKMapViewDelegate{
     func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
         let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 500, 500)
         mapView.setRegion(region, animated: true)
@@ -170,14 +173,14 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         infoView.hidden = false
         view.backgroundColor =  UIColor.mrLightblueColor()
         if let selectedAnnotation = view.annotation as? MapAnnotation{
-                        switch selectedAnnotation.type!{
-                        case "toilet":
-                            TrackingManager.sharedManager.createTrackingScreenView("view_in_toilet_map")
-                        case "youbike":
-                            TrackingManager.sharedManager.createTrackingScreenView("view_in_ubike_station_map")
-                        default:
-                            break
-                        }
+            switch selectedAnnotation.type!{
+            case "toilet":
+                TrackingManager.sharedManager.createTrackingScreenView("view_in_toilet_map")
+            case "youbike":
+                TrackingManager.sharedManager.createTrackingScreenView("view_in_ubike_station_map")
+            default:
+                break
+            }
             titleLabel.text = selectedAnnotation.title
             addressLabel.text = selectedAnnotation.address
             catelogLabel.text = selectedAnnotation.catelog
@@ -200,8 +203,6 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             
         }
         
-        
-        
     }
     
     func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
@@ -209,12 +210,39 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         view.backgroundColor = UIColor.whiteColor()
     }
     
-    @IBAction func mapTypeChanged(sender: UIButton) {
-        TrackingManager.sharedManager.createTrackingScreenView("view_in_look_for_picker")
-        pickView.hidden = false
-        pickViewToolBar.hidden = false
+    func addYouBikeAnnotations(youbikes: [BikeYouBikeModel]){
+        mapView.removeAnnotations(mapView.annotations)
+        var annotations = [MapAnnotation]()
+        
+        for youbike in youbikes{
+            let availableYB = String(format: "%d bikes left", youbike.availableYB)
+            let annotation = MapAnnotation(type: "youbike", catelog: youbike.area, address: youbike.address)
+            annotation.title = youbike.name
+            annotation.subtitle = availableYB
+            annotation.coordinate = youbike.coordinate
+            annotations.append(annotation)
+        }
+        mapView.addAnnotations(annotations)
+        
     }
     
+    func addToiletAnnotations(toilets: [BikeToiletModel]){
+        mapView.removeAnnotations(mapView.annotations)
+        var annotations = [MapAnnotation]()
+        
+        for toilet in toilets{
+            let annotation = MapAnnotation(type: "toilet", catelog: toilet.catelog, address: toilet.address)
+            annotation.title = toilet.name
+            annotation.coordinate = toilet.coordinate
+            annotations.append(annotation)
+            
+        }
+        mapView.addAnnotations(annotations)
+    }
+}
+
+// MARK: - PickerView
+extension BikeMapViewController: UIPickerViewDataSource, UIPickerViewDelegate{
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -248,35 +276,14 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         }
         infoView.hidden = true
     }
-    
-    func addYouBikeAnnotations(youbikes: [BikeYouBikeModel]){
-        mapView.removeAnnotations(mapView.annotations)
-        var annotations = [MapAnnotation]()
-        
-        for youbike in youbikes{
-            let availableYB = String(format: "%d bikes left", youbike.availableYB)
-            let annotation = MapAnnotation(type: "youbike", catelog: youbike.area, address: youbike.address)
-            annotation.title = youbike.name
-            annotation.subtitle = availableYB
-            annotation.coordinate = youbike.coordinate
-            annotations.append(annotation)
-        }
-        mapView.addAnnotations(annotations)
-        
-    }
-    
-    func addToiletAnnotations(toilets: [BikeToiletModel]){
-        mapView.removeAnnotations(mapView.annotations)
-        var annotations = [MapAnnotation]()
-        
-        for toilet in toilets{
-            let annotation = MapAnnotation(type: "toilet", catelog: toilet.catelog, address: toilet.address)
-            annotation.title = toilet.name
-            annotation.coordinate = toilet.coordinate
-            annotations.append(annotation)
-            
-        }
-        mapView.addAnnotations(annotations)
+}
+
+// MARK: - Action
+extension BikeMapViewController{
+    @IBAction func mapTypeChanged(sender: UIButton) {
+        TrackingManager.sharedManager.createTrackingScreenView("view_in_look_for_picker")
+        pickView.hidden = false
+        pickViewToolBar.hidden = false
     }
     
     @IBAction func doneButtonTapped(sender: UIButton) {
@@ -290,5 +297,4 @@ class BikeMapViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         pickViewToolBar.hidden = true
         TrackingManager.sharedManager.createTrackingEvent("look_for_picker", action: "select_cancel_in_look_for_picker")
     }
-    
 }
