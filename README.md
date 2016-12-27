@@ -7,7 +7,7 @@ A user-friendly sport app for bikers to record routes and activity details, and 
 * Used Crashlytics, Google Analytics, Amplitude Analytics for crash reporting and user behaviour analytics
 
 #Screenshot
-
+![Image of MrRide](https://cloud.githubusercontent.com/assets/3316679/21506753/992b05ba-ccad-11e6-8cd2-aeb7c16a6b96.gif)
 
 #Libraries
 * SwiftyJSON
