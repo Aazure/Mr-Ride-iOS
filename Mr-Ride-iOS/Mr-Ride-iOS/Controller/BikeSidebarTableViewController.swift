@@ -19,18 +19,16 @@ class BikeSidebarTableViewController: UITableViewController {
     @IBOutlet weak var dotHistoryLabel: UILabel!
     @IBOutlet weak var mapLabel: UILabel!
     @IBOutlet weak var dotMapLabel: UILabel!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+}
+
+// MARK: - Setup
+extension BikeSidebarTableViewController{
+    func setupLabel(){
         homeLabel.font = UIFont.mrTextStyle11Font()
         homeLabel.textColor = UIColor.whiteColor()
         dotHomeLabel.hidden = false
         dotHistoryLabel.hidden = true
         dotMapLabel.hidden = true
-        
-        setupLogoutButton()
-        
     }
     
     func setupLogoutButton(){
@@ -45,29 +43,24 @@ class BikeSidebarTableViewController: UITableViewController {
         
         self.view.addSubview(button)
     }
-    
-    func logout(){
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let loginViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
-        appDelegate.window?.rootViewController = loginViewController
+}
 
-        let loginManager = FBSDKLoginManager()
-        loginManager.logOut()
-        NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "name")
+// MARK: - View LifeCycle
+extension BikeSidebarTableViewController{
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupLabel()
+        setupLogoutButton()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         TrackingManager.sharedManager.createTrackingScreenView("view_in_menu")
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
-    }
-    
-    // MARK: - Table view data source
-    
+}
+
+// MARK: - TableView
+extension BikeSidebarTableViewController{
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
         return 1
@@ -110,5 +103,17 @@ class BikeSidebarTableViewController: UITableViewController {
             break
         }
     }
-    
+}
+
+// MARK: - Logout
+extension BikeSidebarTableViewController{
+    func logout(){
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let loginViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
+        appDelegate.window?.rootViewController = loginViewController
+        
+        let loginManager = FBSDKLoginManager()
+        loginManager.logOut()
+        NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "name")
+    }
 }
