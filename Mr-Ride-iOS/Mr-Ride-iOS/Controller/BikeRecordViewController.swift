@@ -15,7 +15,12 @@ import CoreData
 //    func showHomePage()
 //}
 let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate{
+class BikeRecordViewController: UIViewController{
+    enum Counter{
+        case Begin
+        case Pause
+        case Continue
+    }
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var caloriesLabel: UILabel!
@@ -36,6 +41,7 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
     var date = NSDate()
     var flag = false
     //    weak var delegation:ShowHomePageInfoDelegate?
+    var buttonStatus = Counter.Begin
     
     lazy var locations = [CLLocation]()
     lazy var locationManager: CLLocationManager = {
@@ -47,38 +53,10 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
         _locationManager.distanceFilter = 1.0
         return _locationManager
     }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        distance = 0.0
-        locations.removeAll(keepCapacity: false)
-        setupNavigation()
-        setupRecordButton()
-        setupBackground()
-        setupMapView()
-        setupCircleView()
-        counterLabel.font = UIFont(name: "RobotoMono-Light", size:30.0)
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-    TrackingManager.sharedManager.createTrackingScreenView("view_in_record_creating")
-        locationManager.requestAlwaysAuthorization()
-        locationManager.allowsBackgroundLocationUpdates = true
-        //        locationManager.startUpdatingLocation()
-        
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        locationManager.startUpdatingLocation()
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        locationManager.stopUpdatingLocation()
-        timer.invalidate()
-    }
-    
+}
+
+// MARK: - Setup
+extension BikeRecordViewController{
     func setupNavigation(){
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
@@ -98,46 +76,60 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
         circleView.layer.borderColor = UIColor.whiteColor().CGColor
     }
     
-    func startRecord(timer: NSTimer) {
-        let currentTime = NSDate.timeIntervalSinceReferenceDate()
-        var elapsedTime: NSTimeInterval = currentTime - startTime
-        totalTime = elapsedTime
-        let distanceStr = NSString(format: "%.2f", distance)
-        distanceLabel.text = (distanceStr as String) + " m"
-        let pace = currentSpeed * 3.6
-        let paceStr = NSString(format: "%.2f", pace)
-        paceLabel.text = (paceStr as String) + " km / h"
-        
-        let hours = UInt8(elapsedTime / 3600.0)
-        elapsedTime -= (NSTimeInterval(hours) * 3600)
-        let minutes = UInt8(elapsedTime / 60.0)
-        elapsedTime -= (NSTimeInterval(minutes) * 60)
-        let seconds = UInt8(elapsedTime)
-        elapsedTime -= NSTimeInterval(seconds)
-        let fraction = UInt8(elapsedTime * 100)
-        
-        counterLabel.text = String(format: "%02d:%02d:%02d.%02d", hours, minutes, seconds, fraction)
-        
-        let weight = NSUserDefaults.standardUserDefaults().doubleForKey("weight")
-        
-        let calStr = Int(weight * distance * 0.001 * 1.036)
-        caloriesLabel.text = String(calStr) + " kcal"
-    }
-    
-    func startLocationUpdates() {
-        locationManager.startUpdatingLocation()
-    }
-    
-    func stopLocationUpdates(){
-        locationManager.stopUpdatingLocation()
-    }
-    
     func setupRecordButton(){
         recordButton.backgroundColor = UIColor.redColor()
         recordButton.layer.cornerRadius = recordButton.frame.width / 2
         recordButton.clipsToBounds = true
     }
     
+    func setupBackground() {
+        self.view.backgroundColor = UIColor.mrLightblueColor()
+        let topGradient = UIColor(red: 0, green: 0, blue: 0, alpha: 0.60).CGColor
+        let bottomGradient = UIColor(red: 0, green: 0, blue: 0, alpha: 0.40).CGColor
+        let gradient = CAGradientLayer()
+        gradient.frame = self.view.frame
+        gradient.colors = [topGradient, bottomGradient]
+        self.view.layer.insertSublayer(gradient, atIndex: 0)
+        
+    }
+}
+
+// MARK: - View LifeCycle
+extension BikeRecordViewController{
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        distance = 0.0
+        locations.removeAll(keepCapacity: false)
+        setupNavigation()
+        setupRecordButton()
+        setupBackground()
+        setupMapView()
+        setupCircleView()
+        counterLabel.font = UIFont(name: "RobotoMono-Light", size:30.0)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        TrackingManager.sharedManager.createTrackingScreenView("view_in_record_creating")
+        locationManager.requestAlwaysAuthorization()
+        locationManager.allowsBackgroundLocationUpdates = true
+        //        locationManager.startUpdatingLocation()
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        locationManager.startUpdatingLocation()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        locationManager.stopUpdatingLocation()
+        timer.invalidate()
+    }
+}
+
+// MARK: - Location Manager
+extension BikeRecordViewController: CLLocationManagerDelegate{
     func locationManager(manager: CLLocationManager, didUpdateLocations bikeLocations: [CLLocation]) {
         
         if flag{
@@ -169,23 +161,97 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    func startLocationUpdates() {
+        locationManager.startUpdatingLocation()
     }
     
+    func stopLocationUpdates(){
+        locationManager.stopUpdatingLocation()
+    }
+}
+
+// MARK: - MapView
+extension BikeRecordViewController: MKMapViewDelegate{
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        guard let polyline = overlay as? MKPolyline else {
+            return MKOverlayRenderer()
+        }
+        
+        let renderer = MKPolylineRenderer(polyline: polyline)
+        renderer.lineWidth = 5.0
+        renderer.strokeColor = UIColor.mrBubblegumColor()
+        
+        return renderer
+    }
+}
+
+// MARK: - Stopwatch
+extension BikeRecordViewController{
+    func startRecord(timer: NSTimer) {
+        let currentTime = NSDate.timeIntervalSinceReferenceDate()
+        var elapsedTime: NSTimeInterval = currentTime - startTime
+        totalTime = elapsedTime
+        let distanceStr = NSString(format: "%.2f", distance)
+        distanceLabel.text = (distanceStr as String) + " m"
+        let pace = currentSpeed * 3.6
+        let paceStr = NSString(format: "%.2f", pace)
+        paceLabel.text = (paceStr as String) + " km / h"
+        
+        let hours = UInt8(elapsedTime / 3600.0)
+        elapsedTime -= (NSTimeInterval(hours) * 3600)
+        let minutes = UInt8(elapsedTime / 60.0)
+        elapsedTime -= (NSTimeInterval(minutes) * 60)
+        let seconds = UInt8(elapsedTime)
+        elapsedTime -= NSTimeInterval(seconds)
+        let fraction = UInt8(elapsedTime * 100)
+        
+        counterLabel.text = String(format: "%02d:%02d:%02d.%02d", hours, minutes, seconds, fraction)
+        
+        let weight = NSUserDefaults.standardUserDefaults().doubleForKey("weight")
+        
+        let calStr = Int(weight * distance * 0.001 * 1.036)
+        caloriesLabel.text = String(calStr) + " kcal"
+    }
+}
+
+// MARK: - Button Animation
+extension BikeRecordViewController{
+    func buttonSquareAnimation(){
+        UIView.animateWithDuration(0.6, delay: 0.0,options: .TransitionFlipFromLeft, animations:{
+            self.recordButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
+            },completion: { (isFinished)in
+                self.addIconCornerRadiusAnimation((self.recordButton.bounds.width) / 2, to: 8, duration: 0.3)
+        })
+        
+    }
+    
+    func buttonCircleAnimation(){
+        UIView.animateWithDuration(0.6){
+            self.recordButton.transform = CGAffineTransformMakeScale(0.8, 0.8)
+            self.recordButton.layer.cornerRadius = self.recordButton.bounds.width / 2
+        }
+        
+    }
+    
+    func addIconCornerRadiusAnimation(from: CGFloat, to: CGFloat, duration: CFTimeInterval)
+    {
+        let animation = CABasicAnimation(keyPath:"cornerRadius")
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.fromValue = from
+        animation.toValue = to
+        animation.duration = duration
+        self.recordButton.layer.addAnimation(animation, forKey: "cornerRadius")
+        self.recordButton.layer.cornerRadius = to
+    }
+}
+
+// MARK: - Action
+extension BikeRecordViewController{
     @IBAction func dismissRecord(sender: AnyObject) {
         TrackingManager.sharedManager.createTrackingEvent("record_creating", action: "select_cancel_in_record_creating")
         //        delegation?.showHomePage()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    enum Counter{
-        case Begin
-        case Pause
-        case Continue
-    }
-    
-    var buttonStatus = Counter.Begin
     
     @IBAction func startPressed(sender: UIButton) {
         switch buttonStatus{
@@ -231,59 +297,6 @@ class BikeRecordViewController: UIViewController, CLLocationManagerDelegate, MKM
         destinationVC.routes = locationArray
         self.navigationController!.pushViewController(destinationVC, animated: true)
     }
-    
-    func buttonSquareAnimation(){
-        UIView.animateWithDuration(0.6, delay: 0.0,options: .TransitionFlipFromLeft, animations:{
-            self.recordButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
-            },completion: { (isFinished)in
-                self.addIconCornerRadiusAnimation((self.recordButton.bounds.width) / 2, to: 8, duration: 0.3)
-        })
-        
-    }
-    
-    func buttonCircleAnimation(){
-        UIView.animateWithDuration(0.6){
-            self.recordButton.transform = CGAffineTransformMakeScale(0.8, 0.8)
-            self.recordButton.layer.cornerRadius = self.recordButton.bounds.width / 2
-        }
-        
-    }
-    
-    func addIconCornerRadiusAnimation(from: CGFloat, to: CGFloat, duration: CFTimeInterval)
-    {
-        let animation = CABasicAnimation(keyPath:"cornerRadius")
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        animation.fromValue = from
-        animation.toValue = to
-        animation.duration = duration
-        self.recordButton.layer.addAnimation(animation, forKey: "cornerRadius")
-        self.recordButton.layer.cornerRadius = to
-    }
-    
-    
-    func setupBackground() {
-        self.view.backgroundColor = UIColor.mrLightblueColor()
-        let topGradient = UIColor(red: 0, green: 0, blue: 0, alpha: 0.60).CGColor
-        let bottomGradient = UIColor(red: 0, green: 0, blue: 0, alpha: 0.40).CGColor
-        let gradient = CAGradientLayer()
-        gradient.frame = self.view.frame
-        gradient.colors = [topGradient, bottomGradient]
-        self.view.layer.insertSublayer(gradient, atIndex: 0)
-        
-    }
-    
-    
-    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
-        guard let polyline = overlay as? MKPolyline else {
-            return MKOverlayRenderer()
-        }
-        
-        let renderer = MKPolylineRenderer(polyline: polyline)
-        renderer.lineWidth = 5.0
-        renderer.strokeColor = UIColor.mrBubblegumColor()
-        
-        return renderer
-    }
-    
-    
 }
+
+
