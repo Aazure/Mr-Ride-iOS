@@ -22,28 +22,15 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
     var duration: Double = 0.0
     var routes: [CLLocationCoordinate2D] = []
     var isFromTable = false
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        mapView.delegate = self
-        mapView.layer.cornerRadius = 4
-        setNavigation()
-        setupBackground()
-        setLabel()
-        addPolyLineToMap()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        TrackingManager.sharedManager.createTrackingScreenView("view_in_record_result")
-    }
+}
+
+// MARK: - Setup
+extension BikeAnalysisViewController {
     
     func setNavigation(){
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
         self.navigationController?.navigationBar.translucent = false
-        
     }
     
     func setLabel(){
@@ -66,11 +53,9 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
         
         let calStr = Int(weight * distance * 0.001 * 1.036)
         caloriesLabel.text = String(calStr) + " kcal"
-        
     }
     
     func setupBackground() {
-        
         self.view.backgroundColor = UIColor.mrLightblueColor()
         let topGradient = UIColor(red: 0, green: 0, blue: 0, alpha: 0.60).CGColor
         let bottomGradient = UIColor(red: 0, green: 0, blue: 0, alpha: 0.40).CGColor
@@ -78,9 +63,33 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
         gradient.frame = self.view.frame
         gradient.colors = [topGradient, bottomGradient]
         self.view.layer.insertSublayer(gradient, atIndex: 0)
-        
+    }
+}
+
+// MARK: - View LifeCycle
+extension BikeAnalysisViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        mapView.delegate = self
+        mapView.layer.cornerRadius = 4
+        setNavigation()
+        setupBackground()
+        setLabel()
+        addPolyLineToMap()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        TrackingManager.sharedManager.createTrackingScreenView("view_in_record_result")
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
+
+// MARK: - Map
+extension BikeAnalysisViewController {
     func mapRegion() -> MKCoordinateRegion {
         let initialLoc = routes.first!
         
@@ -113,7 +122,6 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
         //        self.mapView.setVisibleMapRect(polyline.boundingMapRect, animated: true)
         self.mapView.addOverlay(polyline)
         self.mapView.region = mapRegion()
-        
     }
     
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer{
@@ -127,11 +135,10 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
         
         return renderer
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
+}
+
+// MARK: - Action
+extension BikeAnalysisViewController {
     @IBAction func closeAnalysis(sender: AnyObject) {
         TrackingManager.sharedManager.createTrackingEvent("record_result", action: "select_close_in_record_result")
         if isFromTable{
@@ -140,5 +147,5 @@ class BikeAnalysisViewController: UIViewController, MKMapViewDelegate{
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
-    
 }
+
