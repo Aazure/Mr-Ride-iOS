@@ -82,10 +82,6 @@ extension BikeAnalysisViewController {
         super.viewWillAppear(animated)
         TrackingManager.sharedManager.createTrackingScreenView("view_in_record_result")
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
 }
 
 // MARK: - Map

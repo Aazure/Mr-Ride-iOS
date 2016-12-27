@@ -11,7 +11,7 @@ import CoreData
 import CoreLocation
 import Charts
 
-class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+class BikeHistoryViewController: UIViewController{
     @IBOutlet weak var backImage: UIImageView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var historyTableView: UITableView!
@@ -21,23 +21,10 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
     var fetchedResultsController: NSFetchedResultsController!
     var dateArray: [String] = []
     var distanceArray: [Double] = []
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupNavigation()
-        setupBackground()
-        setupTableViewStyle()
-        setupSidebar()
-        initalizeFetchedResultsController()
-        getDataForChart()
-        setChart(self.dateArray, values: self.distanceArray)
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-       TrackingManager.sharedManager.createTrackingScreenView("view_in_home")
-    }
-    
+}
+
+// MARK: - Setup
+extension BikeHistoryViewController {
     func setupSidebar(){
         if self.revealViewController() != nil{
             menuButton.target = self.revealViewController()
@@ -69,23 +56,35 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         historyTableView.separatorStyle = .SingleLine
     }
     
-    func getDataForChart(){
-        let mocChart = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        let request = NSFetchRequest(entityName: "Record")
-        let records = try? mocChart.executeFetchRequest(request)
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MM/dd"
-        for record in records!{
-            if let dateTmp = record.valueForKey("date") as? NSDate{
-                self.dateArray.append(dateFormatter.stringFromDate(dateTmp))
-                print(self.dateArray)
-            }
-            if let distanceTmp = record.valueForKey("distance") as? Double{
-                self.distanceArray.append(distanceTmp / 1000)
-                print(self.distanceArray)
-            }
-            
-        }
+    func configureCell(cell: BikeHistoryTableViewCell, indexPath: NSIndexPath){
+        let record = fetchedResultsController.objectAtIndexPath(indexPath)
+        
+        let date = record.valueForKey("date") as? NSDate
+        let calender = NSCalendar.currentCalendar()
+        let dateComponents = calender.components([.Day, .Month, .Year], fromDate: date!)
+        
+        let distance = record.valueForKey("distance") as? Double
+        let distanceKm = distance! * 0.001
+        let distanceStr = NSString(format: "%.2f", distanceKm)
+        
+        var  duration = record.valueForKey("duration") as! Double
+        let hours = UInt8(duration / 3600.0)
+        duration -= (NSTimeInterval(hours) * 3600)
+        let minutes = UInt8(duration / 60.0)
+        duration -= (NSTimeInterval(minutes) * 60)
+        let seconds = UInt8(duration)
+        duration -= NSTimeInterval(seconds)
+        let fraction = UInt8(duration * 100)
+        
+        let strHours = String(format: "%02d", hours)
+        let strMinutes = String(format: "%02d", minutes)
+        let strSeconds = String(format: "%02d", seconds)
+        let strFraction = String(format: "%02d", fraction)
+        let durationStr = "\(strHours):\(strMinutes):\(strSeconds).\(strFraction)"
+        
+        cell.dateLabel?.text = "\(dateComponents.day)th"
+        cell.recordLabel?.text = "\(distanceStr) km \(durationStr)"
+        
     }
     
     func setChart(dataPoints: [String], values: [Double]){
@@ -132,7 +131,52 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         lineChartView.rightAxis.drawLabelsEnabled = false
         
     }
+}
+
+// MARK: - LifeCycle
+extension BikeHistoryViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupNavigation()
+        setupBackground()
+        setupTableViewStyle()
+        setupSidebar()
+        initalizeFetchedResultsController()
+        getDataForChart()
+        setChart(self.dateArray, values: self.distanceArray)
+    }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        TrackingManager.sharedManager.createTrackingScreenView("view_in_home")
+    }
+    
+}
+
+// MARK: - Data
+extension BikeHistoryViewController{
+    func getDataForChart(){
+        let mocChart = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        let request = NSFetchRequest(entityName: "Record")
+        let records = try? mocChart.executeFetchRequest(request)
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM/dd"
+        for record in records!{
+            if let dateTmp = record.valueForKey("date") as? NSDate{
+                self.dateArray.append(dateFormatter.stringFromDate(dateTmp))
+                print(self.dateArray)
+            }
+            if let distanceTmp = record.valueForKey("distance") as? Double{
+                self.distanceArray.append(distanceTmp / 1000)
+                print(self.distanceArray)
+            }
+            
+        }
+    }
+}
+
+// MARK: - NSFetchedResultsController
+extension BikeHistoryViewController: NSFetchedResultsControllerDelegate {
     func initalizeFetchedResultsController(){
         let fetchRequest = NSFetchRequest(entityName: "Record")
         let fetchSort = NSSortDescriptor(key: "date", ascending: false)
@@ -148,36 +192,6 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
-    func configureCell(cell: BikeHistoryTableViewCell, indexPath: NSIndexPath){
-        let record = fetchedResultsController.objectAtIndexPath(indexPath)
-        
-        let date = record.valueForKey("date") as? NSDate
-        let calender = NSCalendar.currentCalendar()
-        let dateComponents = calender.components([.Day, .Month, .Year], fromDate: date!)
-        
-        let distance = record.valueForKey("distance") as? Double
-        let distanceKm = distance! * 0.001
-        let distanceStr = NSString(format: "%.2f", distanceKm)
-        
-        var  duration = record.valueForKey("duration") as! Double
-        let hours = UInt8(duration / 3600.0)
-        duration -= (NSTimeInterval(hours) * 3600)
-        let minutes = UInt8(duration / 60.0)
-        duration -= (NSTimeInterval(minutes) * 60)
-        let seconds = UInt8(duration)
-        duration -= NSTimeInterval(seconds)
-        let fraction = UInt8(duration * 100)
-        
-        let strHours = String(format: "%02d", hours)
-        let strMinutes = String(format: "%02d", minutes)
-        let strSeconds = String(format: "%02d", seconds)
-        let strFraction = String(format: "%02d", fraction)
-        let durationStr = "\(strHours):\(strMinutes):\(strSeconds).\(strFraction)"
-        
-        cell.dateLabel?.text = "\(dateComponents.day)th"
-        cell.recordLabel?.text = "\(distanceStr) km \(durationStr)"
-        
-    }
     
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         historyTableView.beginUpdates()
@@ -203,6 +217,10 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
+}
+
+// MARK: - TableView
+extension BikeHistoryViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int{
         return fetchedResultsController?.sections?.count ?? 1
     }
@@ -283,9 +301,5 @@ class BikeHistoryViewController: UIViewController, UITableViewDataSource, UITabl
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController!.pushViewController(analysisVC, animated: true)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
 }
+
