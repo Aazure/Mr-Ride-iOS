@@ -24,17 +24,10 @@ class BikeHomeViewController: UIViewController{
     var dateArray: [String] = []
     var distanceArray: [Double] = []
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupNavigation()
-        setupLabel()
-        setupLetsRideButton()
-        setupSidebar()
-        getDataForChart()
-        setChart(self.dateArray, values: self.distanceArray)
-        Amplitude.instance().logEvent("view_in_home")
-    }
-    
+   }
+
+// MARK: - Setup
+extension BikeHomeViewController {
     func setupNavigation(){
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
@@ -46,7 +39,7 @@ class BikeHomeViewController: UIViewController{
         imageView.tintColor = UIColor.whiteColor()
         self.navigationItem.titleView = imageView
     }
-
+    
     func setupSidebar(){
         if self.revealViewController() != nil{
             menuButton.target = self.revealViewController()
@@ -77,26 +70,6 @@ class BikeHomeViewController: UIViewController{
             self.totalCountLabel.font = UIFont.mrTextStyle9Font()
             self.avgSpeedLabel.font = UIFont.mrTextStyle9Font()
         }
-        
-    }
-    
-    func getDataForChart(){
-        let mocChart = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-            let request = NSFetchRequest(entityName: "Record")
-            let records = try? mocChart.executeFetchRequest(request)
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "MM/dd"
-            for record in records!{
-                if let dateTmp = record.valueForKey("date") as? NSDate{
-                    self.dateArray.append(dateFormatter.stringFromDate(dateTmp))
-                    print(self.dateArray)
-                }
-                if let distanceTmp = record.valueForKey("distance") as? Double{
-                    self.distanceArray.append(distanceTmp / 1000)
-                    print(self.distanceArray)
-                }
-        }
-
     }
     
     func setChart(dataPoints: [String], values: [Double]){
@@ -123,8 +96,8 @@ class BikeHomeViewController: UIViewController{
         
         lineChartDataSet.drawCirclesEnabled = false //remove the point circle
         lineChartDataSet.mode = .CubicBezier //make the line to be curve
-       lineChartDataSet.drawValuesEnabled = false       //remove value label on each point
-
+        lineChartDataSet.drawValuesEnabled = false       //remove value label on each point
+        
         //make chartview not scalable and remove the interaction line
         lineChartView.setScaleEnabled(false)
         lineChartView.userInteractionEnabled = false
@@ -156,14 +129,48 @@ class BikeHomeViewController: UIViewController{
         letsRideButton.layer.shadowRadius = 2
         letsRideButton.layer.shadowOffset = CGSize(width: 0, height: 2)
         letsRideButton.layer.masksToBounds = true
-    
     }
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
+}
+
+// MARK: - View LifeCycle
+extension BikeHomeViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupNavigation()
+        setupLabel()
+        setupLetsRideButton()
+        setupSidebar()
+        getDataForChart()
+        setChart(self.dateArray, values: self.distanceArray)
+        Amplitude.instance().logEvent("view_in_home")
     }
+}
+
+// MARK: - Data
+extension BikeHomeViewController {
+    func getDataForChart(){
+        let mocChart = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        let request = NSFetchRequest(entityName: "Record")
+        let records = try? mocChart.executeFetchRequest(request)
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM/dd"
+        for record in records!{
+            if let dateTmp = record.valueForKey("date") as? NSDate{
+                self.dateArray.append(dateFormatter.stringFromDate(dateTmp))
+                print(self.dateArray)
+            }
+            if let distanceTmp = record.valueForKey("distance") as? Double{
+                self.distanceArray.append(distanceTmp / 1000)
+                print(self.distanceArray)
+            }
+        }
+        
+    }
+}
+
+// MARK: - Action
+extension BikeHomeViewController {
     
     //    func showHomePage(){
     //        for subview in view.subviews where subview is UILabel{
