@@ -11,24 +11,14 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import FBSDKShareKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
-    
+class LoginViewController: UIViewController{
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var heightTextField: UITextField!
     @IBOutlet weak var weightTextField: UITextField!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupBackground()
-        setupTextField()
-        loginButton.layer.cornerRadius = 30
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
-    }
-    
+}
+
+// MARK: - Setup
+extension LoginViewController{
     func setupBackground(){
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [UIColor.mrLightblueColor().CGColor, UIColor.mrPineGreen50Color().CGColor]
@@ -37,6 +27,24 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.view.layer.insertSublayer(gradientLayer, atIndex: 1 )
     }
     
+    func setupLoginButton(){
+         loginButton.layer.cornerRadius = 30
+    }
+}
+
+// MARK: - View LifeCycle
+extension LoginViewController{
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupBackground()
+        setupTextField()
+        setupLoginButton()
+    }
+
+}
+
+// MARK: - TextField
+extension LoginViewController: UITextFieldDelegate{
     func setupTextField(){
         heightTextField.delegate = self
         weightTextField.delegate = self
@@ -51,7 +59,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         weightTextField.text = "Please enter your weight"
         
     }
-    
     func textFieldDidBeginEditing(textField: UITextField) {
         heightTextField.textColor = UIColor.mrDarkSlateBlueColor()
         weightTextField.textColor = UIColor.mrDarkSlateBlueColor()
@@ -115,24 +122,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         alert.addAction(ok)
         presentViewController(alert, animated: true, completion: nil)
     }
-    
-    
-    
-    @IBAction func fbButtonTapped(sender: UIButton) {
-        let login = FBSDKLoginManager()
-        login.logInWithReadPermissions(["public_profile", "email"], fromViewController: self, handler: { (result,error) -> Void in
-            if error != nil{
-                print(error.localizedDescription)
-                return
-            }else if result.isCancelled{
-                return
-            }else{
-                self.login()
-                print(FBSDKAccessToken.currentAccessToken())
-            }
-        })
-    }
-    
+
+}
+
+// MARK: - Facebook Login
+extension LoginViewController{
     func login(){
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let homeViewController = self.storyboard?.instantiateViewControllerWithIdentifier("RevealViewController") as! SWRevealViewController
@@ -154,5 +148,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         
     }
-    
 }
+
+// MARK: - Action
+extension LoginViewController{
+    @IBAction func fbButtonTapped(sender: UIButton) {
+        let login = FBSDKLoginManager()
+        login.logInWithReadPermissions(["public_profile", "email"], fromViewController: self, handler: { (result,error) -> Void in
+            if error != nil{
+                print(error.localizedDescription)
+                return
+            }else if result.isCancelled{
+                return
+            }else{
+                self.login()
+                print(FBSDKAccessToken.currentAccessToken())
+            }
+        })
+    }
+}
+
